@@ -38,8 +38,8 @@ namespace Project2_All_Hell_Breaks_Loose.Game
         {
             List<Enemy> wave = new List<Enemy>();
 
-            Minion minion = EnemyFactory.makeMinion();
-            minion.setPosition(-50.0f, 50.0f);
+            Minion minion = EnemyFactory.makeChaser();
+            minion.setPosition(0.0f, 50.0f);
 
             wave.Add(minion);
 

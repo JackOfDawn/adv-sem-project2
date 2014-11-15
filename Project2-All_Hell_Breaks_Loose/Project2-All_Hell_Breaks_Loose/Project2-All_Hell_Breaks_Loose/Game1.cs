@@ -29,6 +29,7 @@ namespace Project2_All_Hell_Breaks_Loose
             graphics.IsFullScreen = false;
             graphics.PreferredBackBufferWidth = WIDTH;
             graphics.PreferredBackBufferHeight = HEIGHT;
+            IsMouseVisible = true;
             
             Content.RootDirectory = "Content";
         }

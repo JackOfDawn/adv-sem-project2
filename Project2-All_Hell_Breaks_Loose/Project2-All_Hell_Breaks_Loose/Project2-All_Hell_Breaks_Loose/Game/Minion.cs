@@ -16,23 +16,28 @@ namespace Project2_All_Hell_Breaks_Loose.Game
         private Texture2D texture;
         private Vector2 position;
         private Vector2 center;
+        private Vector2 origin;
+        private float rotation;//in radians
 
         private int height;
         private int width;
+
+        private Strategies.MovementStrategy moveStrategy;
 
         public Minion()
         {
             health = 0;
             damage = 0;
             speed = 0;
-            position = new Vector2(0, 0);
-            center = new Vector2(0, 0);
+            position = new Vector2();
+            center = new Vector2();
 
-            height = 0;
-            width = 0;
+            moveStrategy = null;
+
+            initToZero();
         }
 
-        public Minion(int health, float damage, float speed, Vector2 pos)
+        public Minion(int health, float damage, float speed, Vector2 pos, Strategies.MovementStrategy strategy)
         {
             this.health = health;
             this.damage = damage;
@@ -40,8 +45,32 @@ namespace Project2_All_Hell_Breaks_Loose.Game
             this.position = pos;
             this.center = pos;
 
+            moveStrategy = strategy;
+
+            initToZero();
+        }
+
+        public Minion(int health, float damage, float speed, float x, float y, Strategies.MovementStrategy strategy)
+        {
+            this.health = health;
+            this.damage = damage;
+            this.speed = speed;
+            this.position = new Vector2(x, y);
+            this.center = new Vector2(x, y);
+
+            moveStrategy = strategy;
+
+            initToZero();
+        }
+
+        private void initToZero()
+        {
             height = 0;
             width = 0;
+
+            origin = new Vector2();
+
+            rotation = 0;
         }
 
         ~Minion()
@@ -63,20 +92,21 @@ namespace Project2_All_Hell_Breaks_Loose.Game
             //set the height and width and center according to the size of the sprite
             height = this.texture.Height;
             width = this.texture.Width;
-            position.X -= width / 2;
-            position.Y -= height / 2;
+
+            origin = new Vector2(width / 2, height / 2);
         }
 
-        public void update()
+        public void update(Vector2 playerPos)
         {
-            position.X += speed;
-            center.X += speed;
+            setRotation(playerPos);
+
+            position = moveStrategy.update(position, playerPos, speed);
         }
 
         public void draw(SpriteBatch batch)
         {
             batch.Begin();
-            batch.Draw(texture, center, Color.White);
+            batch.Draw(texture, position, null, Color.White, rotation, origin, 1.0f, SpriteEffects.None, 0f);
             batch.End();
         }
 
@@ -84,9 +114,6 @@ namespace Project2_All_Hell_Breaks_Loose.Game
         {
             position.X = x;
             position.Y = y;
-
-            center.X = x + width / 2;
-            center.Y = y + height / 2;
         }
 
         public void setPosition(Vector2 pos)
@@ -102,6 +129,23 @@ namespace Project2_All_Hell_Breaks_Loose.Game
         public Vector2 getCenter()
         {
             return center;
+        }
+
+        public void setRotation(float newRotation)
+        {
+            rotation = newRotation;
+        }
+
+        public void setRotation(Vector2 targetLocation)
+        {
+            float rotationOffset = (float)Math.PI / 2;
+
+            float xDiff = position.X - targetLocation.X;
+            float yDiff = position.Y - targetLocation.Y;
+
+            float newRotation = (float)Math.Atan2(yDiff, xDiff);
+
+            setRotation(newRotation - rotationOffset);
         }
 
         public void setHealth(int newHealth)

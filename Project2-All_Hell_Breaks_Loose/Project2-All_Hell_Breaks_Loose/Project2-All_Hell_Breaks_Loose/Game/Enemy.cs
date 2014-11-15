@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -11,7 +12,7 @@ namespace Project2_All_Hell_Breaks_Loose.Game
     {
         void loadSprite(Texture2D texture);
 
-        void update();
+        void update(Vector2 playerPos);
         void draw(SpriteBatch batch);
 
         void setHealth(int newHealth);

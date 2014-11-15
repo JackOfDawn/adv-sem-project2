@@ -39,6 +39,7 @@ namespace Project2_All_Hell_Breaks_Loose.Game
         {
             inputManager.event_MovementPressed += new InputManager.DirectionPressedDelegate(player.updateMovement);
             inputManager.event_SwitchWeapons += new InputManager.ButtonPressedDelegate(player.switchWeapons);
+            inputManager.event_UpdateCursorLoc += new InputManager.MousePositionDelegate(player.setRotation);
         }
 
         public void loadContent(ContentManager content)
@@ -46,7 +47,7 @@ namespace Project2_All_Hell_Breaks_Loose.Game
             Texture2D texture = content.Load<Texture2D>("5c2");
             SpriteManager.loadSprite("enemy", texture);
 
-            texture = content.Load<Texture2D>("giant-anteater-tongue");
+            texture = content.Load<Texture2D>("ship");
             SpriteManager.loadSprite("player", texture);
 
             player.loadSprite();
@@ -63,7 +64,7 @@ namespace Project2_All_Hell_Breaks_Loose.Game
             }
             else
             {
-                enemyManager.update();
+                enemyManager.update(player.getPosition());
             }
 
         }

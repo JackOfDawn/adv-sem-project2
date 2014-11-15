@@ -80,6 +80,8 @@
     <Compile Include="Game\Minion.cs" />
     <Compile Include="Game\Player.cs" />
     <Compile Include="Game\SpriteManager.cs" />
+    <Compile Include="Game\Strategies\MovementStrategy.cs" />
+    <Compile Include="Game\Strategies\Seek.cs" />
     <Compile Include="Game\WaveManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Program.cs" />
@@ -92,9 +94,10 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Project2-All_Hell_Breaks_LooseContent\Project2-All_Hell_Breaks_LooseContent.contentproj">
-      <Name>Project2_All_Hell_Breaks_LooseContent</Name>
+    <ProjectReference Include="..\Project2-All_Hell_Breaks_LooseContent\Project2Content.contentproj">
+      <Name>Project2Content</Name>
       <XnaReferenceType>Content</XnaReferenceType>
+      <Project>{66CFC8F4-C186-4420-AD7C-BA9A8BF9ECEC}</Project>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

@@ -5,7 +5,7 @@ VisualStudioVersion = 12.0.21005.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Project2-All_Hell_Breaks_Loose", "Project2-All_Hell_Breaks_Loose\Project2-All_Hell_Breaks_Loose\Project2-All_Hell_Breaks_Loose.csproj", "{6C5888DF-4B31-4D3D-9CA7-FE3C61ED2274}"
 EndProject
-Project("{96E2B04D-8817-42C6-938A-82C39BA4D311}") = "Project2-All_Hell_Breaks_LooseContent", "Project2-All_Hell_Breaks_Loose\Project2-All_Hell_Breaks_LooseContent\Project2-All_Hell_Breaks_LooseContent.contentproj", "{66CFC8F4-C186-4420-AD7C-BA9A8BF9ECEC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Project2Content", "Project2-All_Hell_Breaks_Loose\Project2-All_Hell_Breaks_LooseContent\Project2Content.contentproj", "{66CFC8F4-C186-4420-AD7C-BA9A8BF9ECEC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

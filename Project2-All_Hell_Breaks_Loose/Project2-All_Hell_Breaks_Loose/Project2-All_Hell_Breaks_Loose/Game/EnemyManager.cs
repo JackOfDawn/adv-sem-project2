@@ -30,12 +30,12 @@ namespace Project2_All_Hell_Breaks_Loose.Game
             enemies.AddRange(enemiesToAdd);
         }
 
-        public void update()
+        public void update(Microsoft.Xna.Framework.Vector2 playerPos)
         {
         
             foreach(Enemy enemy in enemies)
             {
-                enemy.update();
+                enemy.update(playerPos);
             }
         }
         public void draw(SpriteBatch batch)

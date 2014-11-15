@@ -15,6 +15,8 @@ namespace Project2_All_Hell_Breaks_Loose.Game
         private Texture2D texture;
         private Vector2 position;
         private Vector2 center;
+        private Vector2 origin;
+        private float rotation;//in radians
 
         private int height;
         private int width;
@@ -30,6 +32,10 @@ namespace Project2_All_Hell_Breaks_Loose.Game
 
             height = 0;
             width = 0;
+
+            origin = new Vector2();
+
+            rotation = 0;
         }
 
         public Player(int health, float speed, Vector2 position)
@@ -42,6 +48,10 @@ namespace Project2_All_Hell_Breaks_Loose.Game
 
             height = 0;
             width = 0;
+
+            origin = new Vector2();
+
+            rotation = 0;
         }
 
         public Player(int health, float speed, float x, float y)
@@ -54,6 +64,10 @@ namespace Project2_All_Hell_Breaks_Loose.Game
 
             height = 0;
             width = 0;
+
+            origin = new Vector2();
+
+            rotation = 0;
         }
 
         public void loadSprite(Texture2D texture = null)
@@ -71,6 +85,8 @@ namespace Project2_All_Hell_Breaks_Loose.Game
             //set the height and width and center according to the size of the sprite
             height = this.texture.Height;
             width = this.texture.Width;
+
+            origin = new Vector2(width / 2, height / 2);
         }
 
         public void update()
@@ -91,9 +107,8 @@ namespace Project2_All_Hell_Breaks_Loose.Game
 
         public void draw(SpriteBatch batch)
         {
-            center = new Vector2(position.X + width / 2, position.Y + height / 2);
             batch.Begin();
-            batch.Draw(texture, center, Color.White);
+            batch.Draw(texture, position, null, Color.White, rotation, origin, 1.0f, SpriteEffects.None, 0f);
             batch.End();
         }
 
@@ -101,16 +116,11 @@ namespace Project2_All_Hell_Breaks_Loose.Game
         {
             position.X = x;
             position.Y = y;
-
-            center.X = x + width / 2;
-            center.Y = y + height / 2;
         }
 
         public void setPosition(Vector2 pos)
         {
             position = pos;
-            center.X = pos.X + width / 2;
-            center.Y = pos.Y + height / 2;
         }
 
         public Vector2 getPosition()
@@ -121,6 +131,23 @@ namespace Project2_All_Hell_Breaks_Loose.Game
         public Vector2 getCenter()
         {
             return center;
+        }
+
+        public void setRotation(float newRotation)
+        {
+            rotation = newRotation;
+        }
+
+        public void setRotation(Vector2 cursorLocation)
+        {
+            float rotationOffset = (float)Math.PI / 2;
+
+            float xDiff = position.X - cursorLocation.X;
+            float yDiff = position.Y - cursorLocation.Y;
+
+            float newRotation = (float)Math.Atan2(yDiff, xDiff);
+
+            setRotation(newRotation - rotationOffset);
         }
 
         public void setHealth(int newHealth)
