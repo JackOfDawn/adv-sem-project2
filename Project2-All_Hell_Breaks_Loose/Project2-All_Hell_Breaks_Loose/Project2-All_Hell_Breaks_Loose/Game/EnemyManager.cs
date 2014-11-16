@@ -9,7 +9,7 @@ using Microsoft.Xna.Framework;
 
 namespace Project2_All_Hell_Breaks_Loose.Game
 {
-    public class EnemyManager
+    public class EnemyManager : Observable
     {
         private List<Enemy> enemies;
         private List<Enemy> enemiesToDelete;
@@ -53,6 +53,7 @@ namespace Project2_All_Hell_Breaks_Loose.Game
                 if(enemy.getHealth() <= 0)
                 {
                     enemiesToDelete.Add(enemy);
+                    //generate drop?
                 }
             }
             removeAtEndOfFrame();
@@ -66,6 +67,7 @@ namespace Project2_All_Hell_Breaks_Loose.Game
                 {
                     if(player.isDamaged() == false)
                         player.takeDamage(enemy.getDamage());
+                    
                 }
             }
         }
@@ -94,6 +96,14 @@ namespace Project2_All_Hell_Breaks_Loose.Game
         public Enemy getEnemy(int index)
         {
             return enemies[index];
+        }
+
+        public override void notifyObservers()
+        {
+            foreach (Observer observer in observers)
+            {
+                observer.notify();
+            }
         }
     }
 }

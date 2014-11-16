@@ -80,6 +80,9 @@
     <Compile Include="Game\EnemyManager.cs" />
     <Compile Include="Game\InputManager.cs" />
     <Compile Include="Game\Minion.cs" />
+    <Compile Include="Game\Observer.cs" />
+    <Compile Include="Game\Pickups\AmmoPickup.cs" />
+    <Compile Include="Game\Observable.cs" />
     <Compile Include="Game\Pickups\Pickup.cs" />
     <Compile Include="Game\Player.cs" />
     <Compile Include="Game\SpriteManager.cs" />

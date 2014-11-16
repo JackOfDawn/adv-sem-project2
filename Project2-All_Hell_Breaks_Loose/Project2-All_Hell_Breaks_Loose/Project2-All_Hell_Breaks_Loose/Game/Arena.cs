@@ -5,10 +5,11 @@ using System.Text;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework;
+using Project2_All_Hell_Breaks_Loose.Game.Pickups;
 
 namespace Project2_All_Hell_Breaks_Loose.Game
 {
-    public class Arena
+    public class Arena : Observer
     {
         private EnemyManager enemyManager;
         private WaveManager waveManager;
@@ -24,19 +25,26 @@ namespace Project2_All_Hell_Breaks_Loose.Game
         private const float PLAYER_SPAWN_X = 640;
         private const float PLAYER_SPAWN_Y = 360;
 
+        Random rand;
+
+        private List<Pickup> pickups;
+
         public Arena()
         {
             enemyManager = new EnemyManager();
             waveManager = new WaveManager(SPAWN_CAP, WAVE_FREQUENCY);
             inputManager = new InputManager();
             bulletManager = new BulletManager(enemyManager);
+            
         }
 
         public void init()
         {
             player = new Player(PLAYER_HEALTH, PLAYER_SPEED, PLAYER_SPAWN_X, PLAYER_SPAWN_Y);
             player.setBulletmanager(bulletManager);
+            pickups = new List<Pickup>();
             attachListeners();
+            Random rand = new Random();
             
         }
 
@@ -59,9 +67,13 @@ namespace Project2_All_Hell_Breaks_Loose.Game
             texture = content.Load<Texture2D>("Pew");
             SpriteManager.loadSprite("bullet", texture);
 
-            texture = content.Load<Texture2D>("spce");
-            SpriteManager.loadSprite("background", texture);
+            texture = content.Load<Texture2D>("AmmoPickup");
+            SpriteManager.loadSprite("ammo", texture);
 
+            texture = content.Load<Texture2D>("MoneyPickup");
+            SpriteManager.loadSprite("money", texture);
+
+           
             player.loadSprite();
           
         }
@@ -89,13 +101,29 @@ namespace Project2_All_Hell_Breaks_Loose.Game
         public void draw(SpriteBatch batch)
         {
             //draw backgroud
-            batch.Begin();
+
             //batch.Draw(SpriteManager.getSprite("background"), zero, Color.White);
-            batch.End();
+            foreach (Pickup pickup in pickups)
+            {
+                pickup.Draw(batch);
+            }
+
+        
 
             enemyManager.draw(batch);
             player.draw(batch);
             bulletManager.Draw(batch);
+        }
+
+
+        public void generatePickup()
+        {
+            int type = rand.Next(3);
+        }
+
+        public void notify(int money, int ammo)
+        {
+            generatePickup();
         }
     }
 }
