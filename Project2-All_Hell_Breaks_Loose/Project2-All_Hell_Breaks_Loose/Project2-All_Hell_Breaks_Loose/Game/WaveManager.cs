@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Project2_All_Hell_Breaks_Loose.Game
 {
-    class WaveManager
+    public class WaveManager
     {
         //the highest number of enemies that can be spawned in one wave
         private int spawnCap;

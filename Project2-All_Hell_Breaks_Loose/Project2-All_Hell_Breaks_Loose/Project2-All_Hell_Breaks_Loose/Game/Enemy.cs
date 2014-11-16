@@ -16,10 +16,16 @@ namespace Project2_All_Hell_Breaks_Loose.Game
         void draw(SpriteBatch batch);
 
         void setHealth(int newHealth);
-        int getHealth();
-        void setDamage(float newDamage);
+        float getHealth();
+        void takeDamage(float damage);
+        void setDamage(float damage);
         float getDamage();
         void setSpeed(float newSpeed);
         float getSpeed();
+        Vector2 getPosition();
+        int getHeight();
+        int getWidth();
+
+        Rectangle getBoundingRectangle();
     }
 }

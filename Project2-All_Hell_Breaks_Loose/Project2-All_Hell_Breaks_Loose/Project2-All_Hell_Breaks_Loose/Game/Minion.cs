@@ -7,10 +7,10 @@ using Microsoft.Xna.Framework;
 
 namespace Project2_All_Hell_Breaks_Loose.Game
 {
-    class Minion : Enemy
+    public class Minion : Enemy
     {
 
-        private int health;
+        private float health;
         private float damage;
         private float speed;
         private Texture2D texture;
@@ -18,6 +18,7 @@ namespace Project2_All_Hell_Breaks_Loose.Game
         private Vector2 center;
         private Vector2 origin;
         private float rotation;//in radians
+        private Color color;
 
         private int height;
         private int width;
@@ -31,33 +32,33 @@ namespace Project2_All_Hell_Breaks_Loose.Game
             speed = 0;
             position = new Vector2();
             center = new Vector2();
-
+            color = Color.White;
             moveStrategy = null;
 
             initToZero();
         }
 
-        public Minion(int health, float damage, float speed, Vector2 pos, Strategies.MovementStrategy strategy)
+        public Minion(int health, float damage, float speed, Vector2 pos, Strategies.MovementStrategy strategy, Color color)
         {
             this.health = health;
             this.damage = damage;
             this.speed = speed;
             this.position = pos;
             this.center = pos;
-
+            this.color = color;
             moveStrategy = strategy;
 
             initToZero();
         }
 
-        public Minion(int health, float damage, float speed, float x, float y, Strategies.MovementStrategy strategy)
+        public Minion(int health, float damage, float speed, float x, float y, Strategies.MovementStrategy strategy, Color color)
         {
             this.health = health;
             this.damage = damage;
             this.speed = speed;
             this.position = new Vector2(x, y);
             this.center = new Vector2(x, y);
-
+            this.color = color;
             moveStrategy = strategy;
 
             initToZero();
@@ -106,7 +107,9 @@ namespace Project2_All_Hell_Breaks_Loose.Game
         public void draw(SpriteBatch batch)
         {
             batch.Begin();
-            batch.Draw(texture, position, null, Color.White, rotation, origin, 1.0f, SpriteEffects.None, 0f);
+            
+            batch.Draw(texture, position, null, color, rotation, origin, 1.0f, SpriteEffects.None, 0f);
+
             batch.End();
         }
 
@@ -131,6 +134,11 @@ namespace Project2_All_Hell_Breaks_Loose.Game
             return center;
         }
 
+        public Vector2 getOrigin()
+        {
+            return origin;
+        }
+
         public void setRotation(float newRotation)
         {
             rotation = newRotation;
@@ -138,14 +146,13 @@ namespace Project2_All_Hell_Breaks_Loose.Game
 
         public void setRotation(Vector2 targetLocation)
         {
-            float rotationOffset = (float)Math.PI / 2;
 
-            float xDiff = position.X - targetLocation.X;
-            float yDiff = position.Y - targetLocation.Y;
+            float xDiff = targetLocation.X - position.X;
+            float yDiff = targetLocation.Y - position.Y;
 
             float newRotation = (float)Math.Atan2(yDiff, xDiff);
 
-            setRotation(newRotation - rotationOffset);
+            setRotation(newRotation);
         }
 
         public void setHealth(int newHealth)
@@ -153,14 +160,18 @@ namespace Project2_All_Hell_Breaks_Loose.Game
             health = newHealth;
         }
 
-        public int getHealth()
+        public float getHealth()
         {
             return health;
         }
 
-        public void setDamage(float newDamage)
+        public void takeDamage(float damage)
         {
-            damage = newDamage;
+            health -= damage;
+        }
+        public void setDamage(float damage)
+        {
+            this.damage = damage;
         }
 
         public float getDamage()
@@ -176,6 +187,21 @@ namespace Project2_All_Hell_Breaks_Loose.Game
         public float getSpeed()
         {
             return speed;
+        }
+
+        public Rectangle getBoundingRectangle()
+        {
+            return new Rectangle((int)position.X, (int)position.Y, width, height);
+        }
+
+        public int getHeight()
+        {
+            return height;
+        }
+
+        public int getWidth()
+        {
+            return width;
         }
     }
 }

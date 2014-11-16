@@ -6,7 +6,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace Project2_All_Hell_Breaks_Loose.Game
 {
-    class SpriteManager
+    public class SpriteManager
     {
         private static Dictionary<string, Texture2D> sprites;
 

@@ -8,15 +8,17 @@ using Microsoft.Xna.Framework;
 
 namespace Project2_All_Hell_Breaks_Loose.Game
 {
-    class Arena
+    public class Arena
     {
         private EnemyManager enemyManager;
         private WaveManager waveManager;
-        private const int SPAWN_CAP = 2;
+        private BulletManager bulletManager;
+
+        private const int SPAWN_CAP = 5;
         private const float WAVE_FREQUENCY = 150.0F;
 
         private InputManager inputManager;
-        private Player player;
+        public Player player;
         private const int PLAYER_HEALTH = 200;
         private const float PLAYER_SPEED = 3;
         private const float PLAYER_SPAWN_X = 640;
@@ -27,12 +29,15 @@ namespace Project2_All_Hell_Breaks_Loose.Game
             enemyManager = new EnemyManager();
             waveManager = new WaveManager(SPAWN_CAP, WAVE_FREQUENCY);
             inputManager = new InputManager();
+            bulletManager = new BulletManager(enemyManager);
         }
 
         public void init()
         {
             player = new Player(PLAYER_HEALTH, PLAYER_SPEED, PLAYER_SPAWN_X, PLAYER_SPAWN_Y);
+            player.setBulletmanager(bulletManager);
             attachListeners();
+            
         }
 
         private void attachListeners()
@@ -40,6 +45,7 @@ namespace Project2_All_Hell_Breaks_Loose.Game
             inputManager.event_MovementPressed += new InputManager.DirectionPressedDelegate(player.updateMovement);
             inputManager.event_SwitchWeapons += new InputManager.ButtonPressedDelegate(player.switchWeapons);
             inputManager.event_UpdateCursorLoc += new InputManager.MousePositionDelegate(player.setRotation);
+            inputManager.event_Shoot += new InputManager.ButtonPressedDelegate(player.Shoot);
         }
 
         public void loadContent(ContentManager content)
@@ -47,16 +53,24 @@ namespace Project2_All_Hell_Breaks_Loose.Game
             Texture2D texture = content.Load<Texture2D>("5c2");
             SpriteManager.loadSprite("enemy", texture);
 
-            texture = content.Load<Texture2D>("ship");
+            texture = content.Load<Texture2D>("Player");
             SpriteManager.loadSprite("player", texture);
 
+            texture = content.Load<Texture2D>("Pew");
+            SpriteManager.loadSprite("bullet", texture);
+
+            texture = content.Load<Texture2D>("spce");
+            SpriteManager.loadSprite("background", texture);
+
             player.loadSprite();
+          
         }
 
         public void update(GameTime gameTime)
         {
             inputManager.update(gameTime);
-            player.update();
+            player.update(gameTime);
+            bulletManager.Update(gameTime);
 
             if(enemyManager.getNumEnemies() == 0)
             {
@@ -65,13 +79,23 @@ namespace Project2_All_Hell_Breaks_Loose.Game
             else
             {
                 enemyManager.update(player.getPosition());
+                enemyManager.checkPlayerCollision(player);
             }
-
+            if(player.getHealth() <= 0 )
+            {
+                player.Shoot();
+            }
         }
         public void draw(SpriteBatch batch)
         {
+            //draw backgroud
+            batch.Begin();
+            //batch.Draw(SpriteManager.getSprite("background"), zero, Color.White);
+            batch.End();
+
             enemyManager.draw(batch);
             player.draw(batch);
+            bulletManager.Draw(batch);
         }
     }
 }

@@ -6,7 +6,7 @@ using Microsoft.Xna.Framework;
 
 namespace Project2_All_Hell_Breaks_Loose.Game.Strategies
 {
-    class SeekMovement : MovementStrategy
+    public class SeekMovement : MovementStrategy
     {
         public Vector2 update(Vector2 position, Vector2 targetLoc, float speed)
         {

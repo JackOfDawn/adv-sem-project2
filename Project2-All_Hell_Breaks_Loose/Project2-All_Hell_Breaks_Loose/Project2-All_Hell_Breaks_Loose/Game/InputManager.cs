@@ -8,7 +8,7 @@ using Microsoft.Xna.Framework.Input;
 namespace Project2_All_Hell_Breaks_Loose.Game
 {
 
-    class InputManager
+    public class InputManager
     {
         //delegates
         public delegate void DirectionPressedDelegate(Vector2 moveVector);

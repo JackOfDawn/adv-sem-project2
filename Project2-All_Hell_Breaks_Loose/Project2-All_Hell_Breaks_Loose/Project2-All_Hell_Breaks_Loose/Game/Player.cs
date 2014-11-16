@@ -5,12 +5,13 @@ using System.Text;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
+using Project2_All_Hell_Breaks_Loose.Game.Weapons;
 
 namespace Project2_All_Hell_Breaks_Loose.Game
 {
-    class Player
+    public class Player
     {
-        private int health;
+        private float health;
         private float speed;
         private Texture2D texture;
         private Vector2 position;
@@ -20,7 +21,14 @@ namespace Project2_All_Hell_Breaks_Loose.Game
 
         private int height;
         private int width;
-    
+
+        private bool damaged;
+        private const int DAMAGE_COOL_DOWN = 500;
+        private float damageCoolDownTimer;
+
+
+        private Weapon currentWeapon;
+        private BulletManager bulletManagerRef;
 
         public Player()
         {
@@ -30,12 +38,9 @@ namespace Project2_All_Hell_Breaks_Loose.Game
 
             center = new Vector2();
 
-            height = 0;
-            width = 0;
+            initToZero();
 
-            origin = new Vector2();
-
-            rotation = 0;
+            setStartWeapon();
         }
 
         public Player(int health, float speed, Vector2 position)
@@ -46,12 +51,9 @@ namespace Project2_All_Hell_Breaks_Loose.Game
 
             this.center = position;
 
-            height = 0;
-            width = 0;
+            initToZero();
 
-            origin = new Vector2();
-
-            rotation = 0;
+            setStartWeapon();
         }
 
         public Player(int health, float speed, float x, float y)
@@ -62,12 +64,30 @@ namespace Project2_All_Hell_Breaks_Loose.Game
 
             this.center = new Vector2(x, y);
 
+            initToZero();
+            setStartWeapon();
+        }
+
+        public void setBulletmanager(BulletManager bulletManager)
+        {
+            bulletManagerRef = bulletManager;
+        }
+
+        private void setStartWeapon()
+        {
+            currentWeapon = new DecoratedPistol(new Pistol());
+        }
+
+        private void initToZero()
+        {
             height = 0;
             width = 0;
 
             origin = new Vector2();
 
             rotation = 0;
+            damaged = false;
+            damageCoolDownTimer = 0;
         }
 
         public void loadSprite(Texture2D texture = null)
@@ -89,9 +109,17 @@ namespace Project2_All_Hell_Breaks_Loose.Game
             origin = new Vector2(width / 2, height / 2);
         }
 
-        public void update()
+        public void update(GameTime gameTime)
         {
-            
+            if (damaged)
+            {
+                damageCoolDownTimer -= gameTime.ElapsedGameTime.Milliseconds;
+                if(damageCoolDownTimer <= 0)
+                {
+                    damaged = false;
+                    
+                }
+            }
         }
 
         public void updateMovement(Vector2 moveVector)
@@ -104,11 +132,20 @@ namespace Project2_All_Hell_Breaks_Loose.Game
 
         }
 
+        public void Shoot()
+        {
+            Vector2 direction = new Vector2((float)Math.Cos((double)rotation), (float)Math.Sin((double)rotation));
+
+            currentWeapon.shoot(this.position, direction, bulletManagerRef);
+        }
 
         public void draw(SpriteBatch batch)
         {
             batch.Begin();
-            batch.Draw(texture, position, null, Color.White, rotation, origin, 1.0f, SpriteEffects.None, 0f);
+            if(!damaged)
+                batch.Draw(texture, position, null, Color.White, rotation, origin, 1.0f, SpriteEffects.None, 0f);
+            else
+                batch.Draw(texture, position, null, Color.Red, rotation, origin, 1.0f, SpriteEffects.None, 0f);
             batch.End();
         }
 
@@ -140,14 +177,13 @@ namespace Project2_All_Hell_Breaks_Loose.Game
 
         public void setRotation(Vector2 cursorLocation)
         {
-            float rotationOffset = (float)Math.PI / 2;
 
-            float xDiff = position.X - cursorLocation.X;
-            float yDiff = position.Y - cursorLocation.Y;
+            float xDiff = cursorLocation.X - position.X;
+            float yDiff = cursorLocation.Y - position.Y;
 
             float newRotation = (float)Math.Atan2(yDiff, xDiff);
 
-            setRotation(newRotation - rotationOffset);
+            setRotation(newRotation);
         }
 
         public void setHealth(int newHealth)
@@ -155,7 +191,19 @@ namespace Project2_All_Hell_Breaks_Loose.Game
             health = newHealth;
         }
 
-        public int getHealth()
+        public void takeDamage(float damage)
+        {
+            damaged = true;
+            damageCoolDownTimer = DAMAGE_COOL_DOWN;
+            health -= damage;
+        }
+
+        public bool isDamaged()
+        {
+            return damaged;
+        }
+
+        public float getHealth()
         {
             return health;
         }
@@ -170,6 +218,10 @@ namespace Project2_All_Hell_Breaks_Loose.Game
             return speed;
         }
 
+        public float getRadius()
+        {
+            return width / 2;
+        }
         
     }
 }

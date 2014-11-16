@@ -6,7 +6,7 @@ using Microsoft.Xna.Framework;
 
 namespace Project2_All_Hell_Breaks_Loose.Game
 {
-    class EnemyFactory
+    public class EnemyFactory
     {
         //Minion Parameters
         private const int MINION_HEALTH = 50;
@@ -16,7 +16,7 @@ namespace Project2_All_Hell_Breaks_Loose.Game
 
         public static Minion makeChaser()
         {
-            Minion minion = new Minion(MINION_HEALTH, MINION_DAMAGE, MINION_SPEED, ZERO, new Strategies.SeekMovement());
+            Minion minion = new Minion(MINION_HEALTH, MINION_DAMAGE, MINION_SPEED, ZERO, new Strategies.SeekMovement(), Color.Tomato);
             minion.loadSprite();
             return minion;
         }
