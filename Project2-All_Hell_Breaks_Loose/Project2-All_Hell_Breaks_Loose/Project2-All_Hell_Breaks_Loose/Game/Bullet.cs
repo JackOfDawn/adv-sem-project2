@@ -22,13 +22,21 @@ namespace Project2_All_Hell_Breaks_Loose.Game
             direction.Normalize();
             this.direction = direction;
             this.damage = damage;
-            this.radius = SpriteManager.getSprite("bullet").Height/2;
+            if (SpriteManager.getSprite("bullet") != null)
+            {
+                this.radius = SpriteManager.getSprite("bullet").Height/2;
+            }
+            else
+            {
+                this.radius = 5;
+            }
             this.position = position;
         }
 
-        public void Update(GameTime gameTime)
+        public void Update()
         {
             position += (direction * speed);// * gameTime.ElapsedGameTime.Seconds);
+            
         }
 
         public void Draw(SpriteBatch spriteBatch, Texture2D texture)

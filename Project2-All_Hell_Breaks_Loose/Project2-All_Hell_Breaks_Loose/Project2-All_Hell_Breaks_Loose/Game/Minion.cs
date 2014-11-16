@@ -83,18 +83,20 @@ namespace Project2_All_Hell_Breaks_Loose.Game
             //multiple options
             if(texture == null)
             {
-                this.texture = SpriteManager.getSprite("enemy");
+               this.texture = SpriteManager.getSprite("enemy");
             }
             else
             {
-                this.texture = texture;
+               this.texture = texture;
             }
 
             //set the height and width and center according to the size of the sprite
-            height = this.texture.Height;
-            width = this.texture.Width;
-
-            origin = new Vector2(width / 2, height / 2);
+            if(this.texture != null)
+            {
+                height = this.texture.Height;
+                width = this.texture.Width;
+                origin = new Vector2(width / 2, height / 2);
+            }
         }
 
         public void update(Vector2 playerPos)
@@ -137,6 +139,16 @@ namespace Project2_All_Hell_Breaks_Loose.Game
         public Vector2 getOrigin()
         {
             return origin;
+        }
+
+        public void setOrigin(Vector2 newOrigin)
+        {
+            origin = newOrigin;
+        }
+
+        public void setOrigin(float x, float y)
+        {
+            origin = new Vector2(x, y);
         }
 
         public void setRotation(float newRotation)
@@ -202,6 +214,26 @@ namespace Project2_All_Hell_Breaks_Loose.Game
         public int getWidth()
         {
             return width;
+        }
+
+        public void setHeight(int newHeight)
+        {
+            height = newHeight;
+        }
+
+        public void setWidth(int newWidth)
+        {
+            width = newWidth;
+        }
+
+        public Color getColor()
+        {
+            return color;
+        }
+
+        public int getRadius()
+        {
+            return (height + width) / 4;
         }
     }
 }

@@ -54,7 +54,7 @@ namespace Project2_All_Hell_Breaks_Loose.Game
                 if(enemy.getHealth() <= 0)
                 {
                     enemiesToDelete.Add(enemy);
-                    //generate drop?
+                    
                 }
             }
 
@@ -66,7 +66,7 @@ namespace Project2_All_Hell_Breaks_Loose.Game
         {
             foreach (Enemy enemy in enemies)
             {
-                if (Vector2.Distance(enemy.getPosition(), player.getPosition()) < player.getRadius() + enemy.getWidth() /2)
+                if (Vector2.Distance(enemy.getPosition(), player.getPosition()) < player.getRadius() + enemy.getRadius())
                 {
                     if(player.isDamaged() == false)
                         player.takeDamage(enemy.getDamage());

@@ -44,5 +44,10 @@ namespace Project2_All_Hell_Breaks_Loose.Game.Pickups
         {
             return position;
         }
+
+        public float getRadius()
+        {
+            return texture.Width / 2;
+        }
     }
 }

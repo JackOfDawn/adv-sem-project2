@@ -26,6 +26,7 @@ namespace Project2_All_Hell_Breaks_Loose.Game
         int getHeight();
         int getWidth();
 
+        int getRadius();
         Rectangle getBoundingRectangle();
     }
 }

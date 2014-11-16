@@ -59,16 +59,17 @@ namespace Project2_All_Hell_Breaks_Loose.Game
             if (outOfBoundsX || outOfBoundsY)
             {
                 deleteBullet(bullet);
+         
             }
             else
             {
                 for (int i = 0; i < enemyManager.getNumEnemies(); i++)
                 {
                     Enemy enemy = enemyManager.getEnemy(i);
-
-                    if (Vector2.Distance(bullet.getPosition(), enemy.getPosition()) < radius + enemy.getHeight() / 2)
+                   
+                    if (Vector2.Distance(bullet.getPosition(), enemy.getPosition()) <= radius + enemy.getRadius())
                     {
-
+                        
                         enemy.takeDamage(bullet.getDamage());
                         deleteBullet(bullet);
                         break;
@@ -77,12 +78,15 @@ namespace Project2_All_Hell_Breaks_Loose.Game
             }
         }
 
-        public void Update(GameTime gameTime)
+        public void Update()
         {
             foreach (Bullet bullet in bullets)
             {
-                bullet.Update(gameTime);
+               
+                bullet.Update();
+               
                 checkCollisions(bullet);
+                
             }
             removeAtEndOfFrame();
         }
@@ -93,6 +97,11 @@ namespace Project2_All_Hell_Breaks_Loose.Game
             {
                 bullet.Draw(batch, SpriteManager.getSprite("bullet"));
             }
+        }
+
+        public int getNumBullets()
+        {
+            return bullets.Count;
         }
     }
 }

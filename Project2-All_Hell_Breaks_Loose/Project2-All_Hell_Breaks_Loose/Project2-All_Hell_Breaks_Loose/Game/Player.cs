@@ -75,7 +75,7 @@ namespace Project2_All_Hell_Breaks_Loose.Game
 
         private void setStartWeapon()
         {
-            currentWeapon = new DecoratedPistol(new Pistol());
+            currentWeapon = new Pistol();
         }
 
         private void initToZero()
@@ -103,10 +103,14 @@ namespace Project2_All_Hell_Breaks_Loose.Game
             }
 
             //set the height and width and center according to the size of the sprite
-            height = this.texture.Height;
-            width = this.texture.Width;
+            if(this.texture != null)
+            {
+                height = this.texture.Height;
+                width = this.texture.Width;
 
-            origin = new Vector2(width / 2, height / 2);
+                origin = new Vector2(width / 2, height / 2);
+            }
+            
         }
 
         public void update(GameTime gameTime)

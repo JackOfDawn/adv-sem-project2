@@ -58,7 +58,7 @@ namespace Project2_All_Hell_Breaks_Loose
             spriteBatch = new SpriteBatch(GraphicsDevice);
             
             // TODO: use this.Content to load your game content here
-            arena.loadContent(this.Content);
+            arena.loadContent(this.Content, graphics.GraphicsDevice);
         }
 
         /// <summary>

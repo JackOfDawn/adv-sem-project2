@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace Project2_All_Hell_Breaks_Loose.Game
@@ -9,10 +10,30 @@ namespace Project2_All_Hell_Breaks_Loose.Game
     public class SpriteManager
     {
         private static Dictionary<string, Texture2D> sprites;
+        private const string missingTextureName = "missing";
 
         static SpriteManager()
         {
             sprites = new Dictionary<string, Texture2D>();
+        }
+
+        public static void generateDefaultTexture(GraphicsDevice device)
+        {
+            int textureHeight = 50;
+            int textureWidth = 50;
+            int textureSize = textureHeight * textureWidth;
+
+            Color[] texture = new Color[textureSize];
+
+            for(int i = 0; i < textureSize; i ++)
+            {
+                texture[i] = Color.Gray;
+            }
+
+            Texture2D missingTexture = new Texture2D(device, textureHeight, textureWidth);
+            missingTexture.SetData(texture);
+
+            sprites.Add(missingTextureName, missingTexture);
         }
 
         public static void loadSprite(string key, Texture2D sprite)
@@ -36,9 +57,12 @@ namespace Project2_All_Hell_Breaks_Loose.Game
             {
                 return sprites[key];
             }
+            else if (sprites.ContainsKey(missingTextureName))
+            {
+                return sprites[missingTextureName];
+            }
             else
             {
-                Console.WriteLine("Error, key does not exist");
                 return null;
             }
         }

@@ -20,7 +20,7 @@ namespace Project2_All_Hell_Breaks_Loose.Game
 
         private InputManager inputManager;
         public Player player;
-        private const int PLAYER_HEALTH = 200;
+        private const int PLAYER_HEALTH = 20;
         private const float PLAYER_SPEED = 3;
         private const float PLAYER_SPAWN_X = 640;
         private const float PLAYER_SPAWN_Y = 360;
@@ -58,8 +58,10 @@ namespace Project2_All_Hell_Breaks_Loose.Game
             inputManager.event_Shoot += new InputManager.ButtonPressedDelegate(player.Shoot);
         }
 
-        public void loadContent(ContentManager content)
+        public void loadContent(ContentManager content, GraphicsDevice device)
         {
+            SpriteManager.generateDefaultTexture(device);
+
             Texture2D texture = content.Load<Texture2D>("5c2");
             SpriteManager.loadSprite("enemy", texture);
 
@@ -84,7 +86,7 @@ namespace Project2_All_Hell_Breaks_Loose.Game
         {
             inputManager.update(gameTime);
             player.update(gameTime);
-            bulletManager.Update(gameTime);
+            bulletManager.Update();
 
             if(enemyManager.getNumEnemies() == 0)
             {
@@ -99,7 +101,27 @@ namespace Project2_All_Hell_Breaks_Loose.Game
             {
                 player.Shoot();
             }
+
+            handlePickups();
+           
         }
+
+        public void handlePickups()
+        {
+            for (int i = pickups.Count - 1; i >= 0; i--)
+            {
+                //check player collision with
+                Pickup pickup = pickups[i];
+                float radiiSqr = player.getRadius() * player.getRadius() + pickup.getRadius() * pickup.getRadius();
+
+                if (radiiSqr > Vector2.DistanceSquared(player.getPosition(), pickup.getPosition()))
+                {
+                    ((Observable)pickup).notifyObservers();
+                    pickups.RemoveAt(i);
+                }
+            }
+        }
+
         public void draw(SpriteBatch batch)
         {
             //draw backgroud
@@ -109,8 +131,6 @@ namespace Project2_All_Hell_Breaks_Loose.Game
             {
                 pickup.Draw(batch);
             }
-
-        
 
             enemyManager.draw(batch);
             player.draw(batch);
@@ -122,8 +142,13 @@ namespace Project2_All_Hell_Breaks_Loose.Game
         {
             //int type = rand.Next(3);
 
-            Pickup pickup = new AmmoPickup(pos);
-            pickup.LoadTexture(SpriteManager.getSprite("ammo"));
+            Pickup pickup;
+
+            AmmoPickup ammoPickup = new AmmoPickup(pos);
+            ammoPickup.LoadTexture(SpriteManager.getSprite("ammo"));
+
+            pickup = ammoPickup;
+
             pickups.Add(pickup);
         }
 
