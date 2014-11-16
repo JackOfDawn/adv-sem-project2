@@ -19,6 +19,7 @@ namespace Project2_All_Hell_Breaks_Loose.Game
         {
             enemies = new List<Enemy>();
             enemiesToDelete = new List<Enemy>();
+            observers = new List<Observer>();
         }
         ~EnemyManager()
         {
@@ -56,6 +57,8 @@ namespace Project2_All_Hell_Breaks_Loose.Game
                     //generate drop?
                 }
             }
+
+            notifyObservers();
             removeAtEndOfFrame();
         }
 
@@ -102,7 +105,12 @@ namespace Project2_All_Hell_Breaks_Loose.Game
         {
             foreach (Observer observer in observers)
             {
-                observer.notify();
+                foreach (Enemy enemy in enemiesToDelete)
+                {
+                    observer.notify(ObserverMessages.SPAWN_PICKUPS_MESSAGE, 0, enemy.getPosition());
+                    
+                }
+                
             }
         }
     }

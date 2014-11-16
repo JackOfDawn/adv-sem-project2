@@ -32,6 +32,7 @@ namespace Project2_All_Hell_Breaks_Loose.Game
         public Arena()
         {
             enemyManager = new EnemyManager();
+            enemyManager.registerObserver(this);
             waveManager = new WaveManager(SPAWN_CAP, WAVE_FREQUENCY);
             inputManager = new InputManager();
             bulletManager = new BulletManager(enemyManager);
@@ -45,6 +46,7 @@ namespace Project2_All_Hell_Breaks_Loose.Game
             pickups = new List<Pickup>();
             attachListeners();
             Random rand = new Random();
+
             
         }
 
@@ -116,14 +118,19 @@ namespace Project2_All_Hell_Breaks_Loose.Game
         }
 
 
-        public void generatePickup()
+        public void generatePickup(Vector2 pos)
         {
-            int type = rand.Next(3);
+            //int type = rand.Next(3);
+
+            Pickup pickup = new AmmoPickup(pos);
+            pickup.LoadTexture(SpriteManager.getSprite("ammo"));
+            pickups.Add(pickup);
         }
 
-        public void notify(int money, int ammo)
+        public void notify(ObserverMessages message, int value, Vector2 pos)
         {
-            generatePickup();
+            if(message == ObserverMessages.SPAWN_PICKUPS_MESSAGE)
+                generatePickup(pos);
         }
     }
 }
