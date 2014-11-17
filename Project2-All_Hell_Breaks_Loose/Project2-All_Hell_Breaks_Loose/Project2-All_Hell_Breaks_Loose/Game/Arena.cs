@@ -25,7 +25,7 @@ namespace Project2_All_Hell_Breaks_Loose.Game
         private const float PLAYER_SPAWN_X = 640;
         private const float PLAYER_SPAWN_Y = 360;
 
-        Random rand;
+      
 
         private List<Pickup> pickups;
 
@@ -39,123 +39,123 @@ namespace Project2_All_Hell_Breaks_Loose.Game
             
         }
 
-        public void init()
+        public void Init()
         {
             player = new Player(PLAYER_HEALTH, PLAYER_SPEED, PLAYER_SPAWN_X, PLAYER_SPAWN_Y);
             player.setBulletmanager(bulletManager);
             pickups = new List<Pickup>();
-            attachListeners();
+            AttachListeners();
             Random rand = new Random();
 
             
         }
 
-        private void attachListeners()
+        private void AttachListeners()
         {
-            inputManager.event_MovementPressed += new InputManager.DirectionPressedDelegate(player.updateMovement);
-            inputManager.event_SwitchWeapons += new InputManager.ButtonPressedDelegate(player.switchWeapons);
-            inputManager.event_UpdateCursorLoc += new InputManager.MousePositionDelegate(player.setRotation);
-            inputManager.event_Shoot += new InputManager.ButtonPressedDelegate(player.Shoot);
+            inputManager.Event_MovementPressed += new InputManager.DirectionPressedDelegate(player.UpdateMovement);
+            inputManager.Event_SwitchWeapons += new InputManager.ButtonPressedDelegate(player.SwitchWeapons);
+            inputManager.Event_UpdateCursorLoc += new InputManager.MousePositionDelegate(player.SetRotation);
+            inputManager.Event_Shoot += new InputManager.ButtonPressedDelegate(player.Shoot);
         }
 
-        public void loadContent(ContentManager content, GraphicsDevice device)
+        public void LoadContent(ContentManager content, GraphicsDevice device)
         {
-            SpriteManager.generateDefaultTexture(device);
+            SpriteManager.GenerateDefaultTexture(device);
 
             Texture2D texture = content.Load<Texture2D>("5c2");
-            SpriteManager.loadSprite("enemy", texture);
+            SpriteManager.LoadSprite("enemy", texture);
 
             texture = content.Load<Texture2D>("Player");
-            SpriteManager.loadSprite("player", texture);
+            SpriteManager.LoadSprite("player", texture);
 
             texture = content.Load<Texture2D>("Pew");
-            SpriteManager.loadSprite("bullet", texture);
+            SpriteManager.LoadSprite("bullet", texture);
 
             texture = content.Load<Texture2D>("AmmoPickup");
-            SpriteManager.loadSprite("ammo", texture);
+            SpriteManager.LoadSprite("ammo", texture);
 
             texture = content.Load<Texture2D>("MoneyPickup");
-            SpriteManager.loadSprite("money", texture);
+            SpriteManager.LoadSprite("money", texture);
 
            
-            player.loadSprite();
+            player.LoadSprite();
           
         }
 
-        public void update(GameTime gameTime)
+        public void Update(GameTime gameTime)
         {
-            inputManager.update(gameTime);
-            player.update(gameTime);
+            inputManager.Update(gameTime);
+            player.Update(gameTime);
             bulletManager.Update();
 
-            if(enemyManager.getNumEnemies() == 0)
+            if(enemyManager.GetNumEnemies() == 0)
             {
-                enemyManager.addEnemies(waveManager.spawnWave());
+                enemyManager.AddEnemies(waveManager.SpawnWave());
             }
             else
             {
-                enemyManager.update(player.getPosition());
-                enemyManager.checkPlayerCollision(player);
+                enemyManager.Update(player.GetPosition());
+                enemyManager.CheckPlayerCollision(player);
             }
-            if(player.getHealth() <= 0 )
+            if(player.GetHealth() <= 0 )
             {
                 player.Shoot();
             }
 
-            handlePickups();
+            HandlePickups();
            
         }
 
-        public void handlePickups()
+        public void HandlePickups()
         {
             for (int i = pickups.Count - 1; i >= 0; i--)
             {
                 //check player collision with
                 Pickup pickup = pickups[i];
-                float radiiSqr = player.getRadius() * player.getRadius() + pickup.getRadius() * pickup.getRadius();
+                float radiiSqr = player.GetRadius() * player.GetRadius() + pickup.GetRadius() * pickup.GetRadius();
 
-                if (radiiSqr > Vector2.DistanceSquared(player.getPosition(), pickup.getPosition()))
+                if (radiiSqr > Vector2.DistanceSquared(player.GetPosition(), pickup.GetPosition()))
                 {
-                    ((Observable)pickup).notifyObservers();
+                    ((Observable)pickup).NotifyObservers();
                     pickups.RemoveAt(i);
                 }
             }
         }
 
-        public void draw(SpriteBatch batch)
+        public void Draw(SpriteBatch batch)
         {
-            //draw backgroud
+            //Draw backgroud
 
-            //batch.Draw(SpriteManager.getSprite("background"), zero, Color.White);
+            //batch.Draw(SpriteManager.GetSprite("background"), zero, Color.White);
             foreach (Pickup pickup in pickups)
             {
                 pickup.Draw(batch);
             }
 
-            enemyManager.draw(batch);
-            player.draw(batch);
+            enemyManager.Draw(batch);
+            player.Draw(batch);
             bulletManager.Draw(batch);
         }
 
 
-        public void generatePickup(Vector2 pos)
+        public void GeneratePickup(Vector2 pos)
         {
             //int type = rand.Next(3);
 
             Pickup pickup;
 
             AmmoPickup ammoPickup = new AmmoPickup(pos);
-            ammoPickup.LoadTexture(SpriteManager.getSprite("ammo"));
+            ammoPickup.LoadTexture(SpriteManager.GetSprite("ammo"));
 
             pickup = ammoPickup;
 
             pickups.Add(pickup);
         }
 
-        public void notify(ObserverMessages message, int value, Vector2 pos)
+        public void Notify(ObserverMessages message, int value, Vector2 pos)
         {
             if(message == ObserverMessages.SPAWN_PICKUPS_MESSAGE)
-                generatePickup(pos);
+                GeneratePickup(pos);
         }
     }
 }

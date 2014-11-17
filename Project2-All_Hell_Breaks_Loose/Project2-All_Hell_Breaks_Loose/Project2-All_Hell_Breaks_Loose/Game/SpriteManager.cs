@@ -17,7 +17,7 @@ namespace Project2_All_Hell_Breaks_Loose.Game
             sprites = new Dictionary<string, Texture2D>();
         }
 
-        public static void generateDefaultTexture(GraphicsDevice device)
+        public static void GenerateDefaultTexture(GraphicsDevice device)
         {
             int textureHeight = 50;
             int textureWidth = 50;
@@ -36,7 +36,7 @@ namespace Project2_All_Hell_Breaks_Loose.Game
             sprites.Add(missingTextureName, missingTexture);
         }
 
-        public static void loadSprite(string key, Texture2D sprite)
+        public static void LoadSprite(string key, Texture2D sprite)
         {
             //check to see if the specified key already exists
             if(!sprites.ContainsKey(key))
@@ -51,7 +51,7 @@ namespace Project2_All_Hell_Breaks_Loose.Game
             }
         }
 
-        public static Texture2D getSprite(string key)
+        public static Texture2D GetSprite(string key)
         {
             if(sprites.ContainsKey(key))
             {

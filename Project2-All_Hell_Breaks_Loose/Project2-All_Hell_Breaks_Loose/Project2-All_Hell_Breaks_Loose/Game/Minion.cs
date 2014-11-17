@@ -35,7 +35,7 @@ namespace Project2_All_Hell_Breaks_Loose.Game
             color = Color.White;
             moveStrategy = null;
 
-            initToZero();
+            InitToZero();
         }
 
         public Minion(int health, float damage, float speed, Vector2 pos, Strategies.MovementStrategy strategy, Color color)
@@ -48,7 +48,7 @@ namespace Project2_All_Hell_Breaks_Loose.Game
             this.color = color;
             moveStrategy = strategy;
 
-            initToZero();
+            InitToZero();
         }
 
         public Minion(int health, float damage, float speed, float x, float y, Strategies.MovementStrategy strategy, Color color)
@@ -61,10 +61,10 @@ namespace Project2_All_Hell_Breaks_Loose.Game
             this.color = color;
             moveStrategy = strategy;
 
-            initToZero();
+            InitToZero();
         }
 
-        private void initToZero()
+        private void InitToZero()
         {
             height = 0;
             width = 0;
@@ -78,12 +78,12 @@ namespace Project2_All_Hell_Breaks_Loose.Game
         {
         }
 
-        public void loadSprite(Texture2D texture = null)
+        public void LoadSprite(Texture2D texture = null)
         {
             //multiple options
             if(texture == null)
             {
-               this.texture = SpriteManager.getSprite("enemy");
+               this.texture = SpriteManager.GetSprite("enemy");
             }
             else
             {
@@ -99,14 +99,14 @@ namespace Project2_All_Hell_Breaks_Loose.Game
             }
         }
 
-        public void update(Vector2 playerPos)
+        public void Update(Vector2 playerPos)
         {
-            setRotation(playerPos);
+            SetRotation(playerPos);
 
-            position = moveStrategy.update(position, playerPos, speed);
+            position = moveStrategy.Update(position, playerPos, speed);
         }
 
-        public void draw(SpriteBatch batch)
+        public void Draw(SpriteBatch batch)
         {
             batch.Begin();
             
@@ -115,48 +115,48 @@ namespace Project2_All_Hell_Breaks_Loose.Game
             batch.End();
         }
 
-        public void setPosition(float x, float y)
+        public void SetPosition(float x, float y)
         {
             position.X = x;
             position.Y = y;
         }
 
-        public void setPosition(Vector2 pos)
+        public void SetPosition(Vector2 pos)
         {
             position = pos;
         }
 
-        public Vector2 getPosition()
+        public Vector2 GetPosition()
         {
             return position;
         }
 
-        public Vector2 getCenter()
+        public Vector2 GetCenter()
         {
             return center;
         }
 
-        public Vector2 getOrigin()
+        public Vector2 GetOrigin()
         {
             return origin;
         }
 
-        public void setOrigin(Vector2 newOrigin)
+        public void SetOrigin(Vector2 newOrigin)
         {
             origin = newOrigin;
         }
 
-        public void setOrigin(float x, float y)
+        public void SetOrigin(float x, float y)
         {
             origin = new Vector2(x, y);
         }
 
-        public void setRotation(float newRotation)
+        public void SetRotation(float newRotation)
         {
             rotation = newRotation;
         }
 
-        public void setRotation(Vector2 targetLocation)
+        public void SetRotation(Vector2 targetLocation)
         {
 
             float xDiff = targetLocation.X - position.X;
@@ -164,74 +164,74 @@ namespace Project2_All_Hell_Breaks_Loose.Game
 
             float newRotation = (float)Math.Atan2(yDiff, xDiff);
 
-            setRotation(newRotation);
+            SetRotation(newRotation);
         }
 
-        public void setHealth(int newHealth)
+        public void SetHealth(int newHealth)
         {
             health = newHealth;
         }
 
-        public float getHealth()
+        public float GetHealth()
         {
             return health;
         }
 
-        public void takeDamage(float damage)
+        public void TakeDamage(float damage)
         {
             health -= damage;
         }
-        public void setDamage(float damage)
+        public void SetDamage(float damage)
         {
             this.damage = damage;
         }
 
-        public float getDamage()
+        public float GetDamage()
         {
             return damage;
         }
 
-        public void setSpeed(float newSpeed)
+        public void SetSpeed(float newSpeed)
         {
             speed = newSpeed;
         }
 
-        public float getSpeed()
+        public float GetSpeed()
         {
             return speed;
         }
 
-        public Rectangle getBoundingRectangle()
+        public Rectangle GetBoundingRectangle()
         {
             return new Rectangle((int)position.X, (int)position.Y, width, height);
         }
 
-        public int getHeight()
+        public int GetHeight()
         {
             return height;
         }
 
-        public int getWidth()
+        public int GetWidth()
         {
             return width;
         }
 
-        public void setHeight(int newHeight)
+        public void SetHeight(int newHeight)
         {
             height = newHeight;
         }
 
-        public void setWidth(int newWidth)
+        public void SetWidth(int newWidth)
         {
             width = newWidth;
         }
 
-        public Color getColor()
+        public Color GetColor()
         {
             return color;
         }
 
-        public int getRadius()
+        public int GetRadius()
         {
             return (height + width) / 4;
         }

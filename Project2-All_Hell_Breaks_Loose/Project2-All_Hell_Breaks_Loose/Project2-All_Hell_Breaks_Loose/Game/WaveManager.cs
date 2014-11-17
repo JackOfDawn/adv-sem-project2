@@ -20,12 +20,12 @@ namespace Project2_All_Hell_Breaks_Loose.Game
             countdownTillNextWave = waveFrequency;
         }
 
-        public List<Enemy> update()
+        public List<Enemy> Update()
         {
             if (countdownTillNextWave <= 0)
             {
                 countdownTillNextWave = waveFrequency;
-                return spawnWave();
+                return SpawnWave();
             }
             else
             {
@@ -34,14 +34,14 @@ namespace Project2_All_Hell_Breaks_Loose.Game
             }
         }
 
-        public List<Enemy> spawnWave()
+        public List<Enemy> SpawnWave()
         {
             List<Enemy> wave = new List<Enemy>();
 
             for (int i = 0; i < spawnCap; i++)
             {
                 Minion minion = EnemyFactory.makeChaser();
-                minion.setPosition(0.0f, 50.0f * (i*2));
+                minion.SetPosition(0.0f, 50.0f * (i*2));
 
                 wave.Add(minion); 
             }
@@ -50,19 +50,19 @@ namespace Project2_All_Hell_Breaks_Loose.Game
             return wave;
         }
 
-        public void setSpawnCap(int newSpawnCap)
+        public void SetSpawnCap(int newSpawnCap)
         {
             spawnCap = newSpawnCap;
         }
-        public int getSpawnCap()
+        public int GetSpawnCap()
         {
             return spawnCap;
         }
-        public void setWaveFrequency(float newWaveFrequency)
+        public void SetWaveFrequency(float newWaveFrequency)
         {
             waveFrequency = newWaveFrequency;
         }
-        public float getWaveFrequency()
+        public float GetWaveFrequency()
         {
             return waveFrequency;
         }

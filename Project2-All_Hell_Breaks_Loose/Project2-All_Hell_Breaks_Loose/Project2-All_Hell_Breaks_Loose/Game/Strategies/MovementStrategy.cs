@@ -8,6 +8,6 @@ namespace Project2_All_Hell_Breaks_Loose.Game.Strategies
 {
     public interface MovementStrategy
     {
-        Vector2 update(Vector2 position, Vector2 targetLoc, float speed);
+        Vector2 Update(Vector2 position, Vector2 targetLoc, float speed);
     }
 }

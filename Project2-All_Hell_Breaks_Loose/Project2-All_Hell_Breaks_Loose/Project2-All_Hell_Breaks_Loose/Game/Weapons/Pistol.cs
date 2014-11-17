@@ -15,11 +15,11 @@ namespace Project2_All_Hell_Breaks_Loose.Game.Weapons
         {
 
         }
-        public override int getSpeed()
+        public override int GetSpeed()
         {
             return SPEED;
         }
-        public override int getDamage()
+        public override int GetDamage()
         {
             return DAMAGE;
         }

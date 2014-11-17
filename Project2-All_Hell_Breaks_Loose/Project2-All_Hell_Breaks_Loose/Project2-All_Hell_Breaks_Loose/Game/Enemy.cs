@@ -10,23 +10,23 @@ namespace Project2_All_Hell_Breaks_Loose.Game
 {
     public interface Enemy
     {
-        void loadSprite(Texture2D texture);
+        void LoadSprite(Texture2D texture);
 
-        void update(Vector2 playerPos);
-        void draw(SpriteBatch batch);
+        void Update(Vector2 playerPos);
+        void Draw(SpriteBatch batch);
 
-        void setHealth(int newHealth);
-        float getHealth();
-        void takeDamage(float damage);
-        void setDamage(float damage);
-        float getDamage();
-        void setSpeed(float newSpeed);
-        float getSpeed();
-        Vector2 getPosition();
-        int getHeight();
-        int getWidth();
+        void SetHealth(int newHealth);
+        float GetHealth();
+        void TakeDamage(float damage);
+        void SetDamage(float damage);
+        float GetDamage();
+        void SetSpeed(float newSpeed);
+        float GetSpeed();
+        Vector2 GetPosition();
+        int GetHeight();
+        int GetWidth();
 
-        int getRadius();
-        Rectangle getBoundingRectangle();
+        int GetRadius();
+        Rectangle GetBoundingRectangle();
     }
 }

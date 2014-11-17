@@ -44,7 +44,7 @@ namespace Project2_All_Hell_Breaks_Loose
         {
             // TODO: Add your initialization logic here
             arena = new Game.Arena();
-            arena.init();
+            arena.Init();
             base.Initialize();
         }
 
@@ -54,11 +54,11 @@ namespace Project2_All_Hell_Breaks_Loose
         /// </summary>
         protected override void LoadContent()
         {
-            // Create a new SpriteBatch, which can be used to draw textures.
+            // Create a new SpriteBatch, which can be used to Draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
             
             // TODO: use this.Content to load your game content here
-            arena.loadContent(this.Content, graphics.GraphicsDevice);
+            arena.LoadContent(this.Content, graphics.GraphicsDevice);
         }
 
         /// <summary>
@@ -81,13 +81,13 @@ namespace Project2_All_Hell_Breaks_Loose
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 this.Exit();
 
-            // TODO: Add your update logic here
-            arena.update(gameTime);
+            // TODO: Add your Update logic here
+            arena.Update(gameTime);
             base.Update(gameTime);
         }
 
         /// <summary>
-        /// This is called when the game should draw itself.
+        /// This is called when the game should Draw itself.
         /// </summary>
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
@@ -95,7 +95,7 @@ namespace Project2_All_Hell_Breaks_Loose
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             // TODO: Add your drawing code here
-            arena.draw(spriteBatch);
+            arena.Draw(spriteBatch);
             base.Draw(gameTime);
         }
     }

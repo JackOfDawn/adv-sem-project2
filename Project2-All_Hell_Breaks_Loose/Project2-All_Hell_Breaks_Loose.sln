@@ -31,6 +31,7 @@ Global
 		{6C5888DF-4B31-4D3D-9CA7-FE3C61ED2274}.Release|x86.Build.0 = Release|x86
 		{66CFC8F4-C186-4420-AD7C-BA9A8BF9ECEC}.Debug|Any CPU.ActiveCfg = Debug|x86
 		{66CFC8F4-C186-4420-AD7C-BA9A8BF9ECEC}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
+		{66CFC8F4-C186-4420-AD7C-BA9A8BF9ECEC}.Debug|Mixed Platforms.Build.0 = Debug|x86
 		{66CFC8F4-C186-4420-AD7C-BA9A8BF9ECEC}.Debug|x86.ActiveCfg = Debug|x86
 		{66CFC8F4-C186-4420-AD7C-BA9A8BF9ECEC}.Release|Any CPU.ActiveCfg = Release|x86
 		{66CFC8F4-C186-4420-AD7C-BA9A8BF9ECEC}.Release|Mixed Platforms.ActiveCfg = Release|x86

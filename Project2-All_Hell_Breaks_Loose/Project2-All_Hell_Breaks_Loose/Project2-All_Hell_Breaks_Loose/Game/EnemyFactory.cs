@@ -14,10 +14,12 @@ namespace Project2_All_Hell_Breaks_Loose.Game
         private const float MINION_SPEED = 2.0f;
         private static Vector2 ZERO = new Vector2(0, 0);
 
+        public static Color CHASER_COLOR = Color.Tomato; 
+
         public static Minion makeChaser()
         {
             Minion minion = new Minion(MINION_HEALTH, MINION_DAMAGE, MINION_SPEED, ZERO, new Strategies.SeekMovement(), Color.Tomato);
-            minion.loadSprite();
+            minion.LoadSprite();
             return minion;
         }
     }

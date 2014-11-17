@@ -22,9 +22,9 @@ namespace Project2_All_Hell_Breaks_Loose.Game
             direction.Normalize();
             this.direction = direction;
             this.damage = damage;
-            if (SpriteManager.getSprite("bullet") != null)
+            if (SpriteManager.GetSprite("bullet") != null)
             {
-                this.radius = SpriteManager.getSprite("bullet").Height/2;
+                this.radius = SpriteManager.GetSprite("bullet").Height/2;
             }
             else
             {
@@ -47,22 +47,22 @@ namespace Project2_All_Hell_Breaks_Loose.Game
             spriteBatch.End();
         }
 
-        public Vector2 getPosition()
+        public Vector2 GetPosition()
         {
             return position;
         }
 
-        public int getRadius()
+        public int GetRadius()
         {
             return radius;
         }
 
-        public Vector2 getOrigin()
+        public Vector2 GetOrigin()
         {
             return position;
         }
 
-        public float getDamage()
+        public float GetDamage()
         {
             return damage;
         }

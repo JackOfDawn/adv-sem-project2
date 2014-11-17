@@ -1,10 +1,11 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Project2_All_Hell_Breaks_Loose.Game;
-using Project2_All_Hell_Breaks_Loose.Game.Weapons;
-using Project2_All_Hell_Breaks_Loose;
 using Microsoft.Xna.Framework;
 using System.Collections.Generic;
+using Project2_All_Hell_Breaks_Loose.Game;
+using Project2_All_Hell_Breaks_Loose.Game.Strategies;
+using Project2_All_Hell_Breaks_Loose.Game.Weapons;
+using Project2_All_Hell_Breaks_Loose.Game.Pickups;
 
 namespace Tests
 {
@@ -13,13 +14,12 @@ namespace Tests
     {
         Player player;
 
-        private void init()
+        private void Init()
         {
             player = new Player();
-            player.setPosition(0, 0);
-            player.setHealth(34935);
+            player.SetPosition(0, 0);
 
-
+            player.SetHealth(34935);
         }
 
         [TestMethod]
@@ -27,38 +27,40 @@ namespace Tests
         {
             Minion minion = EnemyFactory.makeChaser();
 
-            Assert.AreEqual(Color.Tomato, minion.getColor());
+            Assert.AreEqual(EnemyFactory.CHASER_COLOR, minion.GetColor());
         }
+
         [TestMethod]
         public void TestDecorator()
         {
             AbstractPistol pistol = new Pistol();
-            int prevDamage = pistol.getDamage();
+            int prevDamage = pistol.GetDamage();
 
             pistol = new DecoratedPistol(pistol);
-            int newDamage = pistol.getDamage();
+            int newDamage = pistol.GetDamage();
 
             Assert.IsTrue(newDamage > prevDamage);
         }
+
         [TestMethod]
         public void TestPlayerCollision()
         {
-            init();
+            Init();
 
             Minion minion = EnemyFactory.makeChaser();
-            minion.setPosition(0, 0);
-            minion.setHeight(345);
-            minion.setWidth(344);
+            minion.SetPosition(0, 0);
+            minion.SetHeight(345);
+            minion.SetWidth(344);
 
             EnemyManager enemyManager = new EnemyManager();
 
-            enemyManager.addEnemy(minion);
+            enemyManager.AddEnemy(minion);
             
-            float prevHealth = player.getHealth();
+            float prevHealth = player.GetHealth();
 
-            enemyManager.checkPlayerCollision(player);
+            enemyManager.CheckPlayerCollision(player);
 
-            float newHealth = player.getHealth();
+            float newHealth = player.GetHealth();
 
             Assert.IsTrue(prevHealth > newHealth);
         }
@@ -68,29 +70,29 @@ namespace Tests
         {
             BulletManager bulletManager = new BulletManager(null);
 
-            init();
+            Init();
 
             player.setBulletmanager(bulletManager);
 
             player.Shoot();
 
       
-            Assert.IsTrue(bulletManager.getNumBullets() == 1);
+            Assert.IsTrue(bulletManager.GetNumBullets() == 1);
         }
 
         [TestMethod]
         public void TestPlayerMovement()
         {
             
-            init();
+            Init();
 
-            player.setSpeed(5);
+            player.SetSpeed(5);
 
-            Vector2 newPosition = player.getPosition() + Vector2.One * player.getSpeed();
+            Vector2 newPosition = player.GetPosition() + Vector2.One * player.GetSpeed();
 
-            player.updateMovement(Vector2.One);
+            player.UpdateMovement(Vector2.One);
 
-            Assert.IsTrue(player.getPosition() == newPosition);
+            Assert.IsTrue(player.GetPosition() == newPosition);
 
         }
 
@@ -101,7 +103,7 @@ namespace Tests
 
             WaveManager waves = new WaveManager(numEnemies, 7);
 
-            List<Enemy> enemies = waves.spawnWave();
+            List<Enemy> enemies = waves.SpawnWave();
 
             Assert.IsTrue(enemies.Count == numEnemies);
         }
@@ -113,9 +115,9 @@ namespace Tests
 
             Enemy minion = new Minion();
 
-            enemyManager.addEnemy(minion);
+            enemyManager.AddEnemy(minion);
 
-            Assert.IsTrue(enemyManager.getNumEnemies() == 1);
+            Assert.IsTrue(enemyManager.GetNumEnemies() == 1);
         }
 
         [TestMethod]
@@ -124,26 +126,26 @@ namespace Tests
             EnemyManager enemyManager = new EnemyManager();
 
             Enemy minion = EnemyFactory.makeChaser();
-            minion.setHealth(0);
+            minion.SetHealth(0);
 
-            enemyManager.addEnemy(minion);
+            enemyManager.AddEnemy(minion);
 
-            enemyManager.update(new Vector2());
+            enemyManager.Update(new Vector2());
 
-            Assert.IsTrue(enemyManager.getNumEnemies() == 0);
+            Assert.IsTrue(enemyManager.GetNumEnemies() == 0);
         }
 
         [TestMethod]
         public void TestSeek()
         {
             Minion minion = EnemyFactory.makeChaser();
-            minion.setPosition(50, 50);
+            minion.SetPosition(50, 50);
 
-            Vector2 prevPostion = minion.getPosition();
+            Vector2 prevPostion = minion.GetPosition();
 
-            minion.update(Vector2.Zero);
+            minion.Update(Vector2.Zero);
 
-            Vector2 newPosition = minion.getPosition();
+            Vector2 newPosition = minion.GetPosition();
 
             float prevDistance = Vector2.Distance(prevPostion, Vector2.Zero);
             float newDistance = Vector2.Distance(newPosition, Vector2.Zero);
@@ -158,28 +160,23 @@ namespace Tests
             BulletManager bulletManager = new BulletManager(enemyManager);
 
             Minion minion = EnemyFactory.makeChaser();
-            minion.setPosition(50, 50);
-            minion.setHeight(5);
+            minion.SetPosition(50, 50);
+            minion.SetHeight(5);
 
 
             Bullet bullet = new Bullet(new Vector2(49, 49), 1, Vector2.One, 3);
 
-            System.Console.WriteLine(bulletManager.getNumBullets());
-            enemyManager.addEnemy(minion);
-            bulletManager.addBullet(bullet);
+            System.Console.WriteLine(bulletManager.GetNumBullets());
+            enemyManager.AddEnemy(minion);
+            bulletManager.AddBullet(bullet);
 
-            
-            
-
-            float prevHealth = minion.getHealth();
+            float prevHealth = minion.GetHealth();
             
             bulletManager.Update();
             
-
-            float newHealth = minion.getHealth();
+            float newHealth = minion.GetHealth();
           
-
-            Assert.IsTrue(bulletManager.getNumBullets() == 0);
+            Assert.IsTrue(bulletManager.GetNumBullets() == 0);
         }
     }
 }

@@ -25,57 +25,57 @@ namespace Project2_All_Hell_Breaks_Loose.Game
         {
         }
 
-        public void addEnemy(Enemy enemy)
+        public void AddEnemy(Enemy enemy)
         {
             enemies.Add(enemy);
         }
 
-        public void addEnemies(List<Enemy> enemiesToAdd)
+        public void AddEnemies(List<Enemy> enemiesToAdd)
         {
             enemies.AddRange(enemiesToAdd);
         }
 
-        public void deleteEnemy(Enemy enemy)
+        public void DeleteEnemy(Enemy enemy)
         {
             enemies.Remove(enemy);
         }
 
-        public void deleteEnemy(int index)
+        public void DeleteEnemy(int index)
         {
             enemies.RemoveAt(index);
         }
 
-        public void update(Microsoft.Xna.Framework.Vector2 playerPos)
+        public void Update(Microsoft.Xna.Framework.Vector2 playerPos)
         {
         
             foreach(Enemy enemy in enemies)
             {
-                enemy.update(playerPos);
-                if(enemy.getHealth() <= 0)
+                enemy.Update(playerPos);
+                if(enemy.GetHealth() <= 0)
                 {
                     enemiesToDelete.Add(enemy);
                     
                 }
             }
 
-            notifyObservers();
-            removeAtEndOfFrame();
+            NotifyObservers();
+            RemoveAtEndOfFrame();
         }
 
-        public void checkPlayerCollision(Player player)
+        public void CheckPlayerCollision(Player player)
         {
             foreach (Enemy enemy in enemies)
             {
-                if (Vector2.Distance(enemy.getPosition(), player.getPosition()) < player.getRadius() + enemy.getRadius())
+                if (Vector2.Distance(enemy.GetPosition(), player.GetPosition()) < player.GetRadius() + enemy.GetRadius())
                 {
-                    if(player.isDamaged() == false)
-                        player.takeDamage(enemy.getDamage());
+                    if(player.IsDamaged() == false)
+                        player.TakeDamage(enemy.GetDamage());
                     
                 }
             }
         }
 
-        private void removeAtEndOfFrame()
+        private void RemoveAtEndOfFrame()
         {
             foreach (Enemy enemy in enemiesToDelete)
             {
@@ -84,30 +84,30 @@ namespace Project2_All_Hell_Breaks_Loose.Game
             enemiesToDelete.Clear();
         }
 
-        public void draw(SpriteBatch batch)
+        public void Draw(SpriteBatch batch)
         {
             foreach(Enemy enemy in enemies)
             {
-                enemy.draw(batch);
+                enemy.Draw(batch);
             }
         }
-        public int getNumEnemies()
+        public int GetNumEnemies()
         {
             return enemies.Count;
         }
 
-        public Enemy getEnemy(int index)
+        public Enemy GetEnemy(int index)
         {
             return enemies[index];
         }
 
-        public override void notifyObservers()
+        public override void NotifyObservers()
         {
             foreach (Observer observer in observers)
             {
                 foreach (Enemy enemy in enemiesToDelete)
                 {
-                    observer.notify(ObserverMessages.SPAWN_PICKUPS_MESSAGE, 0, enemy.getPosition());
+                    observer.Notify(ObserverMessages.SPAWN_PICKUPS_MESSAGE, 0, enemy.GetPosition());
                     
                 }
                 

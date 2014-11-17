@@ -20,27 +20,27 @@ namespace Project2_All_Hell_Breaks_Loose.Game
             enemyManager = enemyManagerRef;
         }
 
-        public void addBullet(Bullet bullet)
+        public void AddBullet(Bullet bullet)
         {
             bullets.Add(bullet);
         }
 
-        public void addBullets(List<Bullet>bulletsToAdd)
+        public void AddBullets(List<Bullet>bulletsToAdd)
         {
             bullets.AddRange(bulletsToAdd);
         }
 
-        public void deleteBullet(Bullet bullet)
+        public void DeleteBullet(Bullet bullet)
         {
             bulletsToRemove.Add(bullet);
         }
 
-        public void deleteBullet(int index)
+        public void DeleteBullet(int index)
         {
             bulletsToRemove.Add(bullets[index]);
         }
 
-        private void removeAtEndOfFrame()
+        private void RemoveAtEndOfFrame()
         {
             foreach(Bullet bullet in bulletsToRemove)
             {
@@ -49,29 +49,29 @@ namespace Project2_All_Hell_Breaks_Loose.Game
             bulletsToRemove.Clear();
         }
 
-        private void checkCollisions(Bullet bullet)
+        private void CheckCollisions(Bullet bullet)
         {
-            int radius = bullet.getRadius();
+            int radius = bullet.GetRadius();
 
-            bool outOfBoundsX = bullet.getPosition().X < 0 || bullet.getPosition().X > Game1.WIDTH;
-            bool outOfBoundsY = bullet.getPosition().Y < 0 || bullet.getPosition().Y > Game1.HEIGHT;
+            bool outOfBoundsX = bullet.GetPosition().X < 0 || bullet.GetPosition().X > Game1.WIDTH;
+            bool outOfBoundsY = bullet.GetPosition().Y < 0 || bullet.GetPosition().Y > Game1.HEIGHT;
 
             if (outOfBoundsX || outOfBoundsY)
             {
-                deleteBullet(bullet);
+                DeleteBullet(bullet);
          
             }
             else
             {
-                for (int i = 0; i < enemyManager.getNumEnemies(); i++)
+                for (int i = 0; i < enemyManager.GetNumEnemies(); i++)
                 {
-                    Enemy enemy = enemyManager.getEnemy(i);
+                    Enemy enemy = enemyManager.GetEnemy(i);
                    
-                    if (Vector2.Distance(bullet.getPosition(), enemy.getPosition()) <= radius + enemy.getRadius())
+                    if (Vector2.Distance(bullet.GetPosition(), enemy.GetPosition()) <= radius + enemy.GetRadius())
                     {
                         
-                        enemy.takeDamage(bullet.getDamage());
-                        deleteBullet(bullet);
+                        enemy.TakeDamage(bullet.GetDamage());
+                        DeleteBullet(bullet);
                         break;
                     }
                 }
@@ -85,21 +85,21 @@ namespace Project2_All_Hell_Breaks_Loose.Game
                
                 bullet.Update();
                
-                checkCollisions(bullet);
+                CheckCollisions(bullet);
                 
             }
-            removeAtEndOfFrame();
+            RemoveAtEndOfFrame();
         }
 
         public void Draw(SpriteBatch batch)
         {
             foreach(Bullet bullet in bullets)
             {
-                bullet.Draw(batch, SpriteManager.getSprite("bullet"));
+                bullet.Draw(batch, SpriteManager.GetSprite("bullet"));
             }
         }
 
-        public int getNumBullets()
+        public int GetNumBullets()
         {
             return bullets.Count;
         }

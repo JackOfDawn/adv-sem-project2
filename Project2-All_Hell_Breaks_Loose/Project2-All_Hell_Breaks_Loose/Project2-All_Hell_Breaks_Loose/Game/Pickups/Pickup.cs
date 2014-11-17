@@ -11,7 +11,7 @@ namespace Project2_All_Hell_Breaks_Loose.Game.Pickups
     {
         void Draw(SpriteBatch batch);
         void LoadTexture(Texture2D texture);
-        Vector2 getPosition();
-        float getRadius();
+        Vector2 GetPosition();
+        float GetRadius();
     }
 }

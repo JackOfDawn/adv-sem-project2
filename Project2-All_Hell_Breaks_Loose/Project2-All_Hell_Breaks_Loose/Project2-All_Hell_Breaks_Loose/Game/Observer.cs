@@ -15,6 +15,6 @@ namespace Project2_All_Hell_Breaks_Loose.Game
 
     public interface Observer
     {
-        void notify(ObserverMessages message, int value = 0, Vector2 pos = new Vector2());
+        void Notify(ObserverMessages message, int value = 0, Vector2 pos = new Vector2());
     }
 }

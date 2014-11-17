@@ -16,10 +16,10 @@ namespace Project2_All_Hell_Breaks_Loose.Game
         public delegate void MousePositionDelegate(Vector2 mousePos);
 
         //Defining events
-        public event DirectionPressedDelegate event_MovementPressed;
-        public event ButtonPressedDelegate event_SwitchWeapons;
-        public event ButtonPressedDelegate event_Shoot;
-        public event MousePositionDelegate event_UpdateCursorLoc;
+        public event DirectionPressedDelegate Event_MovementPressed;
+        public event ButtonPressedDelegate Event_SwitchWeapons;
+        public event ButtonPressedDelegate Event_Shoot;
+        public event MousePositionDelegate Event_UpdateCursorLoc;
 
         KeyboardState lastKeyboardState;
         MouseState lastMouseState;
@@ -42,7 +42,7 @@ namespace Project2_All_Hell_Breaks_Loose.Game
             leftClickDown = false;
         }
         
-        public void update(GameTime gameTime)
+        public void Update(GameTime gameTime)
         {
             shootActionPressed = false;
             switchWeaponActionPressed = false;
@@ -50,35 +50,35 @@ namespace Project2_All_Hell_Breaks_Loose.Game
             movementVector = Vector2.Zero;
 
 
-            handleKeyInput();
-            handleMouseInput();
+            HandleKeyInput();
+            HandleMouseInput();
 
             //call events
-            if(shootActionPressed && event_Shoot != null)
+            if(shootActionPressed && Event_Shoot != null)
             {
-                event_Shoot();
+                Event_Shoot();
             }
 
-            if(switchWeaponActionPressed && event_SwitchWeapons != null)
+            if(switchWeaponActionPressed && Event_SwitchWeapons != null)
             {
-                event_SwitchWeapons();
+                Event_SwitchWeapons();
             }
 
-            if(movementVector != Vector2.Zero && event_MovementPressed != null)
+            if(movementVector != Vector2.Zero && Event_MovementPressed != null)
             {
-                event_MovementPressed(movementVector);
+                Event_MovementPressed(movementVector);
             }
 
-            if(event_UpdateCursorLoc != null)
+            if(Event_UpdateCursorLoc != null)
             {
                 Vector2 mouseLoc = new Vector2(lastMouseState.X, lastMouseState.Y);
-                event_UpdateCursorLoc(mouseLoc);
+                Event_UpdateCursorLoc(mouseLoc);
             }
 
 
         }
 
-        private void handleMouseInput()
+        private void HandleMouseInput()
         {
             //Handle mousestate
             MouseState currentMouseState = Mouse.GetState();
@@ -97,7 +97,7 @@ namespace Project2_All_Hell_Breaks_Loose.Game
             lastMouseState = Mouse.GetState();
         }
 
-        private void handleKeyInput()
+        private void HandleKeyInput()
         {
             //handle debounced Q press
             KeyboardState currentKeyState = Keyboard.GetState();

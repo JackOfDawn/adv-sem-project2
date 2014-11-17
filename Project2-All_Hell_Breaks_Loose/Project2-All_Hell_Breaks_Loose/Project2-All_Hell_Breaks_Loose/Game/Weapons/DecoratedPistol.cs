@@ -14,13 +14,13 @@ namespace Project2_All_Hell_Breaks_Loose.Game.Weapons
             basePistol = pistol;
         }
 
-        public override int getSpeed()
+        public override int GetSpeed()
         {
-            return basePistol.getSpeed() + 1;
+            return basePistol.GetSpeed() + 1;
         }
-        public override int getDamage()
+        public override int GetDamage()
         {
-            return basePistol.getDamage() + 1;
+            return basePistol.GetDamage() + 1;
         }
     }
 }

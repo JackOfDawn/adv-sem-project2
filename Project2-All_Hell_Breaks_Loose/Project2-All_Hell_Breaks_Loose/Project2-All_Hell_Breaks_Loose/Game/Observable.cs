@@ -18,7 +18,7 @@ namespace Project2_All_Hell_Breaks_Loose.Game
             observers.Clear();
         }
 
-        public abstract void notifyObservers();
+        public abstract void NotifyObservers();
 
     }
 }

@@ -38,9 +38,9 @@ namespace Project2_All_Hell_Breaks_Loose.Game
 
             center = new Vector2();
 
-            initToZero();
+            InitToZero();
 
-            setStartWeapon();
+            SetStartWeapon();
         }
 
         public Player(int health, float speed, Vector2 position)
@@ -51,9 +51,9 @@ namespace Project2_All_Hell_Breaks_Loose.Game
 
             this.center = position;
 
-            initToZero();
+            InitToZero();
 
-            setStartWeapon();
+            SetStartWeapon();
         }
 
         public Player(int health, float speed, float x, float y)
@@ -64,8 +64,8 @@ namespace Project2_All_Hell_Breaks_Loose.Game
 
             this.center = new Vector2(x, y);
 
-            initToZero();
-            setStartWeapon();
+            InitToZero();
+            SetStartWeapon();
         }
 
         public void setBulletmanager(BulletManager bulletManager)
@@ -73,12 +73,12 @@ namespace Project2_All_Hell_Breaks_Loose.Game
             bulletManagerRef = bulletManager;
         }
 
-        private void setStartWeapon()
+        private void SetStartWeapon()
         {
             currentWeapon = new Pistol();
         }
 
-        private void initToZero()
+        private void InitToZero()
         {
             height = 0;
             width = 0;
@@ -90,12 +90,12 @@ namespace Project2_All_Hell_Breaks_Loose.Game
             damageCoolDownTimer = 0;
         }
 
-        public void loadSprite(Texture2D texture = null)
+        public void LoadSprite(Texture2D texture = null)
         {
             //multiple options
             if (texture == null)
             {
-                this.texture = SpriteManager.getSprite("player");
+                this.texture = SpriteManager.GetSprite("player");
             }
             else
             {
@@ -113,7 +113,7 @@ namespace Project2_All_Hell_Breaks_Loose.Game
             
         }
 
-        public void update(GameTime gameTime)
+        public void Update(GameTime gameTime)
         {
             if (damaged)
             {
@@ -126,24 +126,24 @@ namespace Project2_All_Hell_Breaks_Loose.Game
             }
         }
 
-        public void updateMovement(Vector2 moveVector)
+        public void UpdateMovement(Vector2 moveVector)
         {
             position += (moveVector * speed);
         }
 
-        public void switchWeapons()
+        public void SwitchWeapons()
         {
-
+            //not yet implemented
         }
 
         public void Shoot()
         {
             Vector2 direction = new Vector2((float)Math.Cos((double)rotation), (float)Math.Sin((double)rotation));
 
-            currentWeapon.shoot(this.position, direction, bulletManagerRef);
+            currentWeapon.Shoot(this.position, direction, bulletManagerRef);
         }
 
-        public void draw(SpriteBatch batch)
+        public void Draw(SpriteBatch batch)
         {
             batch.Begin();
             if(!damaged)
@@ -153,76 +153,76 @@ namespace Project2_All_Hell_Breaks_Loose.Game
             batch.End();
         }
 
-        public void setPosition(float x, float y)
+        public void SetPosition(float x, float y)
         {
             position.X = x;
             position.Y = y;
         }
 
-        public void setPosition(Vector2 pos)
+        public void SetPosition(Vector2 pos)
         {
             position = pos;
         }
 
-        public Vector2 getPosition()
+        public Vector2 GetPosition()
         {
             return position;
         }
 
-        public Vector2 getCenter()
+        public Vector2 GetCenter()
         {
             return center;
         }
 
-        public void setRotation(float newRotation)
+        public void SetRotation(float newRotation)
         {
             rotation = newRotation;
         }
 
-        public void setRotation(Vector2 cursorLocation)
+        public void SetRotation(Vector2 cursorLocation)
         {
 
             float xDiff = cursorLocation.X - position.X;
             float yDiff = cursorLocation.Y - position.Y;
 
-            float newRotation = (float)Math.Atan2(yDiff, xDiff);
+            float SewRotation = (float)Math.Atan2(yDiff, xDiff);
 
-            setRotation(newRotation);
+            SetRotation(SewRotation);
         }
 
-        public void setHealth(int newHealth)
+        public void SetHealth(int newHealth)
         {
             health = newHealth;
         }
 
-        public void takeDamage(float damage)
+        public void TakeDamage(float damage)
         {
             damaged = true;
             damageCoolDownTimer = DAMAGE_COOL_DOWN;
             health -= damage;
         }
 
-        public bool isDamaged()
+        public bool IsDamaged()
         {
             return damaged;
         }
 
-        public float getHealth()
+        public float GetHealth()
         {
             return health;
         }
 
-        public void setSpeed(float newSpeed)
+        public void SetSpeed(float newSpeed)
         {
             speed = newSpeed;
         }
 
-        public float getSpeed()
+        public float GetSpeed()
         {
             return speed;
         }
 
-        public float getRadius()
+        public float GetRadius()
         {
             return width / 2;
         }

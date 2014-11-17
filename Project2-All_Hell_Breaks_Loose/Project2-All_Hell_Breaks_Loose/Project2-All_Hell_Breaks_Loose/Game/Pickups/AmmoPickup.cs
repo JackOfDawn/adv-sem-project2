@@ -19,11 +19,11 @@ namespace Project2_All_Hell_Breaks_Loose.Game.Pickups
             position = newPosition;
         }
 
-        public override void notifyObservers()
+        public override void NotifyObservers()
         {
             foreach (Observer observer in observers)
             {
-                observer.notify(ObserverMessages.AMMO_PICKUP_MESSAGE, 5);
+                observer.Notify(ObserverMessages.AMMO_PICKUP_MESSAGE, 5);
             }
         }
 
@@ -40,12 +40,12 @@ namespace Project2_All_Hell_Breaks_Loose.Game.Pickups
             batch.End();
         }
 
-        public Vector2 getPosition()
+        public Vector2 GetPosition()
         {
             return position;
         }
 
-        public float getRadius()
+        public float GetRadius()
         {
             return texture.Width / 2;
         }

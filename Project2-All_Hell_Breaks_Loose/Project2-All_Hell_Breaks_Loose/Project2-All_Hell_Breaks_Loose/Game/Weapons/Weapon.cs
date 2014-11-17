@@ -8,11 +8,11 @@ namespace Project2_All_Hell_Breaks_Loose.Game.Weapons
 {
     public interface Weapon
     {
-        void shoot(Vector2 pos, Vector2 direction, BulletManager bulletManagerRef);
-        void addAmmo(int amt);
-        bool hasAmmo();
-        void useAmmo();
-        int getSpeed();
-        int getDamage();
+        void Shoot(Vector2 pos, Vector2 direction, BulletManager bulletManagerRef);
+        void AddAmmo(int amt);
+        bool HasAmmo();
+        void UseAmmo();
+        int GetSpeed();
+        int GetDamage();
     }
 }

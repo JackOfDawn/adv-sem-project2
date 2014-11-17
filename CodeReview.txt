@@ -1,0 +1,6 @@
+Inconsistent capitalization of method names. (Fixed)
+
+Strange to be testing Factory by testing if the minion's color is equal to what is essentially a magic color. (Fixed)
+
+Interactions such as player.Shoot() adding a bullet to the bullet manager should probably be turned into pure functions mediated by a manager type class. This separates the state of the two objects.
+
