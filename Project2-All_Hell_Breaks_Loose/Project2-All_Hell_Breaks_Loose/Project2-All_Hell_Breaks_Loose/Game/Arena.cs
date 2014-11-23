@@ -146,6 +146,7 @@ namespace Project2_All_Hell_Breaks_Loose.Game
 
             AmmoPickup ammoPickup = new AmmoPickup(pos);
             ammoPickup.LoadTexture(SpriteManager.GetSprite("ammo"));
+            ammoPickup.registerObserver(player);
 
             pickup = ammoPickup;
 

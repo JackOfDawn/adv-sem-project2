@@ -9,7 +9,7 @@ using Project2_All_Hell_Breaks_Loose.Game.Weapons;
 
 namespace Project2_All_Hell_Breaks_Loose.Game
 {
-    public class Player
+    public class Player : Observer
     {
         private float health;
         private float speed;
@@ -75,7 +75,7 @@ namespace Project2_All_Hell_Breaks_Loose.Game
 
         private void SetStartWeapon()
         {
-            currentWeapon = new Pistol();
+            currentWeapon = new ShotGun();
         }
 
         private void InitToZero()
@@ -121,7 +121,6 @@ namespace Project2_All_Hell_Breaks_Loose.Game
                 if(damageCoolDownTimer <= 0)
                 {
                     damaged = false;
-                    
                 }
             }
         }
@@ -226,6 +225,14 @@ namespace Project2_All_Hell_Breaks_Loose.Game
         {
             return width / 2;
         }
-        
+
+
+        public void Notify(ObserverMessages message, int value = 0, Vector2 pos = new Vector2())
+        {
+            if(message == ObserverMessages.AMMO_PICKUP_MESSAGE)
+            {
+                currentWeapon.AddAmmo(value);
+            }
+        }
     }
 }
