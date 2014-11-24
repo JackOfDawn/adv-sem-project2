@@ -88,6 +88,7 @@
     <Compile Include="Game\Player.cs" />
     <Compile Include="Game\SpriteManager.cs" />
     <Compile Include="Game\Strategies\MovementStrategy.cs" />
+    <Compile Include="Game\Strategies\NullMovement.cs" />
     <Compile Include="Game\Strategies\Seek.cs" />
     <Compile Include="Game\WaveManager.cs" />
     <Compile Include="Game\Weapons\AbstractPistol.cs" />

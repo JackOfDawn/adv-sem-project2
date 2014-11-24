@@ -30,32 +30,23 @@ namespace Project2_All_Hell_Breaks_Loose.Game
         private Weapon currentWeapon;
         private BulletManager bulletManagerRef;
 
-        public Player() : this(0, 0, new Vector2()) { }
+        public Player() 
+            : this(0, 0, new Vector2()) { }
+
+        public Player(int health, float speed, float x, float y)
+            : this (health, speed, new Vector2(x, y)) {}
 
         public Player(int health, float speed, Vector2 position)
         {
             this.health = health;
             this.speed = speed;
             this.position = position;
-
             this.center = position;
 
             InitToZero();
-
             SetStartWeapon();
         }
 
-        public Player(int health, float speed, float x, float y)
-        {
-            this.health = health;
-            this.speed = speed;
-            this.position = new Vector2(x, y);
-
-            this.center = new Vector2(x, y);
-
-            InitToZero();
-            SetStartWeapon();
-        }
 
         public void setBulletmanager(BulletManager bulletManager)
         {
@@ -214,7 +205,6 @@ namespace Project2_All_Hell_Breaks_Loose.Game
         {
             return width / 2;
         }
-
 
         public void Notify(ObserverMessages message, int value = 0, Vector2 pos = new Vector2())
         {
