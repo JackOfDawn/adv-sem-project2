@@ -30,18 +30,7 @@ namespace Project2_All_Hell_Breaks_Loose.Game
         private Weapon currentWeapon;
         private BulletManager bulletManagerRef;
 
-        public Player()
-        {
-            health = 0;
-            speed = 0;
-            position = new Vector2();
-
-            center = new Vector2();
-
-            InitToZero();
-
-            SetStartWeapon();
-        }
+        public Player() : this(0, 0, new Vector2()) { }
 
         public Player(int health, float speed, Vector2 position)
         {

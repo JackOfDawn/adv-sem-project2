@@ -116,7 +116,7 @@ namespace Project2_All_Hell_Breaks_Loose.Game
 
                 if (radiiSqr > Vector2.DistanceSquared(player.GetPosition(), pickup.GetPosition()))
                 {
-                    ((Observable)pickup).NotifyObservers();
+                    pickup.NotifyObservers();
                     pickups.RemoveAt(i);
                 }
             }
