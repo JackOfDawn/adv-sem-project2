@@ -4,7 +4,8 @@ using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework;
 
-namespace Project2_All_Hell_Breaks_Loose.Game
+
+namespace Project2_All_Hell_Breaks_Loose.Game.GameObjects.Enemies
 {
     public class EnemyFactory
     {

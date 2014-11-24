@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Project2_All_Hell_Breaks_Loose.Game.GameObjects.Enemies;
 
-namespace Project2_All_Hell_Breaks_Loose.Game
+namespace Project2_All_Hell_Breaks_Loose.Game.Managers
 {
     public class WaveManager
     {

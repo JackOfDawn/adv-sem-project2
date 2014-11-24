@@ -6,8 +6,11 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using Project2_All_Hell_Breaks_Loose.Game.Weapons;
+using Project2_All_Hell_Breaks_Loose.Game.GameObjects;
 
-namespace Project2_All_Hell_Breaks_Loose.Game
+using Project2_All_Hell_Breaks_Loose.Game.Managers;
+
+namespace Project2_All_Hell_Breaks_Loose.Game.GameObjects
 {
     public class Player : Observer
     {

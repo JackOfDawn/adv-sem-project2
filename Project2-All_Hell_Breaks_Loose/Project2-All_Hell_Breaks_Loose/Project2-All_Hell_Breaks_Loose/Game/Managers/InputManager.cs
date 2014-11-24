@@ -5,7 +5,7 @@ using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 
-namespace Project2_All_Hell_Breaks_Loose.Game
+namespace Project2_All_Hell_Breaks_Loose.Game.Managers
 {
 
     public class InputManager

@@ -6,6 +6,9 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework;
 using Project2_All_Hell_Breaks_Loose.Game.Pickups;
+using Project2_All_Hell_Breaks_Loose.Game.GameObjects;
+using Project2_All_Hell_Breaks_Loose.Game.Managers;
+using Project2_All_Hell_Breaks_Loose.Game.GameObjects.Enemies;
 
 namespace Project2_All_Hell_Breaks_Loose.Game
 {
@@ -95,6 +98,7 @@ namespace Project2_All_Hell_Breaks_Loose.Game
             else
             {
                 enemyManager.Update(player.GetPosition());
+                
                 enemyManager.CheckPlayerCollision(player);
             }
             if(player.GetHealth() <= 0 )

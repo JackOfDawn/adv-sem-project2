@@ -74,23 +74,23 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Game\Arena.cs" />
-    <Compile Include="Game\Bullets\Bullet.cs" />
-    <Compile Include="Game\Bullets\BulletManager.cs" />
-    <Compile Include="Game\Enemies\Enemy.cs" />
-    <Compile Include="Game\Enemies\EnemyFactory.cs" />
-    <Compile Include="Game\Enemies\EnemyManager.cs" />
-    <Compile Include="Game\InputManager.cs" />
-    <Compile Include="Game\Enemies\Minion.cs" />
+    <Compile Include="Game\GameObjects\Bullet.cs" />
+    <Compile Include="Game\Managers\BulletManager.cs" />
+    <Compile Include="Game\GameObjects\Enemies\Enemy.cs" />
+    <Compile Include="Game\GameObjects\Enemies\EnemyFactory.cs" />
+    <Compile Include="Game\Managers\EnemyManager.cs" />
+    <Compile Include="Game\Managers\InputManager.cs" />
+    <Compile Include="Game\GameObjects\Enemies\Minion.cs" />
     <Compile Include="Game\Observer.cs" />
     <Compile Include="Game\Pickups\AmmoPickup.cs" />
     <Compile Include="Game\Observable.cs" />
     <Compile Include="Game\Pickups\Pickup.cs" />
-    <Compile Include="Game\Player.cs" />
-    <Compile Include="Game\SpriteManager.cs" />
+    <Compile Include="Game\GameObjects\Player.cs" />
+    <Compile Include="Game\Managers\SpriteManager.cs" />
     <Compile Include="Game\Strategies\MovementStrategy.cs" />
     <Compile Include="Game\Strategies\NullMovement.cs" />
     <Compile Include="Game\Strategies\Seek.cs" />
-    <Compile Include="Game\WaveManager.cs" />
+    <Compile Include="Game\Managers\WaveManager.cs" />
     <Compile Include="Game\Weapons\AbstractPistol.cs" />
     <Compile Include="Game\Weapons\DecoratedPistol.cs" />
     <Compile Include="Game\Weapons\Pistol.cs" />
