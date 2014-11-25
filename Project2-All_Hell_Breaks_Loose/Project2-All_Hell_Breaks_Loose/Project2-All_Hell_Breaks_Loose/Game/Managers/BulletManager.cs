@@ -4,8 +4,10 @@ using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
+using Project2_All_Hell_Breaks_Loose.Game.GameObjects.Enemies;
+using Project2_All_Hell_Breaks_Loose.Game.GameObjects;
 
-namespace Project2_All_Hell_Breaks_Loose.Game
+namespace Project2_All_Hell_Breaks_Loose.Game.Managers
 {
     public class BulletManager
     {

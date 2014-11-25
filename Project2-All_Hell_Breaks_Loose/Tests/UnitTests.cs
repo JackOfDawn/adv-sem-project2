@@ -5,6 +5,9 @@ using System.Collections.Generic;
 using Project2_All_Hell_Breaks_Loose.Game;
 using Project2_All_Hell_Breaks_Loose.Game.Strategies;
 using Project2_All_Hell_Breaks_Loose.Game.Weapons;
+using Project2_All_Hell_Breaks_Loose.Game.GameObjects;
+using Project2_All_Hell_Breaks_Loose.Game.GameObjects.Enemies;
+using Project2_All_Hell_Breaks_Loose.Game.Managers;
 using Project2_All_Hell_Breaks_Loose.Game.Pickups;
 
 namespace Tests
@@ -77,7 +80,7 @@ namespace Tests
             player.Shoot();
 
       
-            Assert.IsTrue(bulletManager.GetNumBullets() == 1);
+            Assert.IsTrue(bulletManager.GetNumBullets() >= 1);
         }
 
         [TestMethod]

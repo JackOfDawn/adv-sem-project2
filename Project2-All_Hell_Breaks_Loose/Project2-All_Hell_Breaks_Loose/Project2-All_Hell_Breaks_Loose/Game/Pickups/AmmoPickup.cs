@@ -7,11 +7,9 @@ using Microsoft.Xna.Framework;
 
 namespace Project2_All_Hell_Breaks_Loose.Game.Pickups
 {
-    class AmmoPickup : Observable, Pickup
+    class AmmoPickup : Pickup
     {
-        private Texture2D texture;
-        private Vector2 position;
-        private Vector2 origin;
+
 
         public AmmoPickup(Vector2 newPosition)
         {
@@ -26,28 +24,7 @@ namespace Project2_All_Hell_Breaks_Loose.Game.Pickups
                 observer.Notify(ObserverMessages.AMMO_PICKUP_MESSAGE, 5);
             }
         }
-
-        public void LoadTexture(Texture2D texture)
-        {
-            this.texture = texture;
-            origin = new Vector2(texture.Width / 2, texture.Height / 2);
-        }
-
-        public void Draw(SpriteBatch batch)
-        {
-            batch.Begin();
-            batch.Draw(texture, position, null, Color.White, 0, origin, 1.0f, SpriteEffects.None, 0f);
-            batch.End();
-        }
-
-        public Vector2 GetPosition()
-        {
-            return position;
-        }
-
-        public float GetRadius()
-        {
-            return texture.Width / 2;
-        }
     }
 }
+
+

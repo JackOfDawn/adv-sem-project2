@@ -6,8 +6,11 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using Project2_All_Hell_Breaks_Loose.Game.Weapons;
+using Project2_All_Hell_Breaks_Loose.Game.GameObjects;
 
-namespace Project2_All_Hell_Breaks_Loose.Game
+using Project2_All_Hell_Breaks_Loose.Game.Managers;
+
+namespace Project2_All_Hell_Breaks_Loose.Game.GameObjects
 {
     public class Player : Observer
     {
@@ -30,43 +33,23 @@ namespace Project2_All_Hell_Breaks_Loose.Game
         private Weapon currentWeapon;
         private BulletManager bulletManagerRef;
 
-        public Player()
-        {
-            health = 0;
-            speed = 0;
-            position = new Vector2();
+        public Player() 
+            : this(0, 0, new Vector2()) { }
 
-            center = new Vector2();
-
-            InitToZero();
-
-            SetStartWeapon();
-        }
+        public Player(int health, float speed, float x, float y)
+            : this (health, speed, new Vector2(x, y)) {}
 
         public Player(int health, float speed, Vector2 position)
         {
             this.health = health;
             this.speed = speed;
             this.position = position;
-
             this.center = position;
 
             InitToZero();
-
             SetStartWeapon();
         }
 
-        public Player(int health, float speed, float x, float y)
-        {
-            this.health = health;
-            this.speed = speed;
-            this.position = new Vector2(x, y);
-
-            this.center = new Vector2(x, y);
-
-            InitToZero();
-            SetStartWeapon();
-        }
 
         public void setBulletmanager(BulletManager bulletManager)
         {
@@ -225,7 +208,6 @@ namespace Project2_All_Hell_Breaks_Loose.Game
         {
             return width / 2;
         }
-
 
         public void Notify(ObserverMessages message, int value = 0, Vector2 pos = new Vector2())
         {

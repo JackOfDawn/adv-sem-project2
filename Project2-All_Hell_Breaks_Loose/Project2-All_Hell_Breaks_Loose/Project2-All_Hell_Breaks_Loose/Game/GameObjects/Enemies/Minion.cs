@@ -4,8 +4,9 @@ using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
+using Project2_All_Hell_Breaks_Loose.Game.Managers;
 
-namespace Project2_All_Hell_Breaks_Loose.Game
+namespace Project2_All_Hell_Breaks_Loose.Game.GameObjects.Enemies
 {
     public class Minion : Enemy
     {
@@ -26,18 +27,9 @@ namespace Project2_All_Hell_Breaks_Loose.Game
         private Strategies.MovementStrategy moveStrategy;
 
         public Minion()
-        {
-            health = 0;
-            damage = 0;
-            speed = 0;
-            position = new Vector2();
-            center = new Vector2();
-            color = Color.White;
-            moveStrategy = null;
+            : this(0, 0, 0, new Vector2(), new Strategies.NullMovement(), Color.White) { }
 
-            InitToZero();
-        }
-
+        
         public Minion(int health, float damage, float speed, Vector2 pos, Strategies.MovementStrategy strategy, Color color)
         {
             this.health = health;
@@ -52,17 +44,7 @@ namespace Project2_All_Hell_Breaks_Loose.Game
         }
 
         public Minion(int health, float damage, float speed, float x, float y, Strategies.MovementStrategy strategy, Color color)
-        {
-            this.health = health;
-            this.damage = damage;
-            this.speed = speed;
-            this.position = new Vector2(x, y);
-            this.center = new Vector2(x, y);
-            this.color = color;
-            moveStrategy = strategy;
-
-            InitToZero();
-        }
+            : this(health, damage, speed, new Vector2(x, y), strategy, color) { }
 
         private void InitToZero()
         {

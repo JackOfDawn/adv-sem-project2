@@ -6,7 +6,8 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace Project2_All_Hell_Breaks_Loose.Game
+
+namespace Project2_All_Hell_Breaks_Loose.Game.GameObjects.Enemies
 {
     public interface Enemy
     {
