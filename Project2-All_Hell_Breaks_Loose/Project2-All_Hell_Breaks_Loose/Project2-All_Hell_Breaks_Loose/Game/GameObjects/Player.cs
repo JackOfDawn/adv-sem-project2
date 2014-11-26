@@ -29,7 +29,8 @@ namespace Project2_All_Hell_Breaks_Loose.Game.GameObjects
         private const int DAMAGE_COOL_DOWN = 500;
         private float damageCoolDownTimer;
 
-
+        private Dictionary<int, Weapon> weaponlist;
+        private int weaponNum;
         private Weapon currentWeapon;
         private BulletManager bulletManagerRef;
 
@@ -58,7 +59,17 @@ namespace Project2_All_Hell_Breaks_Loose.Game.GameObjects
 
         private void SetStartWeapon()
         {
-            currentWeapon = new ShotGun();
+            weaponNum = 0;
+
+            weaponlist = new Dictionary<int, Weapon>();
+
+            Weapon weaponToAdd = new Pistol();
+            weaponlist.Add(0, weaponToAdd);
+
+            weaponToAdd = new ShotGun();
+            weaponlist.Add(1, weaponToAdd);
+
+            currentWeapon = weaponlist[0];
         }
 
         private void InitToZero()
@@ -115,7 +126,13 @@ namespace Project2_All_Hell_Breaks_Loose.Game.GameObjects
 
         public void SwitchWeapons()
         {
-            //not yet implemented
+            weaponNum++;
+            if(weaponNum >= weaponlist.Count)
+            {
+                weaponNum = 0;
+            }
+
+            currentWeapon = weaponlist[weaponNum];
         }
 
         public void Shoot()
@@ -213,7 +230,14 @@ namespace Project2_All_Hell_Breaks_Loose.Game.GameObjects
         {
             if(message == ObserverMessages.AMMO_PICKUP_MESSAGE)
             {
-                currentWeapon.AddAmmo(value);
+                if(weaponNum == 0)
+                {
+                    weaponlist[1].AddAmmo(value);
+                }
+                else
+                {
+                    currentWeapon.AddAmmo(value);
+                }
             }
         }
     }
