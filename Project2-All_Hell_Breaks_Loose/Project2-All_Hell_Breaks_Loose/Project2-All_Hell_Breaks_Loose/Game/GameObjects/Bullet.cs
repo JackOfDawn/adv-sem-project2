@@ -8,13 +8,14 @@ using Project2_All_Hell_Breaks_Loose.Game.Managers;
 
 namespace Project2_All_Hell_Breaks_Loose.Game.GameObjects
 {
-    public class Bullet
+    public class Bullet : GameObject
     {
         private float speed;
         private Vector2 direction;
         private int damage;
         private int radius;
-        private Vector2 position;
+   
+
 
         public Bullet(Vector2 position,float speed, Vector2 direction, int damage)
         {
@@ -22,14 +23,8 @@ namespace Project2_All_Hell_Breaks_Loose.Game.GameObjects
             direction.Normalize();
             this.direction = direction;
             this.damage = damage;
-            if (SpriteManager.GetSprite("bullet") != null)
-            {
-                this.radius = SpriteManager.GetSprite("bullet").Height/2;
-            }
-            else
-            {
-                this.radius = 5;
-            }
+            LoadSprite("bullet");
+            radius = (texture.Width + texture.Height) / 4;
             this.position = position;
         }
 
@@ -39,7 +34,7 @@ namespace Project2_All_Hell_Breaks_Loose.Game.GameObjects
             
         }
 
-        public void Draw(SpriteBatch spriteBatch, Texture2D texture)
+        public void Draw(SpriteBatch spriteBatch)
         {
             Vector2 origin = new Vector2(texture.Width / 2, texture.Height / 2);
             spriteBatch.Begin();

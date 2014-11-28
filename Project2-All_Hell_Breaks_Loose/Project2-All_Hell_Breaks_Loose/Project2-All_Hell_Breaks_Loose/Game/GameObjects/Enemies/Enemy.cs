@@ -11,7 +11,7 @@ namespace Project2_All_Hell_Breaks_Loose.Game.GameObjects.Enemies
 {
     public interface Enemy
     {
-        void LoadSprite(Texture2D texture);
+  
 
         void Update(Vector2 playerPos);
         void Draw(SpriteBatch batch);

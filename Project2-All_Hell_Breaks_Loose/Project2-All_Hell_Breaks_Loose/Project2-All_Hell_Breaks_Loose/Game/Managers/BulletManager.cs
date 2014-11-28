@@ -9,47 +9,16 @@ using Project2_All_Hell_Breaks_Loose.Game.GameObjects;
 
 namespace Project2_All_Hell_Breaks_Loose.Game.Managers
 {
-    public class BulletManager
+    public class BulletManager : GenericManager<Bullet>
     {
-        private List<Bullet> bullets;
-        private List<Bullet> bulletsToRemove;
         private EnemyManager enemyManager;
 
         public BulletManager(EnemyManager enemyManagerRef)
         {
-            bullets = new List<Bullet>();
-            bulletsToRemove = new List<Bullet>();
             enemyManager = enemyManagerRef;
         }
 
-        public void AddBullet(Bullet bullet)
-        {
-            bullets.Add(bullet);
-        }
-
-        public void AddBullets(List<Bullet>bulletsToAdd)
-        {
-            bullets.AddRange(bulletsToAdd);
-        }
-
-        public void DeleteBullet(Bullet bullet)
-        {
-            bulletsToRemove.Add(bullet);
-        }
-
-        public void DeleteBullet(int index)
-        {
-            bulletsToRemove.Add(bullets[index]);
-        }
-
-        private void RemoveAtEndOfFrame()
-        {
-            foreach(Bullet bullet in bulletsToRemove)
-            {
-                bullets.Remove(bullet);
-            }
-            bulletsToRemove.Clear();
-        }
+       
 
         private void CheckCollisions(Bullet bullet)
         {
@@ -60,7 +29,8 @@ namespace Project2_All_Hell_Breaks_Loose.Game.Managers
 
             if (outOfBoundsX || outOfBoundsY)
             {
-                DeleteBullet(bullet);
+                
+                DeleteObject(bullet);
          
             }
             else
@@ -73,7 +43,7 @@ namespace Project2_All_Hell_Breaks_Loose.Game.Managers
                     {
                         
                         enemy.TakeDamage(bullet.GetDamage());
-                        DeleteBullet(bullet);
+                        DeleteObject(bullet);
                         break;
                     }
                 }
@@ -82,7 +52,7 @@ namespace Project2_All_Hell_Breaks_Loose.Game.Managers
 
         public void Update()
         {
-            foreach (Bullet bullet in bullets)
+            foreach (Bullet bullet in objects)
             {
                
                 bullet.Update();
@@ -90,20 +60,18 @@ namespace Project2_All_Hell_Breaks_Loose.Game.Managers
                 CheckCollisions(bullet);
                 
             }
+        
             RemoveAtEndOfFrame();
         }
 
         public void Draw(SpriteBatch batch)
         {
-            foreach(Bullet bullet in bullets)
+            foreach(Bullet bullet in objects)
             {
-                bullet.Draw(batch, SpriteManager.GetSprite("bullet"));
+                bullet.Draw(batch);
             }
         }
 
-        public int GetNumBullets()
-        {
-            return bullets.Count;
-        }
+
     }
 }

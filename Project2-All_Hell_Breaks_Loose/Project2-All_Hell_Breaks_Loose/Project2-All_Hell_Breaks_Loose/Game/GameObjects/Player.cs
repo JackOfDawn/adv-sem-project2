@@ -12,18 +12,13 @@ using Project2_All_Hell_Breaks_Loose.Game.Managers;
 
 namespace Project2_All_Hell_Breaks_Loose.Game.GameObjects
 {
-    public class Player : Observer
+    public class Player : GameObject , Observer
     {
         private float health;
         private float speed;
-        private Texture2D texture;
-        private Vector2 position;
-        private Vector2 center;
-        private Vector2 origin;
+        
         private float rotation;//in radians
 
-        private int height;
-        private int width;
 
         private bool damaged;
         private const int DAMAGE_COOL_DOWN = 500;
@@ -84,28 +79,7 @@ namespace Project2_All_Hell_Breaks_Loose.Game.GameObjects
             damageCoolDownTimer = 0;
         }
 
-        public void LoadSprite(Texture2D texture = null)
-        {
-            //multiple options
-            if (texture == null)
-            {
-                this.texture = SpriteManager.GetSprite("player");
-            }
-            else
-            {
-                this.texture = texture;
-            }
-
-            //set the height and width and center according to the size of the sprite
-            if(this.texture != null)
-            {
-                height = this.texture.Height;
-                width = this.texture.Width;
-
-                origin = new Vector2(width / 2, height / 2);
-            }
-            
-        }
+       
 
         public void Update(GameTime gameTime)
         {

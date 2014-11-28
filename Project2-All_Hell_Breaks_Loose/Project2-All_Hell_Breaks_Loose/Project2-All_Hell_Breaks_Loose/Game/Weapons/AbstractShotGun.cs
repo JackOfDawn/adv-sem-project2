@@ -23,9 +23,9 @@ namespace Project2_All_Hell_Breaks_Loose.Game.Weapons
                 Bullet newBullet = new Bullet(pos, GetSpeed(), direction, GetDamage());
                 Bullet newBullet2 = new Bullet(pos, GetSpeed(), rotate(direction, ROTATION), GetDamage());
                 Bullet newBullet3 = new Bullet(pos, GetSpeed(), rotate(direction, -ROTATION), GetDamage());
-                bulletManagerRef.AddBullet(newBullet);
-                bulletManagerRef.AddBullet(newBullet2);
-                bulletManagerRef.AddBullet(newBullet3);
+                bulletManagerRef.AddObject(newBullet);
+                bulletManagerRef.AddObject(newBullet2);
+                bulletManagerRef.AddObject(newBullet3);
                 UseAmmo();
             }
             

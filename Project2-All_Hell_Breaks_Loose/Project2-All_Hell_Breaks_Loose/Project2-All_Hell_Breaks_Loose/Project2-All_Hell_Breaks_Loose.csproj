@@ -75,10 +75,12 @@
   <ItemGroup>
     <Compile Include="Game\Arena.cs" />
     <Compile Include="Game\GameObjects\Bullet.cs" />
+    <Compile Include="Game\GameObjects\GameObject.cs" />
     <Compile Include="Game\Managers\BulletManager.cs" />
     <Compile Include="Game\GameObjects\Enemies\Enemy.cs" />
     <Compile Include="Game\GameObjects\Enemies\EnemyFactory.cs" />
     <Compile Include="Game\Managers\EnemyManager.cs" />
+    <Compile Include="Game\Managers\GenericManager.cs" />
     <Compile Include="Game\Managers\InputManager.cs" />
     <Compile Include="Game\GameObjects\Enemies\Minion.cs" />
     <Compile Include="Game\Observer.cs" />
@@ -92,6 +94,8 @@
     <Compile Include="Game\Strategies\NullMovement.cs" />
     <Compile Include="Game\Strategies\Seek.cs" />
     <Compile Include="Game\Managers\WaveManager.cs" />
+    <Compile Include="Game\Strategies\Flee.cs" />
+    <Compile Include="Game\Strategies\SeekAndFlee.cs" />
     <Compile Include="Game\Weapons\AbstractPistol.cs" />
     <Compile Include="Game\Weapons\DecoratedPistol.cs" />
     <Compile Include="Game\Weapons\Pistol.cs" />

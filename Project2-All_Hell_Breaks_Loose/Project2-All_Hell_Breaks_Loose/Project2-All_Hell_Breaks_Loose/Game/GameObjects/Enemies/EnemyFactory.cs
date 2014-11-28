@@ -15,12 +15,30 @@ namespace Project2_All_Hell_Breaks_Loose.Game.GameObjects.Enemies
         private const float MINION_SPEED = 2.0f;
         private static Vector2 ZERO = new Vector2(0, 0);
 
-        public static Color CHASER_COLOR = Color.Tomato; 
+        public static Color CHASER_COLOR = Color.Tomato;
+        public static Color FLEEING_COLOR = Color.Gainsboro;
+        public static Color BLOCKER_COLOR = Color.LimeGreen;
 
         public static Minion makeChaser()
         {
-            Minion minion = new Minion(MINION_HEALTH, MINION_DAMAGE, MINION_SPEED, ZERO, new Strategies.SeekMovement(), Color.Tomato);
-            minion.LoadSprite();
+            return baseMinion(new Strategies.SeekMovement(), CHASER_COLOR);
+        }
+
+        public static Minion makeFleeing()
+        {
+            return baseMinion(new Strategies.FleeMovement(), FLEEING_COLOR);
+        }
+
+        public static Minion makeBlocker()
+        {
+            return baseMinion(new Strategies.SeekAndFlee(), BLOCKER_COLOR);
+        }
+        
+        
+        private static Minion baseMinion(Strategies.MovementStrategy strategy, Color color)
+        {
+            Minion minion = new Minion(MINION_HEALTH, MINION_DAMAGE, MINION_SPEED, ZERO, strategy, color);
+            minion.LoadSprite("enemy");
             return minion;
         }
     }

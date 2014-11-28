@@ -39,10 +39,11 @@ namespace Project2_All_Hell_Breaks_Loose.Game.Managers
         {
             List<Enemy> wave = new List<Enemy>();
 
+            spawnCap++;
             for (int i = 0; i < spawnCap; i++)
             {
-                Minion minion = EnemyFactory.makeChaser();
-                minion.SetPosition(0.0f, 50.0f * (i*2));
+                Minion minion = EnemyFactory.makeBlocker();
+                minion.SetPosition(0.0f, 32.0f * (i*2));
 
                 wave.Add(minion); 
             }

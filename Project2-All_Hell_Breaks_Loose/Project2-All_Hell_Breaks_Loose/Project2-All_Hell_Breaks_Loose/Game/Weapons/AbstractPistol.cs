@@ -13,7 +13,7 @@ namespace Project2_All_Hell_Breaks_Loose.Game.Weapons
         public void Shoot(Vector2 pos, Vector2 direction, BulletManager bulletManagerRef)
         {
             Bullet newBullet = new Bullet(pos, GetSpeed(), direction, GetDamage());
-            bulletManagerRef.AddBullet(newBullet);
+            bulletManagerRef.AddObject(newBullet);
         }
 
         public  void AddAmmo(int amt)

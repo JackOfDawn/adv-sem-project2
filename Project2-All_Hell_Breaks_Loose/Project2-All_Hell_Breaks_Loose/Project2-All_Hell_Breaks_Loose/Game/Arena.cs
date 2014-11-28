@@ -92,7 +92,7 @@ namespace Project2_All_Hell_Breaks_Loose.Game
 
             enemyManager.AddEnemies(waveManager.SpawnWave());
            
-            player.LoadSprite();
+            player.LoadSprite("player");
             weaponShop.LoadSprite();
         }
 

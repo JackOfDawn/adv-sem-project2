@@ -8,21 +8,17 @@ using Project2_All_Hell_Breaks_Loose.Game.Managers;
 
 namespace Project2_All_Hell_Breaks_Loose.Game.GameObjects.Enemies
 {
-    public class Minion : Enemy
+    public class Minion : GameObject, Enemy
     {
 
         private float health;
         private float damage;
         private float speed;
-        private Texture2D texture;
-        private Vector2 position;
-        private Vector2 center;
-        private Vector2 origin;
+      
         private float rotation;//in radians
         private Color color;
 
-        private int height;
-        private int width;
+      
 
         private Strategies.MovementStrategy moveStrategy;
 
@@ -60,32 +56,20 @@ namespace Project2_All_Hell_Breaks_Loose.Game.GameObjects.Enemies
         {
         }
 
-        public void LoadSprite(Texture2D texture = null)
-        {
-            //multiple options
-            if(texture == null)
-            {
-               this.texture = SpriteManager.GetSprite("enemy");
-            }
-            else
-            {
-               this.texture = texture;
-            }
-
-            //set the height and width and center according to the size of the sprite
-            if(this.texture != null)
-            {
-                height = this.texture.Height;
-                width = this.texture.Width;
-                origin = new Vector2(width / 2, height / 2);
-            }
-        }
-
         public void Update(Vector2 playerPos)
         {
             SetRotation(playerPos);
 
             position = moveStrategy.Update(position, playerPos, speed);
+            if(position.X > Game1.WIDTH || position.X < 0)
+            {
+                position.X = Math.Abs(position.X - Game1.WIDTH);
+            }
+
+            if(position.Y > Game1.HEIGHT || position.Y < 0)
+            {
+                position.Y = Math.Abs(position.Y - Game1.HEIGHT);
+            }
         }
 
         public void Draw(SpriteBatch batch)
