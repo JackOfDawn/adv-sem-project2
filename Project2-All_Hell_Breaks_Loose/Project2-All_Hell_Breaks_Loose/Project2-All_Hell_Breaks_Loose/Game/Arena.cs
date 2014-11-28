@@ -108,7 +108,7 @@ namespace Project2_All_Hell_Breaks_Loose.Game
             {
                 if (weaponShop.isOpen())
                 {
-                    weaponShop.update();
+                    weaponShop.update(player);
                 }
                 else
                 {

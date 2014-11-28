@@ -6,6 +6,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Graphics;
 using Project2_All_Hell_Breaks_Loose.Game.Managers;
+using Project2_All_Hell_Breaks_Loose.Game.GameObjects;
 
 namespace Project2_All_Hell_Breaks_Loose.Game
 {
@@ -31,7 +32,7 @@ namespace Project2_All_Hell_Breaks_Loose.Game
             shopOpen = false;
         }
 
-        public void update()
+        public void update(Player player)
         {
             if(Keyboard.GetState().IsKeyDown(Keys.E))
             {

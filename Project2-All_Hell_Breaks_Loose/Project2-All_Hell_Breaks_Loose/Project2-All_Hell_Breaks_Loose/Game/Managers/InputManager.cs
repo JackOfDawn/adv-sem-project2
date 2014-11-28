@@ -20,6 +20,7 @@ namespace Project2_All_Hell_Breaks_Loose.Game.Managers
         public event ButtonPressedDelegate Event_SwitchWeapons;
         public event ButtonPressedDelegate Event_Shoot;
         public event MousePositionDelegate Event_UpdateCursorLoc;
+        public event ButtonPressedDelegate Event_CloseShop;
 
         KeyboardState lastKeyboardState;
         MouseState lastMouseState;
@@ -29,6 +30,8 @@ namespace Project2_All_Hell_Breaks_Loose.Game.Managers
 
         bool leftClickDown;
         bool qKeyDown;
+
+        bool shopExitPressed;
 
         Vector2 movementVector;
         
@@ -40,6 +43,7 @@ namespace Project2_All_Hell_Breaks_Loose.Game.Managers
             movementVector = Vector2.Zero;
             qKeyDown = false;
             leftClickDown = false;
+            shopExitPressed = false;
         }
         
         public void Update(GameTime gameTime)
@@ -74,6 +78,14 @@ namespace Project2_All_Hell_Breaks_Loose.Game.Managers
                 Vector2 mouseLoc = new Vector2(lastMouseState.X, lastMouseState.Y);
                 Event_UpdateCursorLoc(mouseLoc);
             }
+
+
+        }
+
+        public void shopUpdate(GameTime gameTime)
+        {
+            HandleKeyInput();
+            HandleMouseInput();
 
 
         }

@@ -140,8 +140,6 @@ namespace Project2_All_Hell_Breaks_Loose.Game.GameObjects
             Vector2 direction = new Vector2((float)Math.Cos((double)rotation), (float)Math.Sin((double)rotation));
 
             currentWeapon.Shoot(this.position, direction, bulletManagerRef);
-
-            upgradePistol();
         }
 
         public void Draw(SpriteBatch batch)
