@@ -35,9 +35,9 @@ namespace Project2_All_Hell_Breaks_Loose.Game.Managers
             }
             else
             {
-                for (int i = 0; i < enemyManager.GetNumEnemies(); i++)
+                for (int i = 0; i < enemyManager.GetCount(); i++)
                 {
-                    Enemy enemy = enemyManager.GetEnemy(i);
+                    Enemy enemy = enemyManager.GetObject(i);
                    
                     if (Vector2.Distance(bullet.GetPosition(), enemy.GetPosition()) <= radius + enemy.GetRadius())
                     {

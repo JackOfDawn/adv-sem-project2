@@ -57,7 +57,7 @@ namespace Tests
 
             EnemyManager enemyManager = new EnemyManager();
 
-            enemyManager.AddEnemy(minion);
+            enemyManager.AddObject(minion);
             
             float prevHealth = player.GetHealth();
 
@@ -103,13 +103,13 @@ namespace Tests
         [TestMethod]
         public void TestWaveGeneration()
         {
-            int numEnemies = 3;
+            int numEnemies = 4;
 
             WaveManager waves = new WaveManager(numEnemies, 7);
 
             List<Enemy> enemies = waves.SpawnWave();
 
-            Assert.IsTrue(enemies.Count == numEnemies);
+            Assert.IsTrue(enemies.Count - 1 == numEnemies);
         }
 
         [TestMethod]
@@ -119,9 +119,9 @@ namespace Tests
 
             Enemy minion = new Minion();
 
-            enemyManager.AddEnemy(minion);
+            enemyManager.AddObject(minion);
 
-            Assert.IsTrue(enemyManager.GetNumEnemies() == 1);
+            Assert.IsTrue(enemyManager.GetCount() == 1);
         }
 
         [TestMethod]
@@ -132,11 +132,11 @@ namespace Tests
             Enemy minion = EnemyFactory.makeChaser();
             minion.SetHealth(0);
 
-            enemyManager.AddEnemy(minion);
+            enemyManager.AddObject(minion);
 
             enemyManager.Update(new Vector2());
 
-            Assert.IsTrue(enemyManager.GetNumEnemies() == 0);
+            Assert.IsTrue(enemyManager.GetCount() == 0);
         }
 
         [TestMethod]
@@ -170,7 +170,7 @@ namespace Tests
 
             Bullet bullet = new Bullet(new Vector2(49, 49), 1, Vector2.One, 3);
 
-                     enemyManager.AddEnemy(minion);
+            enemyManager.AddObject(minion);
       		System.Console.WriteLine(bulletManager.GetCount());
             bulletManager.AddObject(bullet);
 

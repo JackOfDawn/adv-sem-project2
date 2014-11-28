@@ -15,8 +15,6 @@ namespace Project2_All_Hell_Breaks_Loose.Game.GameObjects
         private int damage;
         private int radius;
    
-
-
         public Bullet(Vector2 position,float speed, Vector2 direction, int damage)
         {
             this.speed = speed;
@@ -24,7 +22,7 @@ namespace Project2_All_Hell_Breaks_Loose.Game.GameObjects
             this.direction = direction;
             this.damage = damage;
             LoadSprite("bullet");
-            radius = (texture.Width + texture.Height) / 4;
+            radius = 5;
             this.position = position;
         }
 

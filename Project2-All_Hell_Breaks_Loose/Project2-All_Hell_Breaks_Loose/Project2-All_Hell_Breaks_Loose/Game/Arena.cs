@@ -94,7 +94,7 @@ namespace Project2_All_Hell_Breaks_Loose.Game
 
             TNR = content.Load<SpriteFont>("Times New Roman");
 
-            enemyManager.AddEnemies(waveManager.SpawnWave());
+            enemyManager.AddObjects(waveManager.SpawnWave());
            
             player.LoadSprite("player");
             weaponShop.LoadSprite();
@@ -103,9 +103,9 @@ namespace Project2_All_Hell_Breaks_Loose.Game
         public void Update(GameTime gameTime)
         {   
 
-            if(enemyManager.GetNumEnemies() == 0)
+            if(enemyManager.GetCount() == 0)
             {
-                enemyManager.AddEnemies(waveManager.SpawnWave());
+                enemyManager.AddObjects(waveManager.SpawnWave());
                 weaponShop.openShop();
             }
             else

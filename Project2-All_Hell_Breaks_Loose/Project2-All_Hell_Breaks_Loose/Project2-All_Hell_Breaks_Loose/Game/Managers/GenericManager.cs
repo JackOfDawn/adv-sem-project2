@@ -8,7 +8,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace Project2_All_Hell_Breaks_Loose.Game.Managers
 {
-    public class GenericManager<T>
+    public class GenericManager<T> : Observable
     {
         protected List<T> objects;
         protected List<T> objectsToRemove;
@@ -52,7 +52,19 @@ namespace Project2_All_Hell_Breaks_Loose.Game.Managers
         {
             return objects.Count;
         }
-      
+
+        public T GetObject(int i)
+        {
+            return objects[i];
+        }
+
+        public override void NotifyObservers()
+        {
+
+        }
+
+        
+
 
     }
 }
