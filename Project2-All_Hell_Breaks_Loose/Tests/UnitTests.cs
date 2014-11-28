@@ -169,7 +169,6 @@ namespace Tests
 
             Bullet bullet = new Bullet(new Vector2(49, 49), 1, Vector2.One, 3);
 
-            System.Console.WriteLine(bulletManager.GetNumBullets());
             enemyManager.AddEnemy(minion);
             bulletManager.AddBullet(bullet);
 

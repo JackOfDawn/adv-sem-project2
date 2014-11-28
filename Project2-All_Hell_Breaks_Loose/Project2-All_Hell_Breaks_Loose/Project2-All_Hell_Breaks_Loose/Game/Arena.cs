@@ -64,6 +64,10 @@ namespace Project2_All_Hell_Breaks_Loose.Game
             inputManager.Event_SwitchWeapons += new InputManager.ButtonPressedDelegate(player.SwitchWeapons);
             inputManager.Event_UpdateCursorLoc += new InputManager.MousePositionDelegate(player.SetRotation);
             inputManager.Event_Shoot += new InputManager.ButtonPressedDelegate(player.Shoot);
+            inputManager.Event_CloseShop += new InputManager.ButtonPressedDelegate(weaponShop.closeShop);
+            inputManager.Event_UpgradePistol += new InputManager.ButtonPressedDelegate(player.upgradePistol);
+            inputManager.Event_UpgradeShotgun += new InputManager.ButtonPressedDelegate(player.upgradeShotgun);
+            inputManager.Event_GiveAmmo += new InputManager.ButtonParamDelegate(player.giveAmmo);
         }
 
         public void LoadContent(ContentManager content, GraphicsDevice device)
@@ -85,7 +89,7 @@ namespace Project2_All_Hell_Breaks_Loose.Game
             texture = content.Load<Texture2D>("MoneyPickup");
             SpriteManager.LoadSprite("money", texture);
 
-            texture = content.Load<Texture2D>("giant-anteater-tongue");
+            texture = content.Load<Texture2D>("Shop");
             SpriteManager.LoadSprite("shop", texture);
 
             TNR = content.Load<SpriteFont>("Times New Roman");
@@ -108,7 +112,7 @@ namespace Project2_All_Hell_Breaks_Loose.Game
             {
                 if (weaponShop.isOpen())
                 {
-                    weaponShop.update(player);
+                    inputManager.shopUpdate(gameTime);
                 }
                 else
                 {
@@ -117,12 +121,13 @@ namespace Project2_All_Hell_Breaks_Loose.Game
                     bulletManager.Update();
 
                     enemyManager.Update(player.GetPosition());
-                
+                    
                     enemyManager.CheckPlayerCollision(player);
                 }
             }
             if(player.GetHealth() <= 0 )
             {
+                
                 player.Shoot();
             }
 
@@ -161,7 +166,10 @@ namespace Project2_All_Hell_Breaks_Loose.Game
             bulletManager.Draw(batch);
             weaponShop.Draw(batch);
 
-            string HUDString = "Score: " + score.ToString() + "\n" + "Health: " + player.GetHealth().ToString() + "\n" + "Current Weapon: " + player.getWeaponName() + "   Ammo: " + player.getAmmo();
+            string HUDString = "Score: " + score.ToString()
+                + "\n" + "Wave: " + waveManager.getWaveNum().ToString()
+                + "\n" + "Health: " + player.GetHealth().ToString()
+                + "\n" + "Current Weapon: " + player.getWeaponName() + "   Ammo: " + player.getAmmo();
             batch.Begin();
             batch.DrawString(TNR, HUDString, HUDPosition, Color.White);
             batch.End();

@@ -32,12 +32,9 @@ namespace Project2_All_Hell_Breaks_Loose.Game
             shopOpen = false;
         }
 
-        public void update(Player player)
+        public void update()
         {
-            if(Keyboard.GetState().IsKeyDown(Keys.E))
-            {
-                closeShop();
-            }
+            
         }
 
         public void Draw(SpriteBatch batch)

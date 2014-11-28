@@ -94,6 +94,7 @@
     <Compile Include="Game\Managers\WaveManager.cs" />
     <Compile Include="Game\Weapons\AbstractPistol.cs" />
     <Compile Include="Game\Weapons\DecoratedPistol.cs" />
+    <Compile Include="Game\Weapons\DecoratedShotgun.cs" />
     <Compile Include="Game\Weapons\Pistol.cs" />
     <Compile Include="Game\Weapons\AbstractShotGun.cs" />
     <Compile Include="Game\Weapons\ShotGun.cs" />

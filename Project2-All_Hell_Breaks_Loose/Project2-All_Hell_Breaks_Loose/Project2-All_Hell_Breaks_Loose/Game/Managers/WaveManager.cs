@@ -13,12 +13,14 @@ namespace Project2_All_Hell_Breaks_Loose.Game.Managers
         //time between wave spawns
         private float waveFrequency;
         private float countdownTillNextWave;
+        private int waveNumber;
 
         public WaveManager(int spawnCap, float waveFrequency)
         {
             this.spawnCap = spawnCap;
             this.waveFrequency = waveFrequency;
             countdownTillNextWave = waveFrequency;
+            waveNumber = 0;
         }
 
         public List<Enemy> Update()
@@ -46,8 +48,8 @@ namespace Project2_All_Hell_Breaks_Loose.Game.Managers
 
                 wave.Add(minion); 
             }
-            
 
+            waveNumber++;
             return wave;
         }
 
@@ -66,6 +68,10 @@ namespace Project2_All_Hell_Breaks_Loose.Game.Managers
         public float GetWaveFrequency()
         {
             return waveFrequency;
+        }
+        public int getWaveNum()
+        {
+            return waveNumber;
         }
     }
 }
