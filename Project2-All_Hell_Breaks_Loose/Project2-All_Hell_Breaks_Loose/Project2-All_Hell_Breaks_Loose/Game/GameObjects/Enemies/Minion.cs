@@ -60,7 +60,7 @@ namespace Project2_All_Hell_Breaks_Loose.Game.GameObjects.Enemies
         {
             SetRotation(playerPos);
 
-            position = moveStrategy.Update(position, playerPos, speed);
+            position = moveStrategy.Update(position, playerPos, GetSpeed());
             if(position.X > Game1.WIDTH || position.X < 0)
             {
                 position.X = Math.Abs(position.X - Game1.WIDTH);
@@ -145,7 +145,7 @@ namespace Project2_All_Hell_Breaks_Loose.Game.GameObjects.Enemies
 
         public void TakeDamage(float damage)
         {
-            health -= damage;
+            SetHealth((int)(GetHealth() - damage));
         }
         public void SetDamage(float damage)
         {

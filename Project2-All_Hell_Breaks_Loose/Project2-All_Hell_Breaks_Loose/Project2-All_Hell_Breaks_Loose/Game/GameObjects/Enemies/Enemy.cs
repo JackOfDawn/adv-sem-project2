@@ -24,6 +24,7 @@ namespace Project2_All_Hell_Breaks_Loose.Game.GameObjects.Enemies
         void SetSpeed(float newSpeed);
         float GetSpeed();
         Vector2 GetPosition();
+        void SetPosition(float x, float y);
         int GetHeight();
         int GetWidth();
 

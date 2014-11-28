@@ -75,6 +75,7 @@
   <ItemGroup>
     <Compile Include="Game\Arena.cs" />
     <Compile Include="Game\GameObjects\Bullet.cs" />
+    <Compile Include="Game\GameObjects\Enemies\EnemyUpgrade.cs" />
     <Compile Include="Game\GameObjects\GameObject.cs" />
     <Compile Include="Game\Managers\BulletManager.cs" />
     <Compile Include="Game\GameObjects\Enemies\Enemy.cs" />

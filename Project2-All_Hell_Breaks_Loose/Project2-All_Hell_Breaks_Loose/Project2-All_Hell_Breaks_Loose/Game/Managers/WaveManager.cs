@@ -41,11 +41,16 @@ namespace Project2_All_Hell_Breaks_Loose.Game.Managers
         {
             List<Enemy> wave = new List<Enemy>();
 
-            spawnCap++;
-            for (int i = 0; i < spawnCap; i++)
+            for (int i = 0; i < spawnCap + waveNumber; i++)
             {
-                Minion minion = EnemyFactory.makeBlocker();
+                Enemy minion = EnemyFactory.makeBlocker();
                 minion.SetPosition(0.0f, 32.0f * (i*2));
+
+                for (int j = 0; j < waveNumber; j ++)
+                {
+                    minion = new EnemyUpgrade(minion);
+                }
+
 
                 wave.Add(minion); 
             }
