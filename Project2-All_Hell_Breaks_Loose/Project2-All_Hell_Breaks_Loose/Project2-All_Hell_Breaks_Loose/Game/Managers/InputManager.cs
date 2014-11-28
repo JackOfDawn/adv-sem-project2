@@ -14,6 +14,7 @@ namespace Project2_All_Hell_Breaks_Loose.Game.Managers
         public delegate void DirectionPressedDelegate(Vector2 moveVector);
         public delegate void ButtonPressedDelegate();
         public delegate void MousePositionDelegate(Vector2 mousePos);
+        public delegate void ButtonParamDelegate(int val);
 
         //Defining events
         public event DirectionPressedDelegate Event_MovementPressed;
@@ -21,6 +22,9 @@ namespace Project2_All_Hell_Breaks_Loose.Game.Managers
         public event ButtonPressedDelegate Event_Shoot;
         public event MousePositionDelegate Event_UpdateCursorLoc;
         public event ButtonPressedDelegate Event_CloseShop;
+        public event ButtonPressedDelegate Event_UpgradePistol;
+        public event ButtonPressedDelegate Event_UpgradeShotgun;
+        public event ButtonParamDelegate Event_GiveAmmo;
 
         KeyboardState lastKeyboardState;
         MouseState lastMouseState;
@@ -30,11 +34,15 @@ namespace Project2_All_Hell_Breaks_Loose.Game.Managers
 
         bool leftClickDown;
         bool qKeyDown;
+        bool eKeyDown;
+        bool oneKeyDown;
+        bool twoKeyDown;
 
         bool shopExitPressed;
+        bool pistolUpgradePressed;
+        bool shotgunUpgradePressed;
 
         Vector2 movementVector;
-        
 
         public InputManager()
         {
@@ -43,7 +51,11 @@ namespace Project2_All_Hell_Breaks_Loose.Game.Managers
             movementVector = Vector2.Zero;
             qKeyDown = false;
             leftClickDown = false;
+            oneKeyDown = false;
+            twoKeyDown = false;
             shopExitPressed = false;
+            pistolUpgradePressed = false;
+            shotgunUpgradePressed = false;
         }
         
         public void Update(GameTime gameTime)
@@ -52,7 +64,6 @@ namespace Project2_All_Hell_Breaks_Loose.Game.Managers
             switchWeaponActionPressed = false;
 
             movementVector = Vector2.Zero;
-
 
             HandleKeyInput();
             HandleMouseInput();
@@ -78,16 +89,32 @@ namespace Project2_All_Hell_Breaks_Loose.Game.Managers
                 Vector2 mouseLoc = new Vector2(lastMouseState.X, lastMouseState.Y);
                 Event_UpdateCursorLoc(mouseLoc);
             }
-
-
         }
 
         public void shopUpdate(GameTime gameTime)
         {
+            shopExitPressed = false;
+            pistolUpgradePressed = false;
+            shotgunUpgradePressed = false;
+
             HandleKeyInput();
             HandleMouseInput();
 
-
+            if(shopExitPressed && Event_GiveAmmo != null && Event_CloseShop != null)
+            {
+                Event_GiveAmmo(20);
+                Event_CloseShop();
+            }
+            if (pistolUpgradePressed && Event_UpgradePistol != null && Event_CloseShop != null)
+            {
+                Event_UpgradePistol();
+                Event_CloseShop();
+            }
+            if (shotgunUpgradePressed && Event_UpgradeShotgun != null && Event_CloseShop != null)
+            {
+                Event_UpgradeShotgun();
+                Event_CloseShop();
+            }
         }
 
         private void HandleMouseInput()
@@ -123,6 +150,36 @@ namespace Project2_All_Hell_Breaks_Loose.Game.Managers
                 else if (!currentKeyState.IsKeyDown(Keys.Q) && qKeyDown)
                 {
                     qKeyDown = false;
+                }
+
+                if(currentKeyState.IsKeyDown(Keys.E) && !eKeyDown)
+                {
+                    shopExitPressed = true;
+                    eKeyDown = true;
+                }
+                else if(!currentKeyState.IsKeyDown(Keys.E) && eKeyDown)
+                {
+                    eKeyDown = false;
+                }
+
+                if(currentKeyState.IsKeyDown(Keys.D1) && !oneKeyDown)
+                {
+                    pistolUpgradePressed = true;
+                    oneKeyDown = true;
+                }
+                else if(!currentKeyState.IsKeyDown(Keys.D1) && oneKeyDown)
+                {
+                    oneKeyDown = false;
+                }
+
+                if (currentKeyState.IsKeyDown(Keys.D2) && !twoKeyDown)
+                {
+                    shotgunUpgradePressed = true;
+                    twoKeyDown = true;
+                }
+                else if (!currentKeyState.IsKeyDown(Keys.D2) && twoKeyDown)
+                {
+                    twoKeyDown = false;
                 }
             }
 

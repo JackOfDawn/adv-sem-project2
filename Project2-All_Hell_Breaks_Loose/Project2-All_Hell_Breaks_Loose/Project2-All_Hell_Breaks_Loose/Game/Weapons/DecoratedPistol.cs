@@ -20,7 +20,7 @@ namespace Project2_All_Hell_Breaks_Loose.Game.Weapons
         }
         public override int GetDamage()
         {
-            return basePistol.GetDamage() + 1;
+            return basePistol.GetDamage() + 3;
         }
     }
 }

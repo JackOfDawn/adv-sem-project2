@@ -80,6 +80,7 @@ namespace Tests
             player.Shoot();
 
 
+
             Assert.IsTrue(bulletManager.GetCount() >= 1);
         }
 
@@ -169,8 +170,8 @@ namespace Tests
 
             Bullet bullet = new Bullet(new Vector2(49, 49), 1, Vector2.One, 3);
 
-            System.Console.WriteLine(bulletManager.GetCount());
-            enemyManager.AddEnemy(minion);
+                     enemyManager.AddEnemy(minion);
+      		System.Console.WriteLine(bulletManager.GetCount());
             bulletManager.AddObject(bullet);
 
             float prevHealth = minion.GetHealth();
@@ -178,7 +179,7 @@ namespace Tests
             bulletManager.Update();
             
             float newHealth = minion.GetHealth();
-          
+
             Assert.IsTrue(bulletManager.GetCount() == 0);
         }
     }

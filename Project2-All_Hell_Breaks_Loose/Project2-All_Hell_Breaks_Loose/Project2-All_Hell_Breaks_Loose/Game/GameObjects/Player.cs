@@ -138,6 +138,15 @@ namespace Project2_All_Hell_Breaks_Loose.Game.GameObjects
             }
         }
 
+        public void upgradeShotgun()
+        {
+            weaponlist[1] = new DecoratedShotgun(weaponlist[1] as AbstractShotGun);
+            if (weaponNum == 1)
+            {
+                currentWeapon = weaponlist[1];
+            }
+        }
+
         public void SetPosition(float x, float y)
         {
             position.X = x;
@@ -220,6 +229,11 @@ namespace Project2_All_Hell_Breaks_Loose.Game.GameObjects
         public int getAmmo()
         {
             return currentWeapon.getAmmo();
+        }
+
+        public void giveAmmo(int ammo)
+        {
+            currentWeapon.AddAmmo(ammo);
         }
 
         public void Notify(ObserverMessages message, int value = 0, Vector2 pos = new Vector2())
