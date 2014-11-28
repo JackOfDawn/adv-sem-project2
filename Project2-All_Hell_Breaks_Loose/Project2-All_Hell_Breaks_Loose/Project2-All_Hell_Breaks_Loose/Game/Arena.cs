@@ -17,9 +17,12 @@ namespace Project2_All_Hell_Breaks_Loose.Game
         private EnemyManager enemyManager;
         private WaveManager waveManager;
         private BulletManager bulletManager;
+        private Shop weaponShop;
 
         private const int SPAWN_CAP = 5;
         private const float WAVE_FREQUENCY = 150.0F;
+
+        private int score;
 
         private InputManager inputManager;
         public Player player;
@@ -28,7 +31,8 @@ namespace Project2_All_Hell_Breaks_Loose.Game
         private const float PLAYER_SPAWN_X = 640;
         private const float PLAYER_SPAWN_Y = 360;
 
-      
+        SpriteFont TNR;
+        Vector2 HUDPosition;
 
         private List<Pickup> pickups;
 
@@ -39,7 +43,10 @@ namespace Project2_All_Hell_Breaks_Loose.Game
             waveManager = new WaveManager(SPAWN_CAP, WAVE_FREQUENCY);
             inputManager = new InputManager();
             bulletManager = new BulletManager(enemyManager);
-            
+            weaponShop = new Shop(new Vector2(640, 360));
+
+            score = 0;
+            HUDPosition = new Vector2(25, 10);
         }
 
         public void Init()
@@ -49,8 +56,6 @@ namespace Project2_All_Hell_Breaks_Loose.Game
             pickups = new List<Pickup>();
             AttachListeners();
             Random rand = new Random();
-
-            
         }
 
         private void AttachListeners()
@@ -80,26 +85,41 @@ namespace Project2_All_Hell_Breaks_Loose.Game
             texture = content.Load<Texture2D>("MoneyPickup");
             SpriteManager.LoadSprite("money", texture);
 
+            texture = content.Load<Texture2D>("giant-anteater-tongue");
+            SpriteManager.LoadSprite("shop", texture);
+
+            TNR = content.Load<SpriteFont>("Times New Roman");
+
+            enemyManager.AddEnemies(waveManager.SpawnWave());
            
             player.LoadSprite();
-          
+            weaponShop.LoadSprite();
         }
 
         public void Update(GameTime gameTime)
-        {
-            inputManager.Update(gameTime);
-            player.Update(gameTime);
-            bulletManager.Update();
+        {   
 
             if(enemyManager.GetNumEnemies() == 0)
             {
                 enemyManager.AddEnemies(waveManager.SpawnWave());
+                weaponShop.openShop();
             }
             else
             {
-                enemyManager.Update(player.GetPosition());
+                if (weaponShop.isOpen())
+                {
+                    weaponShop.update();
+                }
+                else
+                {
+                    inputManager.Update(gameTime);
+                    player.Update(gameTime);
+                    bulletManager.Update();
+
+                    enemyManager.Update(player.GetPosition());
                 
-                enemyManager.CheckPlayerCollision(player);
+                    enemyManager.CheckPlayerCollision(player);
+                }
             }
             if(player.GetHealth() <= 0 )
             {
@@ -139,6 +159,12 @@ namespace Project2_All_Hell_Breaks_Loose.Game
             enemyManager.Draw(batch);
             player.Draw(batch);
             bulletManager.Draw(batch);
+            weaponShop.Draw(batch);
+
+            string HUDString = "Score: " + score.ToString() + "\n" + "Health: " + player.GetHealth().ToString() + "\n" + "Current Weapon: " + player.getWeaponName() + "   Ammo: " + player.getAmmo();
+            batch.Begin();
+            batch.DrawString(TNR, HUDString, HUDPosition, Color.White);
+            batch.End();
         }
 
 
@@ -160,7 +186,11 @@ namespace Project2_All_Hell_Breaks_Loose.Game
         public void Notify(ObserverMessages message, int value, Vector2 pos)
         {
             if(message == ObserverMessages.SPAWN_PICKUPS_MESSAGE)
+            {
                 GeneratePickup(pos);
+                score++;
+            }
+
         }
     }
 }

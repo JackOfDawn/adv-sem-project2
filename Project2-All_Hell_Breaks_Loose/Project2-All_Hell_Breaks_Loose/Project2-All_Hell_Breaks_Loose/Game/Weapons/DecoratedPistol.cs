@@ -16,7 +16,7 @@ namespace Project2_All_Hell_Breaks_Loose.Game.Weapons
 
         public override int GetSpeed()
         {
-            return basePistol.GetSpeed() + 1;
+            return basePistol.GetSpeed();
         }
         public override int GetDamage()
         {

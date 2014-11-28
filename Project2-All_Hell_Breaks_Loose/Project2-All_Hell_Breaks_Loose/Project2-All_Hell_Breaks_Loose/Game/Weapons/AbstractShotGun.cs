@@ -45,6 +45,10 @@ namespace Project2_All_Hell_Breaks_Loose.Game.Weapons
         }
         public abstract int GetSpeed();
         public abstract int GetDamage();
+        public int getAmmo()
+        {
+            return ammo;
+        }
 
         private Vector2 rotate(Vector2 direction, float rotation)
         {
@@ -53,6 +57,11 @@ namespace Project2_All_Hell_Breaks_Loose.Game.Weapons
             newDirection.Y = -direction.X * (float)Math.Sin(rotation) + direction.Y * (float)Math.Cos(rotation);
 
             return newDirection;
+        }
+
+        public string ClassName()
+        {
+            return "ShotGun";
         }
     }
 }

@@ -9,7 +9,7 @@ namespace Project2_All_Hell_Breaks_Loose.Game.Weapons
     public class ShotGun : AbstractShotGun
     {
         private const int SPEED = 3;
-        private const int DAMAGE = 3;
+        private const int DAMAGE = 5;
 
         public ShotGun()
         {

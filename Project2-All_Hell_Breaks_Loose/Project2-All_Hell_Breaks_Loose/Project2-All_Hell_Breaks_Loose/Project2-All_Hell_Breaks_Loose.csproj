@@ -87,6 +87,7 @@
     <Compile Include="Game\Pickups\Pickup.cs" />
     <Compile Include="Game\GameObjects\Player.cs" />
     <Compile Include="Game\Managers\SpriteManager.cs" />
+    <Compile Include="Game\Shop.cs" />
     <Compile Include="Game\Strategies\MovementStrategy.cs" />
     <Compile Include="Game\Strategies\NullMovement.cs" />
     <Compile Include="Game\Strategies\Seek.cs" />

@@ -140,16 +140,30 @@ namespace Project2_All_Hell_Breaks_Loose.Game.GameObjects
             Vector2 direction = new Vector2((float)Math.Cos((double)rotation), (float)Math.Sin((double)rotation));
 
             currentWeapon.Shoot(this.position, direction, bulletManagerRef);
+
+            upgradePistol();
         }
 
         public void Draw(SpriteBatch batch)
         {
+            Color drawcolor;
             batch.Begin();
             if(!damaged)
-                batch.Draw(texture, position, null, Color.White, rotation, origin, 1.0f, SpriteEffects.None, 0f);
+                drawcolor = Color.White;
             else
-                batch.Draw(texture, position, null, Color.Red, rotation, origin, 1.0f, SpriteEffects.None, 0f);
+                drawcolor = Color.Red;
+                
+            batch.Draw(texture, position, null, drawcolor, rotation, origin, 1.0f, SpriteEffects.None, 0f);
             batch.End();
+        }
+
+        public void upgradePistol()
+        {
+            weaponlist[0] = new DecoratedPistol(weaponlist[0] as AbstractPistol);
+            if(weaponNum == 0)
+            {
+                currentWeapon = weaponlist[0];
+            }
         }
 
         public void SetPosition(float x, float y)
@@ -224,6 +238,16 @@ namespace Project2_All_Hell_Breaks_Loose.Game.GameObjects
         public float GetRadius()
         {
             return width / 2;
+        }
+
+        public string getWeaponName()
+        {
+            return currentWeapon.ClassName();
+        }
+
+        public int getAmmo()
+        {
+            return currentWeapon.getAmmo();
         }
 
         public void Notify(ObserverMessages message, int value = 0, Vector2 pos = new Vector2())

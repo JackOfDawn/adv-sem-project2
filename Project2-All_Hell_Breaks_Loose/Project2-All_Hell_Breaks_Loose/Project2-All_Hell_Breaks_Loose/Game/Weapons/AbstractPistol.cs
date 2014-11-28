@@ -30,5 +30,14 @@ namespace Project2_All_Hell_Breaks_Loose.Game.Weapons
         }
         public abstract int GetSpeed();
         public abstract int GetDamage();
+        public int getAmmo()
+        {
+            return -1;
+        }
+
+        public string ClassName()
+        {
+            return "Pistol";
+        }
     }
 }
