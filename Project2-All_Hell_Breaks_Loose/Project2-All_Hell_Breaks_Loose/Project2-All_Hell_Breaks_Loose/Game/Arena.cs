@@ -85,6 +85,8 @@ namespace Project2_All_Hell_Breaks_Loose.Game
             waveManager.setWaveNum(0);
             enemyManager.DeleteAll();
             bulletManager.DeleteAll();
+            enemyManager.Update(player.GetPosition());
+            pickups.Clear();
             score = 0;
 
             enemyManager.AddObjects(waveManager.SpawnWave());
