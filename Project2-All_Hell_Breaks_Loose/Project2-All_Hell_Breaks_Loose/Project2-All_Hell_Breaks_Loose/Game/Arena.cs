@@ -80,7 +80,8 @@ namespace Project2_All_Hell_Breaks_Loose.Game
         private void restartGame()
         {
             player.SetHealth(PLAYER_HEALTH);
-
+            player.SetPosition(CENTER_POINT);
+            player.resetWeapons();
             deathScreen.setDraw(false);
             waveManager.setWaveNum(0);
             enemyManager.DeleteAll();

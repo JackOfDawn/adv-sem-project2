@@ -5,9 +5,6 @@ Content\Pew.xnb
 Content\Player.xnb
 Content\AmmoPickup.xnb
 Content\MoneyPickup.xnb
-Content\Shop.xnb
-<<<<<<< HEAD
-Content\You-Died.xnb
-=======
 Content\Times New Roman.xnb
->>>>>>> 5e69e3061d0f650bf9c32aa12d0ccee370cfa649
+Content\Shop.xnb
+Content\You-Died.xnb
