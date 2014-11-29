@@ -147,6 +147,21 @@ namespace Project2_All_Hell_Breaks_Loose.Game.GameObjects
             }
         }
 
+        public void resetWeapons()
+        {
+            weaponNum = 0;
+
+            weaponlist.Clear();
+
+            Weapon weaponToAdd = new Pistol();
+            weaponlist.Add(0, weaponToAdd);
+
+            weaponToAdd = new ShotGun();
+            weaponlist.Add(1, weaponToAdd);
+
+            currentWeapon = weaponlist[0];
+        }
+
         public void SetPosition(float x, float y)
         {
             position.X = x;
