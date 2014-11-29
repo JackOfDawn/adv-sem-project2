@@ -29,6 +29,7 @@ namespace Project2_All_Hell_Breaks_Loose.Game
         public Player player;
         private const int PLAYER_HEALTH = 20;
         private const float PLAYER_SPEED = 3;
+
         private const float CENTER_X = 640;
         private const float CENTER_Y = 360;
         private Vector2 CENTER_POINT = new Vector2(CENTER_X, CENTER_Y);
@@ -45,15 +46,17 @@ namespace Project2_All_Hell_Breaks_Loose.Game
             waveManager = new WaveManager(SPAWN_CAP, WAVE_FREQUENCY);
             inputManager = new InputManager();
             bulletManager = new BulletManager(enemyManager);
+         
             weaponShop = new Shop(CENTER_POINT);
             deathScreen = new DeathScreen(CENTER_POINT);
-
+            
             score = 0;
             HUDPosition = new Vector2(25, 10);
         }
 
         public void Init()
         {
+           
             player = new Player(PLAYER_HEALTH, PLAYER_SPEED, CENTER_POINT);
             player.setBulletmanager(bulletManager);
             pickups = new List<Pickup>();
@@ -151,6 +154,7 @@ namespace Project2_All_Hell_Breaks_Loose.Game
                     enemyManager.CheckPlayerCollision(player);
                 }
             }
+     
 
             HandlePickups();
            

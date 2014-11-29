@@ -20,6 +20,32 @@ namespace Project2_All_Hell_Breaks_Loose.Game.GameObjects.Enemies
         public static Color BLOCKER_COLOR = Color.LimeGreen;
         public static Color BANSHEE_COLOR = Color.GhostWhite;
 
+        public static Random rand = new Random();
+
+        public static void SeedRandom(int seed)
+        {
+            rand = new Random(seed);
+        }
+
+        public static Minion MakeRandomMinion()
+        {
+            int selection = rand.Next(100);
+
+            if(selection < 10)
+            {
+                return MakeBanshee();
+            }
+            else if( selection < 55)
+            {
+                return MakeBlocker();
+            }
+            else
+            {
+                return MakeChaser();
+            }
+            
+        }
+
         public static Minion MakeChaser()
         {
             return BaseMinion(new Strategies.SeekMovement(), CHASER_COLOR);
@@ -32,7 +58,7 @@ namespace Project2_All_Hell_Breaks_Loose.Game.GameObjects.Enemies
 
         public static Minion MakeBlocker()
         {
-            return BaseMinion(new Strategies.BansheeMovment(), BLOCKER_COLOR);
+            return BaseMinion(new Strategies.SeekAndFlee(), BLOCKER_COLOR);
         }
         
         public static Minion MakeBanshee()
