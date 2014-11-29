@@ -109,7 +109,7 @@ namespace Tests
 
             List<Enemy> enemies = waves.SpawnWave();
 
-            Assert.IsTrue(enemies.Count - 1 == numEnemies);
+            Assert.IsTrue(enemies.Count == numEnemies);
         }
 
         [TestMethod]
@@ -181,6 +181,85 @@ namespace Tests
             float newHealth = minion.GetHealth();
 
             Assert.IsTrue(bulletManager.GetCount() == 0);
+        }
+
+        [TestMethod]
+        public void testEnemyUpgrade()
+        {
+            Enemy minion = new Minion();
+
+            float prevDamage = minion.GetDamage();
+            float prevHealth = minion.GetHealth();
+
+            minion = new EnemyUpgrade(minion);
+
+            float newDamage = minion.GetDamage();
+            float newHealth = minion.GetHealth();
+
+            Assert.IsTrue(newDamage > prevDamage);
+            Assert.IsTrue(newHealth > prevHealth);
+        }
+
+        [TestMethod]
+        public void testShotgun()
+        {
+            ShotGun shotgun = new ShotGun();
+            BulletManager bulletMan = new BulletManager(null);
+
+            shotgun.Shoot(Vector2.Zero, Vector2.Zero, bulletMan);
+
+            Assert.AreEqual(3, bulletMan.GetCount());
+        }
+
+        [TestMethod]
+        public void testShotgunUpgrade()
+        {
+            AbstractShotGun shotgun = new ShotGun();
+
+            float prevDamage = shotgun.GetDamage();
+
+            shotgun = new DecoratedShotgun(shotgun);
+
+            float newDamage = shotgun.GetDamage();
+
+            Assert.IsTrue(newDamage > prevDamage);
+        }
+
+        [TestMethod]
+        public void gameRestart()
+        {
+            Arena arena = new Arena();
+            arena.Init();
+
+            arena.getPlayer().TakeDamage(5);
+            arena.getEnemyManager().AddObject(new Minion());
+            arena.restartGame();
+
+            Assert.AreEqual(20, arena.getPlayer().GetHealth());
+            Assert.AreEqual(5, arena.getEnemyManager().GetCount());
+        }
+
+        [TestMethod]
+        public void playerWeaponReset()
+        {
+            Init();
+
+            player.upgradePistol();
+            player.upgradeShotgun();
+
+            float prevDamage = player.getCurrentWeapon().GetDamage();
+
+            player.resetWeapons();
+
+            float newDamage = player.getCurrentWeapon().GetDamage();
+
+            Assert.IsTrue(newDamage < prevDamage);
+        }
+
+        [TestMethod]
+        public void testBansheeMovement()
+        {
+
         }
     }
 }

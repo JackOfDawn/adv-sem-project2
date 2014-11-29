@@ -10,11 +10,9 @@ using Project2_All_Hell_Breaks_Loose.Game.GameObjects;
 
 namespace Project2_All_Hell_Breaks_Loose.Game
 {
-    class Shop
+    class Shop : GameObject
     {
         bool shopOpen;
-        Texture2D texture;
-        Vector2 position;
 
         public Shop(Vector2 position)
         {
@@ -37,24 +35,9 @@ namespace Project2_All_Hell_Breaks_Loose.Game
             if(shopOpen)
             {
                 batch.Begin();
-                batch.Draw(texture, position, Color.White);
+                batch.Draw(texture, origin, Color.White);
                 batch.End();
             }
-        }
-
-        public void LoadSprite(Texture2D texture = null)
-        {
-            //multiple options
-            if (texture == null)
-            {
-                this.texture = SpriteManager.GetSprite("shop");
-            }
-            else
-            {
-                this.texture = texture;
-            }
-            position.X -= this.texture.Width / 2;
-            position.Y -= this.texture.Height / 2;
         }
 
         public bool isOpen()

@@ -8,11 +8,9 @@ using Project2_All_Hell_Breaks_Loose.Game.Managers;
 
 namespace Project2_All_Hell_Breaks_Loose.Game
 {
-    class DeathScreen
+    class DeathScreen :GameObjects.GameObject
     {
         bool draw;
-        Texture2D texture;
-        Vector2 position;
 
         public DeathScreen(Vector2 pos)
         {
@@ -30,24 +28,9 @@ namespace Project2_All_Hell_Breaks_Loose.Game
             if(draw)
             {
                 batch.Begin();
-                batch.Draw(texture, position, Color.White);
+                batch.Draw(texture, origin, Color.White);
                 batch.End();
             }
-        }
-
-        public void LoadSprite(Texture2D texture = null)
-        {
-            //multiple options
-            if (texture == null)
-            {
-                this.texture = SpriteManager.GetSprite("death");
-            }
-            else
-            {
-                this.texture = texture;
-            }
-            position.X -= this.texture.Width / 2;
-            position.Y -= this.texture.Height / 2;
         }
     }
 }

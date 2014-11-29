@@ -241,6 +241,11 @@ namespace Project2_All_Hell_Breaks_Loose.Game.GameObjects
             return currentWeapon.ClassName();
         }
 
+        public Weapon getCurrentWeapon()
+        {
+            return currentWeapon;
+        }
+
         public int getAmmo()
         {
             return currentWeapon.getAmmo();

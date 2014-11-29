@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
+using Project2_All_Hell_Breaks_Loose.Game.Managers;
 
 namespace Project2_All_Hell_Breaks_Loose.Game.Pickups
 {
@@ -21,10 +22,22 @@ namespace Project2_All_Hell_Breaks_Loose.Game.Pickups
             batch.End();
         }
 
-        public void LoadTexture(Texture2D texture)
+        public void LoadSprite(Texture2D texture = null)
         {
-            this.texture = texture;
-            origin = new Vector2(texture.Width / 2, texture.Height / 2);
+            //multiple options
+            if (texture == null)
+            {
+                this.texture = SpriteManager.GetSprite("ammo");
+            }
+            else
+            {
+                this.texture = texture;
+            }
+            if (this.texture != null)
+            {
+                position.X -= this.texture.Width / 2;
+                position.Y -= this.texture.Height / 2;
+            }
         }
  
         public Vector2 GetPosition()

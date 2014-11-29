@@ -77,7 +77,7 @@ namespace Project2_All_Hell_Breaks_Loose.Game
             inputManager.Event_Respawn += new InputManager.ButtonPressedDelegate(restartGame);
         }
 
-        private void restartGame()
+        public void restartGame()
         {
             player.SetHealth(PLAYER_HEALTH);
             player.SetPosition(CENTER_POINT);
@@ -123,8 +123,8 @@ namespace Project2_All_Hell_Breaks_Loose.Game
             enemyManager.AddObjects(waveManager.SpawnWave());
            
             player.LoadSprite("player");
-            weaponShop.LoadSprite();
-            deathScreen.LoadSprite();
+            weaponShop.LoadSprite("shop");
+            deathScreen.LoadSprite("death");
         }
 
         public void Update(GameTime gameTime)
@@ -204,6 +204,20 @@ namespace Project2_All_Hell_Breaks_Loose.Game
             batch.End();
         }
 
+        public Player getPlayer()
+        {
+            return player;
+        }
+
+        public BulletManager getBulletManager()
+        {
+            return bulletManager;
+        }
+
+        public EnemyManager getEnemyManager()
+        {
+            return enemyManager;
+        }
 
         public void GeneratePickup(Vector2 pos)
         {
@@ -212,7 +226,7 @@ namespace Project2_All_Hell_Breaks_Loose.Game
             Pickup pickup;
 
             AmmoPickup ammoPickup = new AmmoPickup(pos);
-            ammoPickup.LoadTexture(SpriteManager.GetSprite("ammo"));
+            ammoPickup.LoadSprite();
             ammoPickup.registerObserver(player);
 
             pickup = ammoPickup;

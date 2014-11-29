@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Project2_All_Hell_Breaks_Loose.Game.GameObjects.Enemies
 {
-    class EnemyUpgrade : Enemy
+    public class EnemyUpgrade : Enemy
     {
         private Enemy baseEnemy;
 
