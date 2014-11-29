@@ -44,7 +44,7 @@ namespace Project2_All_Hell_Breaks_Loose.Game
             inputManager = new InputManager();
             bulletManager = new BulletManager(enemyManager);
             weaponShop = new Shop(new Vector2(640, 360));
-
+            
             score = 0;
             HUDPosition = new Vector2(25, 10);
         }

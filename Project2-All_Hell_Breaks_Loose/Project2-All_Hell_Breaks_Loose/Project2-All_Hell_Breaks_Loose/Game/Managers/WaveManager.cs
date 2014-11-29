@@ -21,6 +21,7 @@ namespace Project2_All_Hell_Breaks_Loose.Game.Managers
             this.waveFrequency = waveFrequency;
             countdownTillNextWave = waveFrequency;
             waveNumber = 0;
+            
         }
 
         public List<Enemy> Update()
@@ -42,10 +43,10 @@ namespace Project2_All_Hell_Breaks_Loose.Game.Managers
             List<Enemy> wave = new List<Enemy>();
 
 
-            for (int i = 0; i < spawnCap + waveNumber; i++)
+            for (int i = 0; i < spawnCap + waveNumber /2; i++)
             {
                 
-                Enemy minion = EnemyFactory.MakeBanshee();
+                Enemy minion = EnemyFactory.MakeRandomMinion();
                 minion.SetPosition(0.0f, 32.0f * (i*2));
 
                 for (int j = 0; j < waveNumber; j ++)
