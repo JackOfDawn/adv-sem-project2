@@ -18,24 +18,29 @@ namespace Project2_All_Hell_Breaks_Loose.Game.GameObjects.Enemies
         public static Color CHASER_COLOR = Color.Tomato;
         public static Color FLEEING_COLOR = Color.Gainsboro;
         public static Color BLOCKER_COLOR = Color.LimeGreen;
+        public static Color BANSHEE_COLOR = Color.GhostWhite;
 
-        public static Minion makeChaser()
+        public static Minion MakeChaser()
         {
-            return baseMinion(new Strategies.SeekMovement(), CHASER_COLOR);
+            return BaseMinion(new Strategies.SeekMovement(), CHASER_COLOR);
         }
 
-        public static Minion makeFleeing()
+        public static Minion MakeFleeing()
         {
-            return baseMinion(new Strategies.FleeMovement(), FLEEING_COLOR);
+            return BaseMinion(new Strategies.FleeMovement(), FLEEING_COLOR);
         }
 
-        public static Minion makeBlocker()
+        public static Minion MakeBlocker()
         {
-            return baseMinion(new Strategies.SeekAndFlee(), BLOCKER_COLOR);
+            return BaseMinion(new Strategies.BansheeMovment(), BLOCKER_COLOR);
         }
         
+        public static Minion MakeBanshee()
+        {
+            return BaseMinion(new Strategies.BansheeMovment(), BANSHEE_COLOR);
+        }
         
-        private static Minion baseMinion(Strategies.MovementStrategy strategy, Color color)
+        private static Minion BaseMinion(Strategies.MovementStrategy strategy, Color color)
         {
             Minion minion = new Minion(MINION_HEALTH, MINION_DAMAGE, MINION_SPEED, ZERO, strategy, color);
             minion.LoadSprite("enemy");
