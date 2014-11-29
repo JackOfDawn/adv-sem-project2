@@ -74,6 +74,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Game\Arena.cs" />
+    <Compile Include="Game\DeathScreen.cs" />
     <Compile Include="Game\GameObjects\Bullet.cs" />
     <Compile Include="Game\GameObjects\Enemies\EnemyUpgrade.cs" />
     <Compile Include="Game\GameObjects\GameObject.cs" />

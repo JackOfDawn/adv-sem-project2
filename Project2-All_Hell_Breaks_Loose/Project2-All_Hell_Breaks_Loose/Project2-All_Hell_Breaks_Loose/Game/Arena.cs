@@ -18,6 +18,7 @@ namespace Project2_All_Hell_Breaks_Loose.Game
         private WaveManager waveManager;
         private BulletManager bulletManager;
         private Shop weaponShop;
+        private DeathScreen deathScreen;
 
         private const int SPAWN_CAP = 5;
         private const float WAVE_FREQUENCY = 150.0F;
@@ -28,8 +29,9 @@ namespace Project2_All_Hell_Breaks_Loose.Game
         public Player player;
         private const int PLAYER_HEALTH = 20;
         private const float PLAYER_SPEED = 3;
-        private const float PLAYER_SPAWN_X = 640;
-        private const float PLAYER_SPAWN_Y = 360;
+        private const float CENTER_X = 640;
+        private const float CENTER_Y = 360;
+        private Vector2 CENTER_POINT = new Vector2(CENTER_X, CENTER_Y);
 
         SpriteFont TNR;
         Vector2 HUDPosition;
@@ -43,7 +45,8 @@ namespace Project2_All_Hell_Breaks_Loose.Game
             waveManager = new WaveManager(SPAWN_CAP, WAVE_FREQUENCY);
             inputManager = new InputManager();
             bulletManager = new BulletManager(enemyManager);
-            weaponShop = new Shop(new Vector2(640, 360));
+            weaponShop = new Shop(CENTER_POINT);
+            deathScreen = new DeathScreen(CENTER_POINT);
 
             score = 0;
             HUDPosition = new Vector2(25, 10);
@@ -51,7 +54,7 @@ namespace Project2_All_Hell_Breaks_Loose.Game
 
         public void Init()
         {
-            player = new Player(PLAYER_HEALTH, PLAYER_SPEED, PLAYER_SPAWN_X, PLAYER_SPAWN_Y);
+            player = new Player(PLAYER_HEALTH, PLAYER_SPEED, CENTER_POINT);
             player.setBulletmanager(bulletManager);
             pickups = new List<Pickup>();
             AttachListeners();
@@ -68,6 +71,20 @@ namespace Project2_All_Hell_Breaks_Loose.Game
             inputManager.Event_UpgradePistol += new InputManager.ButtonPressedDelegate(player.upgradePistol);
             inputManager.Event_UpgradeShotgun += new InputManager.ButtonPressedDelegate(player.upgradeShotgun);
             inputManager.Event_GiveAmmo += new InputManager.ButtonParamDelegate(player.giveAmmo);
+            inputManager.Event_Respawn += new InputManager.ButtonPressedDelegate(restartGame);
+        }
+
+        private void restartGame()
+        {
+            player.SetHealth(PLAYER_HEALTH);
+
+            deathScreen.setDraw(false);
+            waveManager.setWaveNum(0);
+            enemyManager.DeleteAll();
+            bulletManager.DeleteAll();
+            score = 0;
+
+            enemyManager.AddObjects(waveManager.SpawnWave());
         }
 
         public void LoadContent(ContentManager content, GraphicsDevice device)
@@ -92,12 +109,16 @@ namespace Project2_All_Hell_Breaks_Loose.Game
             texture = content.Load<Texture2D>("Shop");
             SpriteManager.LoadSprite("shop", texture);
 
+            texture = content.Load<Texture2D>("You-Died");
+            SpriteManager.LoadSprite("death", texture);
+
             TNR = content.Load<SpriteFont>("Times New Roman");
 
             enemyManager.AddObjects(waveManager.SpawnWave());
            
             player.LoadSprite("player");
             weaponShop.LoadSprite();
+            deathScreen.LoadSprite();
         }
 
         public void Update(GameTime gameTime)
@@ -107,6 +128,11 @@ namespace Project2_All_Hell_Breaks_Loose.Game
             {
                 enemyManager.AddObjects(waveManager.SpawnWave());
                 weaponShop.openShop();
+            }
+            else if (player.GetHealth() <= 0)
+            {
+                deathScreen.setDraw(true);
+                inputManager.deathUpdate(gameTime);
             }
             else
             {
@@ -124,11 +150,6 @@ namespace Project2_All_Hell_Breaks_Loose.Game
                     
                     enemyManager.CheckPlayerCollision(player);
                 }
-            }
-            if(player.GetHealth() <= 0 )
-            {
-                
-                player.Shoot();
             }
 
             HandlePickups();
@@ -165,6 +186,7 @@ namespace Project2_All_Hell_Breaks_Loose.Game
             player.Draw(batch);
             bulletManager.Draw(batch);
             weaponShop.Draw(batch);
+            deathScreen.Draw(batch);            
 
             string HUDString = "Score: " + score.ToString()
                 + "\n" + "Wave: " + waveManager.getWaveNum().ToString()

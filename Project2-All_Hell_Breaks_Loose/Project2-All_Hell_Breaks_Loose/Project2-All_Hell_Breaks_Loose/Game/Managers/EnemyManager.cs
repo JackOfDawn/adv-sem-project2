@@ -32,7 +32,6 @@ namespace Project2_All_Hell_Breaks_Loose.Game.Managers
                 if(enemy.GetHealth() <= 0)
                 {
                     objectsToRemove.Add(enemy);
-                    
                 }
             }
 
@@ -68,9 +67,7 @@ namespace Project2_All_Hell_Breaks_Loose.Game.Managers
                 foreach (Enemy enemy in objectsToRemove)
                 {
                     observer.Notify(ObserverMessages.SPAWN_PICKUPS_MESSAGE, 0, enemy.GetPosition());
-                    
                 }
-                
             }
         }
     }

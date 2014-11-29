@@ -77,6 +77,10 @@ namespace Project2_All_Hell_Breaks_Loose.Game.Managers
         {
             return waveFrequency;
         }
+        public void setWaveNum(int wave)
+        {
+            waveNumber = wave;
+        }
         public int getWaveNum()
         {
             return waveNumber;

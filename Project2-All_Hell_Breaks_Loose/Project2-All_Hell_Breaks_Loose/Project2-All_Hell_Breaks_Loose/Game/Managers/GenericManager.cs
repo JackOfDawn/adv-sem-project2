@@ -39,6 +39,11 @@ namespace Project2_All_Hell_Breaks_Loose.Game.Managers
             objectsToRemove.Add(objects[index]);
         }
 
+        public void DeleteAll()
+        {
+            objectsToRemove.AddRange(objects);
+        }
+
         public void RemoveAtEndOfFrame()
         {
             foreach (T item in objectsToRemove)

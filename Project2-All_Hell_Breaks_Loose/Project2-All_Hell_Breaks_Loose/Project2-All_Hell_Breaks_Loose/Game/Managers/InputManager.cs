@@ -25,6 +25,7 @@ namespace Project2_All_Hell_Breaks_Loose.Game.Managers
         public event ButtonPressedDelegate Event_UpgradePistol;
         public event ButtonPressedDelegate Event_UpgradeShotgun;
         public event ButtonParamDelegate Event_GiveAmmo;
+        public event ButtonPressedDelegate Event_Respawn;
 
         KeyboardState lastKeyboardState;
         MouseState lastMouseState;
@@ -37,10 +38,13 @@ namespace Project2_All_Hell_Breaks_Loose.Game.Managers
         bool eKeyDown;
         bool oneKeyDown;
         bool twoKeyDown;
+        bool spaceKeyDown;
 
         bool shopExitPressed;
         bool pistolUpgradePressed;
         bool shotgunUpgradePressed;
+
+        bool respawnPressed;
 
         Vector2 movementVector;
 
@@ -98,7 +102,6 @@ namespace Project2_All_Hell_Breaks_Loose.Game.Managers
             shotgunUpgradePressed = false;
 
             HandleKeyInput();
-            HandleMouseInput();
 
             if(shopExitPressed && Event_GiveAmmo != null && Event_CloseShop != null)
             {
@@ -114,6 +117,18 @@ namespace Project2_All_Hell_Breaks_Loose.Game.Managers
             {
                 Event_UpgradeShotgun();
                 Event_CloseShop();
+            }
+        }
+
+        public void deathUpdate(GameTime gameTime)
+        {
+            respawnPressed = false;
+
+            HandleKeyInput();
+
+            if(respawnPressed && Event_Respawn != null)
+            {
+                Event_Respawn();
             }
         }
 
@@ -180,6 +195,16 @@ namespace Project2_All_Hell_Breaks_Loose.Game.Managers
                 else if (!currentKeyState.IsKeyDown(Keys.D2) && twoKeyDown)
                 {
                     twoKeyDown = false;
+                }
+
+                if(currentKeyState.IsKeyDown(Keys.Space) && !spaceKeyDown)
+                {
+                    respawnPressed = true;
+                    spaceKeyDown = true;
+                }
+                else if(!currentKeyState.IsKeyDown(Keys.Space) && spaceKeyDown)
+                {
+                    spaceKeyDown = false;
                 }
             }
 
