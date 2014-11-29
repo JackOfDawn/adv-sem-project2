@@ -28,7 +28,7 @@ namespace Tests
         [TestMethod]
         public void TestFactory()
         {
-            Minion minion = EnemyFactory.makeChaser();
+            Minion minion = EnemyFactory.MakeChaser();
 
             Assert.AreEqual(EnemyFactory.CHASER_COLOR, minion.GetColor());
         }
@@ -50,7 +50,7 @@ namespace Tests
         {
             Init();
 
-            Minion minion = EnemyFactory.makeChaser();
+            Minion minion = EnemyFactory.MakeChaser();
             minion.SetPosition(0, 0);
             minion.SetHeight(345);
             minion.SetWidth(344);
@@ -129,7 +129,7 @@ namespace Tests
         {
             EnemyManager enemyManager = new EnemyManager();
 
-            Enemy minion = EnemyFactory.makeChaser();
+            Enemy minion = EnemyFactory.MakeChaser();
             minion.SetHealth(0);
 
             enemyManager.AddObject(minion);
@@ -142,7 +142,7 @@ namespace Tests
         [TestMethod]
         public void TestSeek()
         {
-            Minion minion = EnemyFactory.makeChaser();
+            Minion minion = EnemyFactory.MakeChaser();
             minion.SetPosition(50, 50);
 
             Vector2 prevPostion = minion.GetPosition();
@@ -163,7 +163,7 @@ namespace Tests
             EnemyManager enemyManager = new EnemyManager();
             BulletManager bulletManager = new BulletManager(enemyManager);
 
-            Minion minion = EnemyFactory.makeChaser();
+            Minion minion = EnemyFactory.MakeChaser();
             minion.SetPosition(50, 50);
             minion.SetHeight(5);
 

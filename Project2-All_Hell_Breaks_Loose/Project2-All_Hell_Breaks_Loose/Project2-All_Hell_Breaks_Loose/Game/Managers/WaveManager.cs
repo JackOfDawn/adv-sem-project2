@@ -45,7 +45,7 @@ namespace Project2_All_Hell_Breaks_Loose.Game.Managers
             for (int i = 0; i < spawnCap + waveNumber; i++)
             {
                 
-                Minion minion = EnemyFactory.MakeBanshee();
+                Enemy minion = EnemyFactory.MakeBanshee();
                 minion.SetPosition(0.0f, 32.0f * (i*2));
 
                 for (int j = 0; j < waveNumber; j ++)
