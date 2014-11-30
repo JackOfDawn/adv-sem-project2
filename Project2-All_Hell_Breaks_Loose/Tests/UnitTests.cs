@@ -127,7 +127,7 @@ namespace Tests
         {
             int numEnemies = 4;
 
-            WaveManager waves = new WaveManager(numEnemies, 7);
+            WaveManager waves = new WaveManager(numEnemies);
 
             List<Enemy> enemies = waves.SpawnWave();
 

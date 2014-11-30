@@ -8,34 +8,15 @@ namespace Project2_All_Hell_Breaks_Loose.Game.Managers
 {
     public class WaveManager
     {
-        //the highest number of enemies that can be spawned in one wave
-        private int spawnCap;
-        //time between wave spawns
-        private float waveFrequency;
-        private float countdownTillNextWave;
+        //the lowest number of enemies that will spawn
+        private int baseEnemyCount;
         private int waveNumber;
 
-        public WaveManager(int spawnCap, float waveFrequency)
+        public WaveManager(int spawnCap)
         {
-            this.spawnCap = spawnCap;
-            this.waveFrequency = waveFrequency;
-            countdownTillNextWave = waveFrequency;
+            this.baseEnemyCount = spawnCap;
             waveNumber = 0;
             
-        }
-
-        public List<Enemy> Update()
-        {
-            if (countdownTillNextWave <= 0)
-            {
-                countdownTillNextWave = waveFrequency;
-                return SpawnWave();
-            }
-            else
-            {
-                countdownTillNextWave--;
-                return null;
-            }
         }
 
         public List<Enemy> SpawnWave()
@@ -43,7 +24,7 @@ namespace Project2_All_Hell_Breaks_Loose.Game.Managers
             List<Enemy> wave = new List<Enemy>();
 
 
-            for (int i = 0; i < spawnCap + waveNumber; i++)
+            for (int i = 0; i < baseEnemyCount + waveNumber; i++)
             {
                 
                 Enemy minion = EnemyFactory.MakeRandomMinion();
@@ -64,19 +45,11 @@ namespace Project2_All_Hell_Breaks_Loose.Game.Managers
 
         public void SetSpawnCap(int newSpawnCap)
         {
-            spawnCap = newSpawnCap;
+            baseEnemyCount = newSpawnCap;
         }
         public int GetSpawnCap()
         {
-            return spawnCap;
-        }
-        public void SetWaveFrequency(float newWaveFrequency)
-        {
-            waveFrequency = newWaveFrequency;
-        }
-        public float GetWaveFrequency()
-        {
-            return waveFrequency;
+            return baseEnemyCount;
         }
         public void setWaveNum(int wave)
         {

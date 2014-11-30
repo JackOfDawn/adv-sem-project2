@@ -28,7 +28,7 @@ namespace Project2_All_Hell_Breaks_Loose.Game.GameObjects
 
         public void Update()
         {
-            position += (direction * speed);// * gameTime.ElapsedGameTime.Seconds);
+            position += (direction * speed);
             
         }
 

@@ -20,8 +20,7 @@ namespace Project2_All_Hell_Breaks_Loose.Game
         private Shop weaponShop;
         private DeathScreen deathScreen;
 
-        private const int SPAWN_CAP = 5;
-        private const float WAVE_FREQUENCY = 150.0F;
+        private const int MINIMUM_SPAWN = 5;
 
         private int score;
         private int previousScore;
@@ -37,9 +36,8 @@ namespace Project2_All_Hell_Breaks_Loose.Game
         private const float CENTER_Y = 360;
         private Vector2 CENTER_POINT = new Vector2(CENTER_X, CENTER_Y);
 
-        SpriteFont TNR;
-        Vector2 HUDPosition;
-
+        HUD hud;
+        
         private Random rand;
         private List<Pickup> pickups;
 
@@ -48,7 +46,7 @@ namespace Project2_All_Hell_Breaks_Loose.Game
         {
             enemyManager = new EnemyManager();
             enemyManager.registerObserver(this);
-            waveManager = new WaveManager(SPAWN_CAP, WAVE_FREQUENCY);
+            waveManager = new WaveManager(MINIMUM_SPAWN);
             inputManager = new InputManager();
             bulletManager = new BulletManager(enemyManager);
             rand = new Random();
@@ -57,7 +55,8 @@ namespace Project2_All_Hell_Breaks_Loose.Game
             
             previousScore = score = 0;
             highScore = DEFAULT_HIGH_SCORE;
-            HUDPosition = new Vector2(25, 10);
+
+            hud = new HUD(new Vector2(25, 10));
         }
 
         public void Init()
@@ -131,7 +130,8 @@ namespace Project2_All_Hell_Breaks_Loose.Game
             texture = content.Load<Texture2D>("You-Died");
             SpriteManager.LoadSprite("death", texture);
 
-            TNR = content.Load<SpriteFont>("Times New Roman");
+            SpriteFont TNR = content.Load<SpriteFont>("Times New Roman");
+            hud.loadFont(TNR);
 
             enemyManager.AddObjects(waveManager.SpawnWave());
            
@@ -173,7 +173,8 @@ namespace Project2_All_Hell_Breaks_Loose.Game
      
 
             HandlePickups();
-           
+
+            hud.update(score, highScore, previousScore, waveManager.getWaveNum(), player.GetHealth(), player.getWeaponName(), player.getCurrentWeapon().getAmmo());
         }
 
         public void HandlePickups()
@@ -194,8 +195,6 @@ namespace Project2_All_Hell_Breaks_Loose.Game
 
         public void Draw(SpriteBatch batch)
         {
-            //Draw backgroud
-
             foreach (Pickup pickup in pickups)
             {
                 pickup.Draw(batch);
@@ -207,15 +206,7 @@ namespace Project2_All_Hell_Breaks_Loose.Game
             weaponShop.Draw(batch);
             deathScreen.Draw(batch);
 
-            string HUDString = "Current Score: " + score.ToString()
-                + "\nHigh Score: " + highScore.ToString()
-                + "\nPrevious Score: " + previousScore.ToString()
-                + "\n" + "Wave: " + waveManager.getWaveNum().ToString()
-                + "\n" + "Health: " + player.GetHealth().ToString()
-                + "\n" + "Current Weapon: " + player.getWeaponName() + "   Ammo: " + player.getAmmo();
-            batch.Begin();
-            batch.DrawString(TNR, HUDString, HUDPosition, Color.White);
-            batch.End();
+            hud.draw(batch);
         }
 
         public Player getPlayer()

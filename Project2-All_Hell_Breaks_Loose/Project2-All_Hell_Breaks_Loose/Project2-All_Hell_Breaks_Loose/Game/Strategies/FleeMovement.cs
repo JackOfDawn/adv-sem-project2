@@ -17,8 +17,6 @@ namespace Project2_All_Hell_Breaks_Loose.Game.Strategies
 
         public Vector2 Update(Vector2 position, Vector2 targetLoc, float speed)
         {
-            //if (Vector2.Distance(position, targetLoc) > 100)
-            //'    return new SeekMovement().Update(position, targetLoc, speed);
             return Flee(position, targetLoc, speed);
         }
 

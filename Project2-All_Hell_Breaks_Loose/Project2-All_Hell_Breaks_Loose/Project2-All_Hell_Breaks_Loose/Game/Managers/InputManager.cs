@@ -72,7 +72,6 @@ namespace Project2_All_Hell_Breaks_Loose.Game.Managers
             HandleKeyInput();
             HandleMouseInput();
 
-            //call events
             if(shootActionPressed && Event_Shoot != null)
             {
                 Event_Shoot();
@@ -134,7 +133,6 @@ namespace Project2_All_Hell_Breaks_Loose.Game.Managers
 
         private void HandleMouseInput()
         {
-            //Handle mousestate
             MouseState currentMouseState = Mouse.GetState();
             if (lastMouseState != currentMouseState)
             {
@@ -153,7 +151,6 @@ namespace Project2_All_Hell_Breaks_Loose.Game.Managers
 
         private void HandleKeyInput()
         {
-            //handle debounced Q press
             KeyboardState currentKeyState = Keyboard.GetState();
             if (lastKeyboardState != currentKeyState)
             {
@@ -208,7 +205,6 @@ namespace Project2_All_Hell_Breaks_Loose.Game.Managers
                 }
             }
 
-            //handle directions
             if (currentKeyState.IsKeyDown(Keys.W)) movementVector.Y = -1;
             if (currentKeyState.IsKeyDown(Keys.S)) movementVector.Y = 1;
             if (currentKeyState.IsKeyDown(Keys.A)) movementVector.X = -1;
