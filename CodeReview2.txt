@@ -1,0 +1,9 @@
+Reviewer: David Johnston
+
+InputManager update system could be more elegant. As it is now you would have to create a new update function for each screen of the game. That's not super relevant right now, but consider a complete game with an intro screen, menu screen, pause screen, sub-menus within menus, etc...
+
+UI should probably be separated from the "Arena," that way you could have arenas with different UI options / skins / whatever.
+
+I really like the use of the strategy pattern here. It's super clean, super extensible (as evidenced by the SeekAndFlee strategy), and super simple.
+
+Generally I think the point of entrance for initialization and re-initialization should be the same (for example in constructor / init and restartGame). It is very easy in my experience to think you are properly reseting everything and find you are not. It causes headaches.

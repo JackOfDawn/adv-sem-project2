@@ -196,7 +196,6 @@ namespace Project2_All_Hell_Breaks_Loose.Game
         {
             //Draw backgroud
 
-            //batch.Draw(SpriteManager.GetSprite("background"), zero, Color.White);
             foreach (Pickup pickup in pickups)
             {
                 pickup.Draw(batch);
