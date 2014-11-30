@@ -253,7 +253,11 @@ namespace Project2_All_Hell_Breaks_Loose.Game.GameObjects
 
         public void giveAmmo(int ammo)
         {
-            currentWeapon.AddAmmo(ammo);
+            foreach (KeyValuePair<int, Weapon> weapon in weaponlist)
+            {
+                weapon.Value.AddAmmo(ammo);
+            }
+
         }
 
         public void Notify(ObserverMessages message, int value = 0, Vector2 pos = new Vector2())

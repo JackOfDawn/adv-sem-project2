@@ -24,6 +24,9 @@ namespace Project2_All_Hell_Breaks_Loose.Game
         private const float WAVE_FREQUENCY = 150.0F;
 
         private int score;
+        private int previousScore;
+        private int highScore;
+        private int DEFAULT_HIGH_SCORE = 20;
 
         private InputManager inputManager;
         public Player player;
@@ -37,7 +40,9 @@ namespace Project2_All_Hell_Breaks_Loose.Game
         SpriteFont TNR;
         Vector2 HUDPosition;
 
+        private Random rand;
         private List<Pickup> pickups;
+
 
         public Arena()
         {
@@ -46,11 +51,12 @@ namespace Project2_All_Hell_Breaks_Loose.Game
             waveManager = new WaveManager(SPAWN_CAP, WAVE_FREQUENCY);
             inputManager = new InputManager();
             bulletManager = new BulletManager(enemyManager);
-         
+            rand = new Random();
             weaponShop = new Shop(CENTER_POINT);
             deathScreen = new DeathScreen(CENTER_POINT);
             
-            score = 0;
+            previousScore = score = 0;
+            highScore = DEFAULT_HIGH_SCORE;
             HUDPosition = new Vector2(25, 10);
         }
 
@@ -79,6 +85,12 @@ namespace Project2_All_Hell_Breaks_Loose.Game
 
         public void restartGame()
         {
+
+            previousScore = score;
+
+            if (previousScore > highScore)
+                highScore = previousScore;
+
             player.SetHealth(PLAYER_HEALTH);
             player.SetPosition(CENTER_POINT);
             player.resetWeapons();
@@ -88,6 +100,7 @@ namespace Project2_All_Hell_Breaks_Loose.Game
             bulletManager.DeleteAll();
             enemyManager.Update(player.GetPosition());
             pickups.Clear();
+            
             score = 0;
 
             enemyManager.AddObjects(waveManager.SpawnWave());
@@ -193,9 +206,11 @@ namespace Project2_All_Hell_Breaks_Loose.Game
             player.Draw(batch);
             bulletManager.Draw(batch);
             weaponShop.Draw(batch);
-            deathScreen.Draw(batch);            
+            deathScreen.Draw(batch);
 
-            string HUDString = "Score: " + score.ToString()
+            string HUDString = "Current Score: " + score.ToString()
+                + "\nHigh Score: " + highScore.ToString()
+                + "\nPrevious Score: " + previousScore.ToString()
                 + "\n" + "Wave: " + waveManager.getWaveNum().ToString()
                 + "\n" + "Health: " + player.GetHealth().ToString()
                 + "\n" + "Current Weapon: " + player.getWeaponName() + "   Ammo: " + player.getAmmo();
@@ -221,17 +236,19 @@ namespace Project2_All_Hell_Breaks_Loose.Game
 
         public void GeneratePickup(Vector2 pos)
         {
-            //int type = rand.Next(3);
+            int type = rand.Next(3);
+            if (type == 1)
+            {
+                Pickup pickup;
 
-            Pickup pickup;
+                AmmoPickup ammoPickup = new AmmoPickup(pos);
+                ammoPickup.LoadSprite();
+                ammoPickup.registerObserver(player);
 
-            AmmoPickup ammoPickup = new AmmoPickup(pos);
-            ammoPickup.LoadSprite();
-            ammoPickup.registerObserver(player);
+                pickup = ammoPickup;
 
-            pickup = ammoPickup;
-
-            pickups.Add(pickup);
+                pickups.Add(pickup);
+            }
         }
 
         public void Notify(ObserverMessages message, int value, Vector2 pos)
@@ -240,6 +257,7 @@ namespace Project2_All_Hell_Breaks_Loose.Game
             {
                 GeneratePickup(pos);
                 score++;
+
             }
 
         }

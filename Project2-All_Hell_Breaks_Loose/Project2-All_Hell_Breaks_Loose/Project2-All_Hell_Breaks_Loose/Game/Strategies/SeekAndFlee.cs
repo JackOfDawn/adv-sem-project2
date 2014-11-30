@@ -6,7 +6,7 @@ using Microsoft.Xna.Framework;
 
 namespace Project2_All_Hell_Breaks_Loose.Game.Strategies
 {
-    class SeekAndFlee : MovementStrategy
+    public class SeekAndFlee : MovementStrategy
     {
         private SeekMovement seek;
         private FleeMovement flee;

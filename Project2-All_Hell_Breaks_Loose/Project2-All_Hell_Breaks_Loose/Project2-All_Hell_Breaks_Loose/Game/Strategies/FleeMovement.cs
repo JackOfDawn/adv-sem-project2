@@ -6,7 +6,7 @@ using Microsoft.Xna.Framework;
 
 namespace Project2_All_Hell_Breaks_Loose.Game.Strategies
 {
-    class FleeMovement : MovementStrategy
+    public class FleeMovement : MovementStrategy
     {
         
         const int THRESHOLD = 100;

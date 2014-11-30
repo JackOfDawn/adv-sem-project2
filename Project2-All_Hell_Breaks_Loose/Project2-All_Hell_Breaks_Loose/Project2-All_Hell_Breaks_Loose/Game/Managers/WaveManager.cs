@@ -43,7 +43,7 @@ namespace Project2_All_Hell_Breaks_Loose.Game.Managers
             List<Enemy> wave = new List<Enemy>();
 
 
-            for (int i = 0; i < spawnCap + waveNumber /2; i++)
+            for (int i = 0; i < spawnCap + waveNumber; i++)
             {
                 
                 Enemy minion = EnemyFactory.MakeRandomMinion();

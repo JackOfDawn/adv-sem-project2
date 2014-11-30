@@ -26,11 +26,33 @@ namespace Tests
         }
 
         [TestMethod]
-        public void TestFactory()
+        public void TestRandomFactory()
+        {
+            Minion minion= EnemyFactory.MakeRandomMinion();
+
+            Assert.IsNotNull(minion);
+        }
+
+        [TestMethod]
+        public void TestChaserMaking()
         {
             Minion minion = EnemyFactory.MakeChaser();
 
             Assert.AreEqual(EnemyFactory.CHASER_COLOR, minion.GetColor());
+        }
+        [TestMethod]
+        public void TestBlockerMaker()
+        {
+            Minion minion = EnemyFactory.MakeBlocker();
+
+            Assert.AreEqual(EnemyFactory.BLOCKER_COLOR, minion.GetColor());
+        }
+        [TestMethod]
+        public void TestBansheeMaker()
+        {
+            Minion minion = EnemyFactory.MakeBanshee();
+
+            Assert.AreEqual(EnemyFactory.BANSHEE_COLOR, minion.GetColor());
         }
 
         [TestMethod]
@@ -96,7 +118,7 @@ namespace Tests
 
             player.UpdateMovement(Vector2.One);
 
-            Assert.IsTrue(player.GetPosition() == newPosition);
+            Assert.AreEqual(player.GetPosition(), newPosition);
 
         }
 
@@ -109,7 +131,7 @@ namespace Tests
 
             List<Enemy> enemies = waves.SpawnWave();
 
-            Assert.IsTrue(enemies.Count == numEnemies);
+            Assert.AreEqual(enemies.Count, numEnemies);
         }
 
         [TestMethod]
@@ -121,7 +143,7 @@ namespace Tests
 
             enemyManager.AddObject(minion);
 
-            Assert.IsTrue(enemyManager.GetCount() == 1);
+            Assert.AreEqual(enemyManager.GetCount(), 1);
         }
 
         [TestMethod]
@@ -136,7 +158,7 @@ namespace Tests
 
             enemyManager.Update(new Vector2());
 
-            Assert.IsTrue(enemyManager.GetCount() == 0);
+            Assert.AreEqual(enemyManager.GetCount(), 0);
         }
 
         [TestMethod]
@@ -180,11 +202,11 @@ namespace Tests
             
             float newHealth = minion.GetHealth();
 
-            Assert.IsTrue(bulletManager.GetCount() == 0);
+            Assert.AreEqual(bulletManager.GetCount(), 0);
         }
 
         [TestMethod]
-        public void testEnemyUpgrade()
+        public void TestEnemyUpgrade()
         {
             Enemy minion = new Minion();
 
@@ -201,7 +223,7 @@ namespace Tests
         }
 
         [TestMethod]
-        public void testShotgun()
+        public void TestShotgun()
         {
             ShotGun shotgun = new ShotGun();
             BulletManager bulletMan = new BulletManager(null);
@@ -212,7 +234,7 @@ namespace Tests
         }
 
         [TestMethod]
-        public void testShotgunUpgrade()
+        public void TestShotgunUpgrade()
         {
             AbstractShotGun shotgun = new ShotGun();
 
@@ -226,7 +248,7 @@ namespace Tests
         }
 
         [TestMethod]
-        public void gameRestart()
+        public void GameRestart()
         {
             Arena arena = new Arena();
             arena.Init();
@@ -240,7 +262,7 @@ namespace Tests
         }
 
         [TestMethod]
-        public void playerWeaponReset()
+        public void PlayerWeaponReset()
         {
             Init();
 
@@ -257,9 +279,31 @@ namespace Tests
         }
 
         [TestMethod]
-        public void testBansheeMovement()
+        public void TestSeeking()
         {
+            Vector2 startPosition = new Vector2(400, 300);
+            Vector2 targetPosition = new Vector2(400, 350);
+            int speed = 5;
+
+            MovementStrategy seeking = new SeekMovement();
+            Vector2 newPosition = seeking.Update(startPosition, targetPosition, speed);
+
+            Assert.IsTrue(Vector2.DistanceSquared(startPosition, targetPosition) >= Vector2.DistanceSquared(newPosition, targetPosition));
 
         }
+
+        [TestMethod]
+        public void TestFleeing()
+        {
+            Vector2 startPosition = new Vector2(400, 300);
+            Vector2 targetPosition = new Vector2(400, 350);
+            int speed = 5;
+
+            MovementStrategy fleeing = new FleeMovement();
+            Vector2 newPosition = fleeing.Update(startPosition, targetPosition, speed);
+
+            Assert.IsTrue(Vector2.DistanceSquared(startPosition, targetPosition) <= Vector2.DistanceSquared(newPosition, targetPosition));
+        }
+
     }
 }

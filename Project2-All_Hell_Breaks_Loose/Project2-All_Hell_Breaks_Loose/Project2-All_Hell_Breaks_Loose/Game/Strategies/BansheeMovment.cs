@@ -7,7 +7,7 @@ using Microsoft.Xna.Framework;
 
 namespace Project2_All_Hell_Breaks_Loose.Game.Strategies
 {
-    class BansheeMovment : MovementStrategy
+    public class BansheeMovment : MovementStrategy
     {
         private SeekMovement seek;
         private const int THRESHOLD = 45;
